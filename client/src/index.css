@@ -127,9 +127,9 @@
     scrollbar-color: #3b82f6 #000000;
   }
 
-  html::-webkit-scrollbar { width: 3px; }
+  html::-webkit-scrollbar { width: 8px; }
   html::-webkit-scrollbar-track { background: #000; }
-  html::-webkit-scrollbar-thumb { background: #3b82f6; }
+  html::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; border: 2px solid #000; }
 
   body {
     @apply bg-background text-foreground;
@@ -175,18 +175,6 @@
   }
   @media (min-width: 1024px) {
     .container { padding-left: 4rem; padding-right: 4rem; max-width: 1360px; }
-  }
-
-  /* ── Scroll progress (left edge) ── */
-  #scroll-progress {
-    position: fixed;
-    left: 0; top: 0;
-    width: 2px;
-    height: 0%;
-    background: #3b82f6;
-    box-shadow: 0 0 6px rgba(59, 130, 246, 0.8);
-    z-index: 200;
-    pointer-events: none;
   }
 
   /* ── Utility: fade-up entrance ── */
@@ -340,6 +328,26 @@
   .btn-primary:hover {
     background: #2563eb;
     box-shadow: 0 0 24px rgba(59, 130, 246, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .btn-slanted {
+    transform: skewX(-15deg);
+    transition: transform 0.3s ease, background 0.25s, box-shadow 0.25s;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-slanted > span {
+    display: inline-block;
+    transform: skewX(15deg);
+    transition: transform 0.3s ease;
+  }
+  .btn-slanted:hover {
+    transform: skewX(0deg) translateY(-2px);
+  }
+  .btn-slanted:hover > span {
+    transform: skewX(0deg);
   }
 
   .btn-outline {

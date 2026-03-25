@@ -6,6 +6,7 @@
  */
 
 import { useRef, useState } from "react";
+import { GraduationCap, Code2, FileText, Trophy } from "lucide-react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { Link } from "wouter";
 import { useScrollSwap } from "../hooks/useScrollSwap";
@@ -41,9 +42,9 @@ const TILES = [
   },
   {
     id: "career",
-    icon: "—",
+    icon: <FileText size={22} className="card-icon" />,
     title: "Werdegang",
-    desc: "Vom Sportgymnasium über das Wirtschaftsinformatik-Abitur zum dualen Studium — mit Praxiserfahrung in IT und Einzelhandel.",
+    desc: "Vom Abitur zum dualen Studium — mit Praxiserfahrung in IT und Einzelhandel.",
     cta: "Lebenslauf ansehen",
     url: "/cv",
     items: [

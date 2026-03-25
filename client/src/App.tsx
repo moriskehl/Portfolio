@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
 import Achievements from "./pages/Achievements";
+import Impressum from "./pages/Impressum";
 import NotFound from "./pages/NotFound";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -29,6 +30,7 @@ function Router() {
           <Route path={"/cv"} component={Resume} />
           <Route path={"/achievements"} component={Achievements} />
           <Route path={"/projects"} component={Projects} />
+          <Route path={"/impressum"} component={Impressum} />
           <Route path={"/404"} component={NotFound} />
           <Route component={NotFound} />
         </Switch>

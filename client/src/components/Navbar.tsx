@@ -129,14 +129,10 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={(e) => scrollTo(e, "contact")}
-                className="btn-primary"
-                style={{ 
-                  padding: "0.45rem 1.1rem", 
-                  fontSize: "0.7rem", 
-                  transform: "skewX(-15deg)" 
-                }}
+                className="btn-primary btn-slanted"
+                style={{ padding: "0.45rem 1.1rem", fontSize: "0.7rem" }}
               >
-                <span style={{ display: "inline-block", transform: "skewX(15deg)" }}>Kontakt</span>
+                <span>Kontakt</span>
               </a>
             </li>
 

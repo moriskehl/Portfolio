@@ -8,6 +8,8 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useScrollSwap } from "../hooks/useScrollSwap";
 
+import { Link } from "wouter";
+
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/moriskehl" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/moris-kehl/" },
@@ -32,14 +34,41 @@ export default function ContactFooter() {
 
   const { ref: swapRef, past } = useScrollSwap(0.35);
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Kontaktanfrage von ${form.name}`);
-    const body = encodeURIComponent(`Hallo Moris,\n\n${form.message}\n\nViele Grüße,\n${form.name}\n${form.email}`);
-    window.location.href = `mailto:moris.kehl@gmail.com?subject=${subject}&body=${body}`;
-    setSent(true);
+    setLoading(true);
+
+    // Dein Formspree-Endpoint
+    const FORMSPREE_URL = "https://formspree.io/f/mwvwkvbb";
+
+    try {
+      const response = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      });
+
+      if (response.ok) {
+        setSent(true);
+      } else {
+        alert("Fehler beim Senden! Hast du deine Formspree-ID im Code (ContactFooter.tsx) eingetragen?");
+      }
+    } catch (err) {
+      alert("Netzwerkfehler. Bitte versuche es später noch einmal.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputStyle: React.CSSProperties = {
@@ -105,9 +134,7 @@ export default function ContactFooter() {
                 maxWidth: "420px",
               }}
             >
-              Offen für spannende Projekte, Werkstudentenstellen und
-              Kooperationen — besonders im Bereich Software-Entwicklung
-              und Wirtschaftsinformatik.
+              Offen für spannende Projekte, fachlichen Austausch und neue Herausforderungen.
             </p>
 
             {/* Contact details */}
@@ -271,8 +298,8 @@ export default function ContactFooter() {
                     onBlur={onBlur}
                   />
                 </div>
-                <button type="submit" className="btn-primary" style={{ width: "100%", padding: "0.9rem" }}>
-                  Nachricht senden
+                <button type="submit" disabled={loading} className="btn-primary btn-slanted" style={{ width: "100%", padding: "0.9rem", opacity: loading ? 0.7 : 1, cursor: loading ? "default" : "pointer" }}>
+                  <span>{loading ? "Wird gesendet..." : "Nachricht senden"}</span>
                 </button>
               </form>
             )}
@@ -306,7 +333,7 @@ export default function ContactFooter() {
               color: "rgba(255,255,255,0.18)",
             }}
           >
-            © {new Date().getFullYear()} Moris Kehl — Built with Three.js + React
+            © {new Date().getFullYear()} Moris Kehl
           </span>
           <div style={{ display: "flex", gap: "1.5rem" }}>
             {[{label: "Über mich", id: "intro"}, {label: "Bereiche", id: "grid"}, {label: "Kontakt", id: "contact"}].map((item) => (
@@ -332,6 +359,22 @@ export default function ContactFooter() {
                 {item.label}
               </a>
             ))}
+            <Link
+              href="/impressum"
+              style={{
+                fontFamily: "'Share Tech Mono', monospace",
+                fontSize: "0.6rem",
+                letterSpacing: "0.18em",
+                color: "rgba(255,255,255,0.18)",
+                textDecoration: "none",
+                textTransform: "uppercase",
+                transition: "color 0.2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#3b82f6")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.18)")}
+            >
+              Impressum
+            </Link>
           </div>
         </div>
       </div>

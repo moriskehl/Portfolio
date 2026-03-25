@@ -7,6 +7,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Trophy } from "lucide-react";
 import { useScrollSwap } from "../hooks/useScrollSwap";
 
 const STATS = [
@@ -206,7 +207,7 @@ export default function Intro() {
                   { cmd: "whoami", out: "moris_kehl" },
                   { cmd: "cat status.txt", out: "Dualer Student ab Okt. 2026" },
                   { cmd: "cat location.txt", out: "Stuttgart, Deutschland" },
-                  { cmd: "ski --ranking", out: "2. Platz Deutsche Ski Liga 🏆" },
+                  { cmd: "ski --ranking", out: <span style={{display: "inline-flex", alignItems: "center", gap: "0.4rem"}}>2. Platz Deutsche Ski Liga <Trophy size={12} /></span> },
                 ].map((line, i) => (
                   <div key={i}>
                     <span style={{ color: "rgba(255,255,255,0.25)" }}>$ </span>

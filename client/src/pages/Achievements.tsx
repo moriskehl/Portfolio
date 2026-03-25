@@ -3,8 +3,8 @@
  * Dark theme with scroll animations and hover effects
  */
 
-import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
+import { Medal, Activity, PlayCircle } from "lucide-react";
 import SubPageFooter from "../components/SubPageFooter";
 import { useScrollSwap } from "../hooks/useScrollSwap";
 
@@ -26,34 +26,42 @@ const ACHIEVEMENTS = [
   {
     year: "2026",
     title: "2. Platz Deutsche Ski Liga",
-    badge: "🥈 Silber",
-    desc: "Erneut auf dem Podium — mit dem Ski Team Seibelseckle konnten wir den zweiten Platz in der Teamwertung der Deutschen Ski Liga verteidigen.",
+    badge: <><Medal size={12} /> Silber</>,
+    desc: "Erneut auf dem Podium, wir konnten den zweiten Platz in der Teamwertung der Deutschen Ski Liga verteidigen.",
     detail: "Deutsche Ski Liga · Teamwertung",
   },
   {
     year: "2025",
     title: "2. Platz Deutsche Ski Liga",
-    badge: "🥈 Silber",
-    desc: "Unser erster großer Erfolg auf nationaler Ebene. Nach einer intensiven Saison konnten wir uns gegen starke Konkurrenz durchsetzen.",
+    badge: <><Medal size={12} /> Silber</>,
+    desc: "Ein großer Erfolg auf nationaler Ebene.",
     detail: "Deutsche Ski Liga · Teamwertung",
   },
   {
-    year: "seit 2009",
+    year: "seit 2025",
     title: "Ski Team Seibelseckle",
-    badge: "⛷️ Aktiv",
-    desc: "Seit dem Alter von 2,5 Jahren auf Ski — seit über 17 Saisons aktiver Rennläufer. Training, Wettkämpfe und die Leidenschaft für den Wintersport.",
+    badge: <><Activity size={12} /> Aktiv</>,
+    desc: "Training, Wettkämpfe und Leidenschaft für den Wintersport im Ski Team Seibelseckle.",
     detail: "Skirennlauf · Schwarzwald",
+    image: "/seibelseckle.jpg"
+  },
+  {
+    year: "2013 – 2025",
+    title: "Bezirk SSV Nord",
+    badge: <><PlayCircle size={12} /> Start der Rennkarriere</>,
+    desc: "Mit 6 Jahren dem Bezirk SSV Nord beigetreten und dort über ein Jahrzehnt den Grundstein für die Skirennlauf-Karriere gelegt.",
+    detail: "Grundlagen & Renntraining",
   },
 ];
 
 const STATS = [
   { value: "17+", label: "Saisons" },
   { value: "2×", label: "DSL Silber" },
-  { value: "2,5", label: "Start-Alter" },
+  { value: "2013", label: "Team-Beitritt" },
   { value: "∞", label: "Leidenschaft" },
 ];
 
-function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0]; index: number }) {
+function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0] & { image?: string }; index: number }) {
   const { ref, visible } = useVisible();
   const [hovered, setHovered] = useState(false);
 
@@ -107,6 +115,9 @@ function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0]; index:
               border: "1px solid rgba(59,130,246,0.3)",
               background: "rgba(59,130,246,0.08)",
               color: "#3b82f6",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.35rem",
             }}
           >
             {item.badge}
@@ -146,6 +157,27 @@ function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0]; index:
         >
           {item.detail}
         </span>
+
+        {item.image && (
+          <div style={{ 
+            marginTop: "1.5rem", 
+            maxWidth: "380px",
+            overflow: "hidden", 
+            border: "1px solid rgba(255,255,255,0.15)",
+            clipPath: "polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)",
+          }}>
+            <img
+              src={item.image}
+              alt={item.title}
+              style={{ 
+                width: "100%", 
+                height: "auto", 
+                display: "block",
+                clipPath: "polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)" 
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

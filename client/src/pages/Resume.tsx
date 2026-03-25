@@ -59,15 +59,15 @@ const EXPERIENCE = [
 const EDUCATION = [
   {
     period: "2023 – 2026",
-    title: "Abitur Wirtschaft (Economics)",
+    title: "Allgemeine Hochschulreife (Abitur)",
     org: "Berufliches Schulzentrum Leonberg",
-    desc: "Profil Wirtschaftsinformatik. Seminarkurs KI — Blackjack-Kartenzähl-Algorithmus.",
+    desc: "Seminarkurs im Bereich KI (Entwicklung eines Algorithmus basierend auf Blackjack).",
   },
   {
     period: "2017 – 2023",
-    title: "Sport Profil",
+    title: "Gymnasium",
     org: "Maria Von Linden-Gymnasium",
-    desc: "Schulische Ausbildung mit Schwerpunkt Sport. Grundlage für selbstständiges und diszipliniertes Arbeiten.",
+    desc: "Schulische Grundausbildung. Grundlage für selbstständiges und diszipliniertes Arbeiten.",
   },
 ];
 

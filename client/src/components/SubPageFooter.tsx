@@ -65,6 +65,26 @@ export default function SubPageFooter() {
               {item.label}
             </Link>
           ))}
+          <Link
+            href="/impressum"
+            style={{
+              fontFamily: "'Share Tech Mono', monospace",
+              fontSize: "0.6rem",
+              letterSpacing: "0.18em",
+              color: "rgba(255,255,255,0.18)",
+              textDecoration: "none",
+              textTransform: "uppercase" as const,
+              transition: "color 0.2s",
+            }}
+            onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) =>
+              (e.currentTarget.style.color = "#3b82f6")
+            }
+            onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) =>
+              (e.currentTarget.style.color = "rgba(255,255,255,0.18)")
+            }
+          >
+            Impressum
+          </Link>
         </div>
       </div>
     </footer>
