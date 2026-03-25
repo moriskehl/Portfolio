@@ -180,9 +180,9 @@ export default function NavigationGrid() {
             transition: "opacity 0.7s ease, transform 0.7s ease",
           }}
         >
-          <span className="section-label">// 02 — navigate</span>
+          <span className="section-label">// 02 — entdecken</span>
           <h2 className="section-heading" style={{ marginBottom: 0 }}>
-            Explore the terrain.
+            Erkunde das Terrain.
           </h2>
         </div>
 
