@@ -23,7 +23,7 @@ function Router() {
         animate={{ opacity: 1, filter: "blur(0px)" }}
         exit={{ opacity: 0, filter: "blur(2px)" }}
         transition={{ duration: 0.15, ease: [0.2, 0.8, 0.2, 1] }}
-        style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}
+        style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", overflowX: "hidden", width: "100%", position: "relative" }}
       >
         <Switch location={location}>
           <Route path={"/"} component={Home} />
