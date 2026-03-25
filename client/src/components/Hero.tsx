@@ -7,7 +7,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import AsciiMountain from "./AsciiMountain";
 
-const NAME = "ALEX_NORDIC";
+const NAME = "MORIS_KEHL";
 
 function useMatrixReveal(text: string, startDelay = 400) {
   const [displayed, setDisplayed] = useState("");
@@ -200,7 +200,7 @@ export default function Hero() {
               textShadow: "0 0 20px rgba(0,0,0,0.9)",
             }}
           >
-            Software Engineer&nbsp;&nbsp;·&nbsp;&nbsp;Hobby Skier
+            Wirtschaftsinformatiker&nbsp;&nbsp;·&nbsp;&nbsp;Skirennfahrer
           </p>
         )}
 
