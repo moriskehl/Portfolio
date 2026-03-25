@@ -228,7 +228,13 @@ export default function AsciiMountain({ onPauseChange }: Props) {
       if (pausedRef.current || !loaded) return;
 
       const cc = ctrlRef.current;
-      if (cc.animateY && meshRef.current) meshRef.current.rotation.y += cc.spinSpeed * 0.001;
+      // Scroll-driven Y rotation: map scroll progress (0→full page) to a full 360° turn
+      const scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight || 1);
+      if (meshRef.current) {
+        // Base rotation from scroll + optional continuous spin
+        meshRef.current.rotation.y = scrollProgress * Math.PI * 2;
+        if (cc.animateY) meshRef.current.rotation.y += performance.now() * cc.spinSpeed * 0.0001;
+      }
 
       renderer.render(scene, camera);
 
