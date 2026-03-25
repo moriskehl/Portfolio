@@ -16,25 +16,41 @@ import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
 const MODEL_URL =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663475502250/g9AaU56zXeUfHmDy3BTvTM/snowy_mountain_decimated_58ef2822.stl";
 
-// ── ASCII density ramp: darkest → brightest ─────────────────────────────────
-// Single characters give much finer detail at the same font size
+// ── ASCII density ramp: 16 bands, darkest → brightest ───────────────────────
+// Massive character set per band for fine-grained, photorealistic rendering
 const BANDS = [
-  // 0 – near black → whitespace / very faint dots
-  [" ", " ", " ", " ", ".", " ", " ", " "],
-  // 1 – very dark → sparse punctuation
-  [".", "·", ",", "'", "`", ".", " ", "."],
-  // 2 – dark → light strokes
-  [":", "-", "~", ";", "¨", "^", "'", "¸"],
-  // 3 – mid-dark → small shapes
-  ["!", "/", "\\", "|", "(", ")", "]", "["],
-  // 4 – mid → medium density
-  ["?", "<", ">", "t", "r", "x", "c", "v", "z", "s"],
-  // 5 – mid-bright → heavier letters
-  ["I", "J", "7", "L", "T", "F", "1", "i", "f", "l"],
-  // 6 – bright → block chars
-  ["Y", "V", "X", "C", "E", "Z", "O", "U", "S", "2", "3", "5"],
-  // 7 – very bright → heavy/dense chars
-  ["#", "@", "W", "M", "N", "B", "Q", "D", "K", "H", "8", "&", "%"],
+  // 0 – black / near-black
+  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+  // 1 – barely visible
+  [" ", " ", " ", ".", " ", " ", "·", " ", " ", " ", ".", " ", " ", " ", " ", "`"],
+  // 2 – faint dots
+  [".", "·", ",", "'", "`", ".", "·", ",", ".", "'", "·", ".", ",", "`", ".", "·"],
+  // 3 – sparse punctuation
+  [":", ";", "'", "\"", "~", "-", ".", "·", ",", "`", "^", ":", ";", "-", "~", "'"],
+  // 4 – light strokes
+  ["-", "~", "=", "+", "_", "¬", ":", ";", "^", "\"", "¯", "-", "~", "=", "+", "_"],
+  // 5 – thin shapes
+  ["/", "\\", "|", "(", ")", "[", "]", "{", "}", "<", ">", "!", "¡", "/", "\\", "|"],
+  // 6 – light letters
+  ["i", "l", "1", "!", ";", ":", "r", "c", "v", "t", "j", "f", "i", "l", "1", "r"],
+  // 7 – small letters
+  ["n", "u", "o", "a", "e", "s", "z", "x", "k", "y", "w", "p", "q", "d", "b", "m"],
+  // 8 – mid letters
+  ["T", "L", "J", "7", "F", "I", "C", "Y", "V", "t", "f", "r", "n", "u", "o", "a"],
+  // 9 – medium density
+  ["E", "Z", "S", "2", "3", "5", "G", "P", "A", "e", "s", "z", "g", "p", "a", "4"],
+  // 10 – heavier letters
+  ["X", "U", "O", "K", "R", "6", "9", "0", "q", "d", "b", "h", "k", "w", "m", "X"],
+  // 11 – bold shapes
+  ["D", "H", "N", "V", "W", "Q", "$", "E", "Z", "A", "G", "P", "S", "8", "D", "H"],
+  // 12 – dense fills
+  ["B", "M", "W", "#", "N", "Q", "D", "K", "H", "8", "&", "R", "G", "0", "B", "M"],
+  // 13 – very dense
+  ["@", "#", "W", "M", "N", "B", "%", "&", "$", "8", "0", "Q", "D", "@", "#", "W"],
+  // 14 – near solid
+  ["█", "▓", "@", "#", "W", "M", "B", "N", "%", "&", "$", "8", "█", "▓", "@", "#"],
+  // 15 – solid / maximum density
+  ["█", "█", "▓", "▓", "█", "▓", "█", "█", "▓", "█", "▓", "█", "█", "▓", "█", "█"],
 ];
 
 const BAND_TOKENS = BANDS.map(b => [...b]);
@@ -352,7 +368,7 @@ export default function AsciiMountain({ onPauseChange }: Props) {
     { key: "rotY",        label: "Pitch (Y)",         min: -180,  max: 180,   step: 1     },
     { key: "rotZ",        label: "Roll (Z)",          min: -180,  max: 180,   step: 1     },
     { key: "spinSpeed",   label: "Spin Speed",        min: 0,     max: 20,    step: 0.1   },
-    { key: "scale",       label: "Scale",             min: 0.05,  max: 3,     step: 0.01  },
+    { key: "scale",       label: "Scale",             min: 0.05,  max: 10,    step: 0.01  },
     { key: "posX",        label: "Position X",        min: -2,    max: 2,     step: 0.01  },
     { key: "posY",        label: "Position Y",        min: -2,    max: 2,     step: 0.01  },
     { key: "lightRot",    label: "Light Rotation",    min: 0,     max: 360,   step: 1     },
