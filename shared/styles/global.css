@@ -69,6 +69,7 @@ nav .container {
     font-size: 1.5rem;
     font-weight: 800;
     background: linear-gradient(135deg, var(--accent), var(--secondary));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
