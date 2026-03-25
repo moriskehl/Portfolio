@@ -59,11 +59,71 @@ h1, h2, h3 {
     margin-bottom: 20px;
 }
 
-iframe {
+/* Iframe Container sizing and scaling */
+.iframe-wrapper {
+    position: relative;
     width: 100%;
-    height: 300px;
+    max-width: 800px;
+    margin: 10px auto 15px auto;
     border: 1px solid #999;
-    margin-top: 10px;
+    background-color: #f4f4f4;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.iframe-wrapper.aspect-16-9 {
+    aspect-ratio: 16 / 9;
+}
+
+.iframe-wrapper.aspect-9-16 {
+    aspect-ratio: 9 / 16;
+    max-width: 400px; /* Constrain width for realistic mobile view */
+}
+
+/* 
+  Make the browser scale inside smaller by rendering a 2x size iframe 
+  and scaling it down to 50% visually using CSS transforms. 
+*/
+.iframe-scaler {
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: top left;
+}
+
+.iframe-scaler iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Aspect ratio controls */
+.controls {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center; /* or flex-start */
+}
+
+.btn-toggle {
+    padding: 6px 15px;
+    background-color: #e0e0e0;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.btn-toggle:hover {
+    background-color: #d0d0d0;
+}
+
+.btn-toggle.active {
+    background-color: #0056b3;
+    color: white;
+    border-color: #004494;
 }
 
 .btn {
