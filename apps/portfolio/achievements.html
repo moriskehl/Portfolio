@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erfolge | Moris Kehl</title>
+    <link rel="stylesheet" href="../../shared/styles/global.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        .achievements-header {
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+        .achievement-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            padding: 4rem;
+            margin-bottom: 4rem;
+        }
+        .achievement-img {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.4), rgba(124, 58, 237, 0.4));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+        }
+        .medal-badge {
+            font-size: 1.25rem;
+            color: #fbbf24;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav class="glass">
+        <div class="container">
+            <div class="logo">MK</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#projects">Projekte</a>
+                <a href="cv.html">Lebenslauf</a>
+                <a href="achievements.html" style="color: var(--accent);">Erfolge</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="achievements-header">
+            <span style="color: var(--accent); font-weight: 600;">Peak Performance</span>
+            <h1>Erfolge & Achievements</h1>
+        </header>
+
+        <section class="achievement-card glass">
+            <div>
+                <span class="medal-badge">🥈 Silbermedaille</span>
+                <h2>2. Platz Deutsche Skiliga</h2>
+                <p style="font-size: 1.25rem; margin-top: 1.5rem; opacity: 0.8;">Ein triumphaler Erfolg mit meinem Team. Nach einer intensiven Saison konnten wir uns auf nationaler Ebene gegen starke Konkurrenz durchsetzen.</p>
+                <p style="margin-top: 1rem; opacity: 0.6;">Deutsche Skiliga | Teamwertung | 2024</p>
+            </div>
+            <div class="achievement-img">🏆</div>
+        </section>
+
+        <section class="achievement-card glass" style="flex-direction: row-reverse; display: grid;">
+            <div class="achievement-img">🏅</div>
+            <div style="grid-column: 2;">
+                <span class="medal-badge" style="color: var(--accent);">Top 10</span>
+                <h2>Regionale Meisterschaften</h2>
+                <p style="font-size: 1.25rem; margin-top: 1.5rem; opacity: 0.8;">Konstante Leistungen unter extremen Bedingungen. Ein Beweis für Präzision und Durchhaltevermögen.</p>
+                <p style="margin-top: 1rem; opacity: 0.6;">Alpin Cup | Einzelwertung | 2023</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
