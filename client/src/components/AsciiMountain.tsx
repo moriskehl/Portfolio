@@ -16,21 +16,25 @@ import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
 const MODEL_URL =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663475502250/g9AaU56zXeUfHmDy3BTvTM/snowy_mountain_decimated_58ef2822.stl";
 
-// ── Token bands ordered from darkest (sparse) → brightest (dense) ────────────
+// ── ASCII density ramp: darkest → brightest ─────────────────────────────────
+// Single characters give much finer detail at the same font size
 const BANDS = [
-  [" ", " ", " ", ".", ",", "`", "'", " "],
-  ["~", "-", "_", "·", ";", ":", "·", "~", "-"],
-  ["()", "[]", "{}", "<>", "/*", "*/", "//", "+=", "!=", "==", "->", "=>"],
-  ["var", "let", "int", "for", "if(", "try", "new", "get", "set", "use", "fn(", "do{"],
-  ["null", "void", "true", "else", "this", "self", "enum", "type", "bool", "char", "long", "byte"],
-  ["const", "class", "while", "break", "throw", "catch", "yield", "async", "await", "super", "final"],
-  ["return", "import", "export", "static", "public", "struct", "object", "string", "number", "typeof"],
-  [
-    "function()", "extends {", "override()", "interface", "implements",
-    "console.log", "useState()", "useEffect", "className=", "<!DOCTYPE",
-    "SELECT *", "padding:0", "margin:0;", "flex-wrap", "transform:",
-    "new Array()", "try{catch}", "async/await", "=>void{}", "#include",
-  ],
+  // 0 – near black → whitespace / very faint dots
+  [" ", " ", " ", " ", ".", " ", " ", " "],
+  // 1 – very dark → sparse punctuation
+  [".", "·", ",", "'", "`", ".", " ", "."],
+  // 2 – dark → light strokes
+  [":", "-", "~", ";", "¨", "^", "'", "¸"],
+  // 3 – mid-dark → small shapes
+  ["!", "/", "\\", "|", "(", ")", "]", "["],
+  // 4 – mid → medium density
+  ["?", "<", ">", "t", "r", "x", "c", "v", "z", "s"],
+  // 5 – mid-bright → heavier letters
+  ["I", "J", "7", "L", "T", "F", "1", "i", "f", "l"],
+  // 6 – bright → block chars
+  ["Y", "V", "X", "C", "E", "Z", "O", "U", "S", "2", "3", "5"],
+  // 7 – very bright → heavy/dense chars
+  ["#", "@", "W", "M", "N", "B", "Q", "D", "K", "H", "8", "&", "%"],
 ];
 
 const BAND_TOKENS = BANDS.map(b => [...b]);
@@ -57,24 +61,24 @@ interface Controls {
 }
 
 const DEFAULTS: Controls = {
-  rotX: 75,
-  rotY: 0,
+  rotX: 0,
+  rotY: 45,
   rotZ: 0,
-  spinSpeed: 6,
-  scale: 1.2,
-  lightRot: 204,
-  lightH: 2.0,
-  camDist: 0.25,
+  spinSpeed: 4.1,
+  scale: 3.0,
+  lightRot: 87,
+  lightH: -0.7,
+  camDist: 1.31,
   animateY: true,
   posX: 0,
-  posY: -0.6,   // mesh.position.y factor
+  posY: -0.6,
   fontSize: 9,
   cellW: 7,
   rowH: 12,
   tokenLife: 4000,
   tokenStagger: 6000,
-  brightness: 0.55,
-  offscreenRes: 0.5,
+  brightness: 1.6,
+  offscreenRes: 1.0,
 };
 
 interface Props {
