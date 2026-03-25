@@ -3,6 +3,7 @@
  * Dark theme with scroll animations and hover effects
  */
 
+import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { Medal, Activity, PlayCircle } from "lucide-react";
 import SubPageFooter from "../components/SubPageFooter";
