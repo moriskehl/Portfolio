@@ -4,7 +4,9 @@
  */
 
 import { useState, useEffect, useRef } from "react";
+import SubPageFooter from "../components/SubPageFooter";
 import { Link } from "wouter";
+import { useScrollSwap } from "../hooks/useScrollSwap";
 
 function useVisible(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -173,6 +175,8 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
             style={{
               position: "relative",
               width: "100%",
+              maxWidth: aspectRatio === "9/16" ? "360px" : "100%",
+              margin: aspectRatio === "9/16" ? "0 auto" : "0",
               aspectRatio,
               overflow: "hidden",
               border: "1px solid rgba(255,255,255,0.06)",
@@ -191,34 +195,16 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
 
 export default function Projects() {
   const { ref: headerRef, visible: headerVisible } = useVisible();
+  const { ref: swapRef, past } = useScrollSwap(0.35);
 
   return (
-    <div style={{ background: "#000", minHeight: "100vh", paddingTop: "6rem" }}>
-      {/* Back nav */}
-      <div className="container" style={{ paddingTop: "2rem" }}>
-        <Link href="/">
-          <span
-            style={{
-              fontFamily: "'Share Tech Mono', monospace",
-              fontSize: "0.7rem",
-              letterSpacing: "0.15em",
-              color: "rgba(255,255,255,0.25)",
-              cursor: "pointer",
-              transition: "color 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#3b82f6")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.25)")}
-          >
-            ← ZURÜCK
-          </span>
-        </Link>
-      </div>
+    <div className="page-enter" style={{ background: "#000", minHeight: "100dvh" }}>
 
       {/* Header */}
       <div
         ref={headerRef}
         className="container"
-        style={{ paddingTop: "3rem", paddingBottom: "4rem" }}
+        style={{ paddingTop: "8rem", paddingBottom: "4rem" }}
       >
         <span
           className="section-label"
@@ -231,6 +217,7 @@ export default function Projects() {
           // projekte
         </span>
         <h1
+          ref={swapRef as React.RefObject<HTMLHeadingElement>}
           className="section-heading"
           style={{
             opacity: headerVisible ? 1 : 0,
@@ -238,8 +225,8 @@ export default function Projects() {
             transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
           }}
         >
-          Software &<br />
-          <span style={{ color: "#3b82f6" }}>Systeme.</span>
+          <span style={{ color: past ? "#ffffff" : "#3b82f6", transition: "color 0.6s ease" }}>Software &</span><br />
+          <span style={{ color: past ? "#3b82f6" : "#ffffff", transition: "color 0.6s ease" }}>Systeme.</span>
         </h1>
         <p
           style={{
@@ -266,6 +253,8 @@ export default function Projects() {
           <ProjectCard key={project.title} project={project} index={i} />
         ))}
       </div>
+
+      <SubPageFooter />
     </div>
   );
 }

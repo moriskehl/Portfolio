@@ -12,12 +12,12 @@ const NAME = "MORIS_KEHL";
 function useMatrixReveal(text: string, startDelay = 400) {
   const [displayed, setDisplayed] = useState("");
   const [done, setDone] = useState(false);
+  const rafRef = useRef<number>(0);
 
   useEffect(() => {
     const SCRAMBLE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$_-";
-    const totalFrames = text.length * 5 + 8;
+    const totalFrames = Math.floor(text.length * 5 + 8);
     let frame = 0;
-    let raf: number;
 
     const timer = setTimeout(() => {
       const tick = () => {
@@ -35,18 +35,18 @@ function useMatrixReveal(text: string, startDelay = 400) {
         }
         setDisplayed(result);
         if (frame < totalFrames) {
-          raf = requestAnimationFrame(tick);
+          rafRef.current = requestAnimationFrame(tick);
         } else {
           setDisplayed(text);
           setDone(true);
         }
       };
-      raf = requestAnimationFrame(tick);
+      rafRef.current = requestAnimationFrame(tick);
     }, startDelay);
 
     return () => {
       clearTimeout(timer);
-      cancelAnimationFrame(raf);
+      cancelAnimationFrame(rafRef.current);
     };
   }, [text, startDelay]);
 
@@ -56,62 +56,47 @@ function useMatrixReveal(text: string, startDelay = 400) {
 export default function Hero() {
   const { displayed, done } = useMatrixReveal(NAME, 800);
   const [showSub, setShowSub] = useState(false);
-  const [showCta, setShowCta] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Hide loading overlay once ASCII starts rendering (after a short grace period)
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 2200);
+    const onScroll = () => {
+      if (window.scrollY > 20) setScrolled(true);
+      else setScrolled(false);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // We now rely on onLoad from AsciiMountain or a fallback.
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 5000); // 5s fallback
     return () => clearTimeout(t);
   }, []);
 
   useEffect(() => {
     if (!done) return;
-    const t1 = setTimeout(() => setShowSub(true), 250);
-    const t2 = setTimeout(() => setShowCta(true), 600);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
+    const t = setTimeout(() => setShowSub(true), 250);
+    return () => clearTimeout(t);
   }, [done]);
-
-  const scrollTo = (id: string) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <section
       id="hero"
       className="relative w-full overflow-hidden"
-      style={{ height: "100svh", minHeight: "600px", background: "#000000" }}
+      style={{ height: "100svh", minHeight: "450px", background: "#000000" }}
     >
-      {/* Layer 1 — ASCII mountain (fills entire hero) */}
-      <AsciiMountain />
+      <div 
+        className="absolute inset-0"
+        style={{ 
+          opacity: loading ? 0 : 1, 
+          transition: "opacity 2.5s ease", /* Fades in smoothly as soon as loaded */
+          zIndex: 1 
+        }}
+      >
+        <AsciiMountain onLoad={() => setLoading(false)} />
+      </div>
 
-      {/* Layer 2 — Loading state */}
-      {loading && (
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{
-            zIndex: 10,
-            background: "#000000",
-            transition: "opacity 0.8s ease",
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "'Share Tech Mono', monospace",
-              fontSize: "0.7rem",
-              letterSpacing: "0.3em",
-              color: "rgba(255,255,255,0.3)",
-              textTransform: "uppercase",
-            }}
-          >
-            loading terrain...
-          </div>
-        </div>
-      )}
-
-      {/* Layer 3 — Radial vignette to darken edges */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -121,7 +106,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Layer 4 — Bottom fade into content sections */}
       <div
         className="absolute bottom-0 left-0 right-0 pointer-events-none"
         style={{
@@ -131,12 +115,10 @@ export default function Hero() {
         }}
       />
 
-      {/* Layer 5 — Hero text (pointer-events:none so controls panel underneath stays clickable) */}
       <div
-        className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
+        className="absolute inset-0 flex flex-col items-center justify-start sm:justify-center text-center px-6 pt-[18vh] sm:pt-0"
         style={{ zIndex: 5, pointerEvents: "none" }}
       >
-        {/* Pre-title */}
         <span
           style={{
             fontFamily: "'Share Tech Mono', monospace",
@@ -153,11 +135,10 @@ export default function Hero() {
           // portfolio.init()
         </span>
 
-        {/* Name */}
         <h1
           style={{
             fontFamily: "'Share Tech Mono', monospace",
-            fontSize: "clamp(2.6rem, 8.5vw, 7rem)",
+            fontSize: "clamp(1.8rem, 8vw, 7rem)",
             fontWeight: 400,
             letterSpacing: "0.06em",
             lineHeight: 1,
@@ -166,6 +147,8 @@ export default function Hero() {
               "0 0 60px rgba(0,0,0,0.9), 0 2px 40px rgba(0,0,0,0.8)",
             marginBottom: "1.4rem",
             whiteSpace: "nowrap",
+            pointerEvents: "all",
+            cursor: "default",
           }}
         >
           {displayed}
@@ -184,7 +167,6 @@ export default function Hero() {
           )}
         </h1>
 
-        {/* Subtitle */}
         {showSub && (
           <p
             style={{
@@ -192,7 +174,7 @@ export default function Hero() {
               fontSize: "clamp(0.8rem, 1.8vw, 1rem)",
               fontWeight: 300,
               letterSpacing: "0.22em",
-              color: "rgba(255,255,255,0.45)",
+              color: "#3b82f6",
               marginBottom: "3rem",
               textTransform: "uppercase",
               opacity: 0,
@@ -203,62 +185,44 @@ export default function Hero() {
             Wirtschaftsinformatiker&nbsp;&nbsp;·&nbsp;&nbsp;Skirennfahrer
           </p>
         )}
-
-        {/* CTAs */}
-        {showCta && (
-          <div
-            style={{
-              display: "flex",
-              gap: "1rem",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              opacity: 0,
-              animation: "fade-up 0.7s ease forwards",
-              pointerEvents: "all",
-            }}
-          >
-            <button className="btn-primary" onClick={() => scrollTo("intro")}>
-              View Work
-            </button>
-            <button
-              className="btn-outline"
-              onClick={() => scrollTo("contact")}
-            >
-              Get In Touch
-            </button>
-          </div>
-        )}
       </div>
 
-      {/* Scroll indicator */}
+      {/* Small scroll indicator arrow */}
       <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         style={{
-          zIndex: 5,
-          opacity: showCta ? 1 : 0,
-          transition: "opacity 1.2s ease 0.8s",
+          position: "absolute",
+          bottom: "2.5rem",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 10,
+          opacity: scrolled || !done ? 0 : 0.6,
+          transition: "opacity 0.5s ease",
+          pointerEvents: "none",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "8px",
         }}
       >
         <div
           style={{
-            width: "1px",
-            height: "48px",
-            background:
-              "linear-gradient(to bottom, rgba(59,130,246,0.7), transparent)",
+            width: "20px",
+            height: "20px",
+            borderRight: "2px solid rgba(255,255,255,0.4)",
+            borderBottom: "2px solid rgba(255,255,255,0.4)",
+            transform: "rotate(45deg)",
+            animation: "scroll-bounce 3.5s ease-in-out infinite",
           }}
         />
-        <span
-          style={{
-            fontFamily: "'Share Tech Mono', monospace",
-            fontSize: "0.56rem",
-            letterSpacing: "0.32em",
-            color: "rgba(255,255,255,0.2)",
-            textTransform: "uppercase",
-          }}
-        >
-          scroll
-        </span>
       </div>
+
+      <style>{`
+        @keyframes scroll-bounce {
+          0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+          40% { transform: translateY(-10px) rotate(45deg); }
+          60% { transform: translateY(-5px) rotate(45deg); }
+        }
+      `}</style>
     </section>
   );
 }

@@ -421,144 +421,115 @@
     margin-left: 2px;
   }
 }
-/* Very Simple, Functional CSS */
-body {
-    font-family: Arial, sans-serif; /* Basic system font */
-    background-color: #ffffff;
-    color: #333333;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
+
+/* ═══════════════════════════════════════
+   MOBILE MENU
+   ═══════════════════════════════════════ */
+
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 60;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+.mobile-menu-btn span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: #fff;
+  transition: transform 0.3s, opacity 0.3s;
 }
 
-nav {
-    background-color: #f4f4f4;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+.mobile-menu-btn.open span:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 5px);
+}
+.mobile-menu-btn.open span:nth-child(2) {
+  opacity: 0;
+}
+.mobile-menu-btn.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -5px);
 }
 
-.nav-links {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.97);
+  backdrop-filter: blur(20px);
+  z-index: 55;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
 }
 
-.nav-links a {
-    color: #0056b3;
-    text-decoration: none;
-    font-weight: bold;
+.mobile-menu-overlay.open {
+  opacity: 1;
+  pointer-events: all;
 }
 
-.nav-links a:hover {
-    text-decoration: underline;
+.mobile-menu-overlay a {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
 }
 
-h1, h2, h3 {
-    color: #222222;
+.mobile-menu-overlay a:hover {
+  color: #3b82f6;
 }
 
-/* Simple Hero / Header */
-.header-section {
-    text-align: center;
-    padding: 40px 0;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 20px;
+@media (max-width: 639px) {
+  .mobile-menu-btn { display: flex; }
 }
 
-/* Projects Grid */
-.projects-container {
-    margin-top: 30px;
+/* ═══════════════════════════════════════
+   PAGE ENTER TRANSITION
+   ═══════════════════════════════════════ */
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.project-item {
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin-bottom: 20px;
+.page-enter {
+  animation: page-enter 0.5s ease forwards;
 }
 
-/* Iframe Container sizing and scaling */
-.iframe-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin: 10px auto 15px auto;
-    border: 1px solid #999;
-    background-color: #f4f4f4;
-    overflow: hidden;
-    transition: all 0.3s ease;
+/* ═══════════════════════════════════════
+   RESPONSIVE NAV GRID
+   ═══════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .nav-tiles-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
 
-.iframe-wrapper.aspect-16-9 {
-    aspect-ratio: 16 / 9;
-}
+/* ═══════════════════════════════════════
+   IFRAME SCALER (projects)
+   ═══════════════════════════════════════ */
 
-.iframe-wrapper.aspect-9-16 {
-    aspect-ratio: 9 / 16;
-    max-width: 400px; /* Constrain width for realistic mobile view */
-}
-
-/* 
-  Make the browser scale inside smaller by rendering a 2x size iframe 
-  and scaling it down to 50% visually using CSS transforms. 
-*/
 .iframe-scaler {
-    width: 200%;
-    height: 200%;
-    transform: scale(0.5);
-    transform-origin: top left;
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+  transform-origin: top left;
 }
 
 .iframe-scaler iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-/* Aspect ratio controls */
-.controls {
-    margin-bottom: 20px;
-    display: flex;
-    gap: 15px;
-    justify-content: center; /* or flex-start */
-}
-
-.btn-toggle {
-    padding: 6px 15px;
-    background-color: #e0e0e0;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.2s;
-}
-
-.btn-toggle:hover {
-    background-color: #d0d0d0;
-}
-
-.btn-toggle.active {
-    background-color: #0056b3;
-    color: white;
-    border-color: #004494;
-}
-
-.btn {
-    display: inline-block;
-    padding: 8px 15px;
-    background-color: #0056b3;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    margin-top: 10px;
-}
-
-.btn:hover {
-    background-color: #003d82;
+  width: 100%;
+  height: 100%;
+  border: none;
 }

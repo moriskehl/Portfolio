@@ -8,9 +8,8 @@
  */
 
 import { useEffect } from "react";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Intro from "@/components/Intro";
+import Hero from "../components/Hero";
+import Intro from "../components/Intro";
 import NavigationGrid from "@/components/NavigationGrid";
 import ContactFooter from "@/components/ContactFooter";
 
@@ -31,9 +30,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div style={{ background: "#000000", minHeight: "100vh" }}>
+    <div style={{ background: "#000000", minHeight: "100dvh" }}>
       <div id="scroll-progress" />
-      <Navbar />
       <Hero />
       <Intro />
       <NavigationGrid />

@@ -4,21 +4,9 @@
  * Black background, white text, blue hover accents.
  */
 
-import { useEffect, useRef, useState } from "react";
-
-function useVisible(threshold = 0.1) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return { ref, visible };
-}
+import { useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useScrollSwap } from "../hooks/useScrollSwap";
 
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/moriskehl" },
@@ -32,12 +20,25 @@ const CONTACT_INFO = [
 ];
 
 export default function ContactFooter() {
-  const { ref, visible } = useVisible();
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 90%", "start 40%"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const xLeft = useTransform(scrollYProgress, [0, 1], [-50, 0]);
+  const xRight = useTransform(scrollYProgress, [0, 1], [50, 0]);
+
+  const { ref: swapRef, past } = useScrollSwap(0.35);
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const subject = encodeURIComponent(`Kontaktanfrage von ${form.name}`);
+    const body = encodeURIComponent(`Hallo Moris,\n\n${form.message}\n\nViele Grüße,\n${form.name}\n${form.email}`);
+    window.location.href = `mailto:moris.kehl@gmail.com?subject=${subject}&body=${body}`;
     setSent(true);
   };
 
@@ -65,7 +66,7 @@ export default function ContactFooter() {
   return (
     <footer
       id="contact"
-      ref={ref}
+      ref={containerRef}
       style={{ background: "#000000" }}
     >
       <hr className="divider" />
@@ -78,20 +79,20 @@ export default function ContactFooter() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           {/* Left — info */}
-          <div
+          <motion.div
             style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? "none" : "translateY(20px)",
-              transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
+              opacity,
+              x: xLeft,
             }}
           >
-            <span className="section-label">// 03 — contact</span>
+            <span className="section-label">// 03 — kontakt</span>
             <h2
+              ref={swapRef as React.RefObject<HTMLHeadingElement>}
               className="section-heading"
               style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)" }}
             >
-              Lass uns etwas<br />
-              <span style={{ color: "#3b82f6" }}>Großes bauen.</span>
+              <span style={{ color: past ? "#ffffff" : "#3b82f6", transition: "color 0.6s ease" }}>Lass uns etwas</span><br />
+              <span style={{ color: past ? "#3b82f6" : "#ffffff", transition: "color 0.6s ease" }}>Großes bauen.</span>
             </h2>
 
             <p
@@ -162,14 +163,13 @@ export default function ContactFooter() {
                 </a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Right — form */}
-          <div
+          <motion.div
             style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? "none" : "translateY(20px)",
-              transition: "opacity 0.7s ease 0.25s, transform 0.7s ease 0.25s",
+              opacity,
+              x: xRight,
               border: "1px solid rgba(255,255,255,0.06)",
               background: "#0a0a0a",
               padding: "2.5rem",
@@ -188,10 +188,10 @@ export default function ContactFooter() {
                   ✓
                 </div>
                 <p style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: "0.85rem", color: "#fff", marginBottom: "0.5rem" }}>
-                  Message transmitted.
+                  Nachricht gesendet.
                 </p>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.82rem", color: "#a1a1aa" }}>
-                  I'll get back to you before the next powder day.
+                  Ich melde mich bald bei dir zurück.
                 </p>
               </div>
             ) : (
@@ -213,7 +213,7 @@ export default function ContactFooter() {
                   <input
                     type="text"
                     required
-                    placeholder="Your name"
+                    placeholder="Dein Name"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     style={inputStyle}
@@ -238,7 +238,7 @@ export default function ContactFooter() {
                   <input
                     type="email"
                     required
-                    placeholder="your@email.com"
+                    placeholder="deine@email.de"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     style={inputStyle}
@@ -258,12 +258,12 @@ export default function ContactFooter() {
                       marginBottom: "0.5rem",
                     }}
                   >
-                    Message
+                    Nachricht
                   </label>
                   <textarea
                     required
                     rows={5}
-                    placeholder="Tell me about your project..."
+                    placeholder="Erzähl mir von deinem Projekt..."
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     style={{ ...inputStyle, resize: "vertical" }}
@@ -272,11 +272,11 @@ export default function ContactFooter() {
                   />
                 </div>
                 <button type="submit" className="btn-primary" style={{ width: "100%", padding: "0.9rem" }}>
-                  Send Message
+                  Nachricht senden
                 </button>
               </form>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -309,13 +309,13 @@ export default function ContactFooter() {
             © {new Date().getFullYear()} Moris Kehl — Built with Three.js + React
           </span>
           <div style={{ display: "flex", gap: "1.5rem" }}>
-            {["Intro", "Grid", "Contact"].map((item) => (
+            {[{label: "Über mich", id: "intro"}, {label: "Bereiche", id: "grid"}, {label: "Kontakt", id: "contact"}].map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.id}
+                href={`#${item.id}`}
                 onClick={(e) => {
                   e.preventDefault();
-                  document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
+                  document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" });
                 }}
                 style={{
                   fontFamily: "'Share Tech Mono', monospace",
@@ -329,7 +329,7 @@ export default function ContactFooter() {
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#3b82f6")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.18)")}
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </div>

@@ -80,7 +80,7 @@ const DEFAULTS: Controls = {
   rotX: 0,
   rotY: 45,
   rotZ: 0,
-  spinSpeed: 0.3,
+  spinSpeed: 0.9,
   scale: 4.47,
   lightRot: 87,
   lightH: -0.7,
@@ -99,6 +99,7 @@ const DEFAULTS: Controls = {
 
 interface Props {
   onPauseChange?: (paused: boolean) => void;
+  onLoad?: () => void;
 }
 
 function lumToColor(lum: number, gamma: number): string {
@@ -107,7 +108,7 @@ function lumToColor(lum: number, gamma: number): string {
   return `rgb(${v},${v},${v})`;
 }
 
-export default function AsciiMountain({ onPauseChange }: Props) {
+export default function AsciiMountain({ onPauseChange, onLoad }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pausedRef = useRef(false);
@@ -222,10 +223,19 @@ export default function AsciiMountain({ onPauseChange }: Props) {
 
     let animId: number;
     let loaded = false;
+    let lastRenderTime = 0;
+    const frameInterval = 1000 / 30; // 30 FPS
 
     const tick = () => {
       animId = requestAnimationFrame(tick);
       if (pausedRef.current || !loaded) return;
+
+      const currentTime = performance.now();
+      const delta = currentTime - lastRenderTime;
+
+      if (delta < frameInterval) return;
+
+      lastRenderTime = currentTime - (delta % frameInterval);
 
       const cc = ctrlRef.current;
       // Scroll-driven Y rotation: map scroll progress (0→full page) to a full 360° turn
@@ -294,6 +304,17 @@ export default function AsciiMountain({ onPauseChange }: Props) {
 
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
+
+      if (meshRef.current) {
+        const isMobile = w < 768;
+        const scaleMult = isMobile ? 0.45 : 1.0;
+        meshRef.current.scale.setScalar(cc.scale * scaleMult);
+        
+        const bboxHeight = bboxRef.current ? bboxRef.current.max.z - bboxRef.current.min.z : 0;
+        const posMult = isMobile ? 0.8 : 1.0; 
+        meshRef.current.position.x = cc.posX * bboxHeight;
+        meshRef.current.position.y = (cc.posY * posMult) * bboxHeight;
+      }
     };
 
     const ro = new ResizeObserver(resize);
@@ -317,10 +338,15 @@ export default function AsciiMountain({ onPauseChange }: Props) {
         scene.add(mesh);
 
         const c = ctrlRef.current;
-        mesh.scale.setScalar(c.scale);
+        const w = container.clientWidth || window.innerWidth;
+        const isMobile = w < 768;
+        const scaleMult = isMobile ? 0.45 : 1.0;
+        const posMult = isMobile ? 0.8 : 1.0;
+        
+        mesh.scale.setScalar(c.scale * scaleMult);
         const bboxHeight = bbox.max.z - bbox.min.z;
         mesh.position.x = c.posX * bboxHeight;
-        mesh.position.y = c.posY * bboxHeight;
+        mesh.position.y = (c.posY * posMult) * bboxHeight;
         mesh.rotation.x = (c.rotX * Math.PI) / 180;
         mesh.rotation.y = (c.rotY * Math.PI) / 180;
         mesh.rotation.z = (c.rotZ * Math.PI) / 180;
@@ -338,6 +364,7 @@ export default function AsciiMountain({ onPauseChange }: Props) {
         );
 
         loaded = true;
+        onLoad?.();
       },
       undefined,
       (err) => console.error("[AsciiMountain] load error:", err)

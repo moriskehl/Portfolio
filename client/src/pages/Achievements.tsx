@@ -5,6 +5,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
+import SubPageFooter from "../components/SubPageFooter";
+import { useScrollSwap } from "../hooks/useScrollSwap";
 
 function useVisible(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -152,31 +154,13 @@ function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0]; index:
 export default function Achievements() {
   const { ref: headerRef, visible: headerVisible } = useVisible();
   const { ref: statsRef, visible: statsVisible } = useVisible();
+  const { ref: swapRef, past } = useScrollSwap(0.35);
 
   return (
-    <div style={{ background: "#000", minHeight: "100vh", paddingTop: "6rem" }}>
-      {/* Back nav */}
-      <div className="container" style={{ paddingTop: "2rem" }}>
-        <Link href="/">
-          <span
-            style={{
-              fontFamily: "'Share Tech Mono', monospace",
-              fontSize: "0.7rem",
-              letterSpacing: "0.15em",
-              color: "rgba(255,255,255,0.25)",
-              cursor: "pointer",
-              transition: "color 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#3b82f6")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.25)")}
-          >
-            ← ZURÜCK
-          </span>
-        </Link>
-      </div>
+    <div className="page-enter" style={{ background: "#000", minHeight: "100dvh" }}>
 
       {/* Header */}
-      <div ref={headerRef} className="container" style={{ paddingTop: "3rem", paddingBottom: "4rem" }}>
+      <div ref={headerRef} className="container" style={{ paddingTop: "8rem", paddingBottom: "4rem" }}>
         <span
           className="section-label"
           style={{
@@ -188,6 +172,7 @@ export default function Achievements() {
           // erfolge
         </span>
         <h1
+          ref={swapRef as React.RefObject<HTMLHeadingElement>}
           className="section-heading"
           style={{
             opacity: headerVisible ? 1 : 0,
@@ -195,8 +180,8 @@ export default function Achievements() {
             transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
           }}
         >
-          Skirennlauf &<br />
-          <span style={{ color: "#3b82f6" }}>Erfolge.</span>
+          <span style={{ color: past ? "#ffffff" : "#3b82f6", transition: "color 0.6s ease" }}>Skirennlauf &</span><br />
+          <span style={{ color: past ? "#3b82f6" : "#ffffff", transition: "color 0.6s ease" }}>Erfolge.</span>
         </h1>
       </div>
 
@@ -256,6 +241,8 @@ export default function Achievements() {
           <AchievementCard key={item.title + item.year} item={item} index={i} />
         ))}
       </div>
+
+      <SubPageFooter />
     </div>
   );
 }
