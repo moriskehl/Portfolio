@@ -138,7 +138,7 @@ export default function Hero() {
         <h1
           style={{
             fontFamily: "'Share Tech Mono', monospace",
-            fontSize: "clamp(1.8rem, 8vw, 7rem)",
+            fontSize: "clamp(1.4rem, 8vw, 7rem)",
             fontWeight: 400,
             letterSpacing: "0.06em",
             lineHeight: 1,
