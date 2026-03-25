@@ -296,6 +296,8 @@ export default function AsciiMountain({ onPauseChange, onLoad }: Props) {
 
       canvas2d.width = w * dpr;
       canvas2d.height = h * dpr;
+      canvas2d.style.width = `${w}px`;
+      canvas2d.style.height = `${h}px`;
       
       const ctx = canvas2d.getContext("2d")!;
       ctx.scale(dpr, dpr);
