@@ -38,6 +38,22 @@ Phase 1: Requirements & Discovery
 - [x] Documentation and handoff
 - **Status:** complete
 
+### Phase 6: React Migration Planning
+- [x] Propose implementation plan
+- [x] User approval received
+- **Status:** complete
+
+### Phase 7: React Environment Setup
+- [x] Backup existing files
+- [x] Initialize Vite project
+- [x] Install react-router-dom
+- **Status:** complete
+
+### Phase 8: Component Migration
+- [/] Migrate components and styles
+- [ ] Verify static routing for sub-projects
+- **Status:** in_progress
+
 ## Key Questions
 1. What is the preferred technical stack for the sub-projects? (Assuming HTML/CSS/JS for now).
 2. Are there specific images for the resume and achievements? (Will use placeholders/generated for now).

@@ -68,7 +68,11 @@
 | Achievements | Open achievements.html | Skiing success displayed | Renders correctly | ✓ |
 
 ## Error Log
+| Timestamp | Error | Attempt | Resolution |
+|-----------|-------|---------|------------|
 | 2026-03-25 14:23 | mkdir: PositionalParameterNotFound | 1 | Use individual mkdir commands in PS |
+| 2026-03-25 14:40 | npm: CommandNotFoundException | 1 | Verified Node is installed; user needs to restart terminal |
+| 2026-03-25 15:06 | gh: CommandNotFoundException | 1 | User must manually create GitHub repo |
 
 ## 5-Question Reboot Check
 | Question | Answer |
