@@ -81,11 +81,11 @@ const DEFAULTS: Controls = {
   rotY: 45,
   rotZ: 0,
   spinSpeed: 4.1,
-  scale: 3.0,
+  scale: 4.47,
   lightRot: 87,
   lightH: -0.7,
   camDist: 1.31,
-  animateY: true,
+  animateY: false,
   posX: 0,
   posY: -0.6,
   fontSize: 9,
@@ -399,7 +399,7 @@ export default function AsciiMountain({ onPauseChange }: Props) {
         style={{ position: "absolute", inset: 0, background: "#000" }}
       />
 
-      {/* Toggle button */}
+      {/* ── Control Panel (commented out — uncomment to re-enable tuning) ──
       <button
         onClick={() => setShowPanel((p) => !p)}
         style={{
@@ -412,7 +412,6 @@ export default function AsciiMountain({ onPauseChange }: Props) {
         {showPanel ? "HIDE CONTROLS" : "// CONTROLS"}
       </button>
 
-      {/* Full control panel */}
       {showPanel && (
         <div style={{
           position: "absolute", bottom: 48, left: 16, zIndex: 100, pointerEvents: "all",
@@ -476,6 +475,7 @@ export default function AsciiMountain({ onPauseChange }: Props) {
           </div>
         </div>
       )}
+      ── End Control Panel */}
     </div>
   );
 }
