@@ -7,7 +7,7 @@
 
 import { useRef, useState } from "react";
 import { GraduationCap, Code2, FileText, Trophy } from "lucide-react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { useScrollSwap } from "../hooks/useScrollSwap";
 
@@ -58,14 +58,10 @@ const TILES = [
 
 function Tile({
   tile,
-  opacity,
-  x,
-  y,
+  index,
 }: {
   tile: (typeof TILES)[0];
-  opacity: MotionValue<number>;
-  x?: MotionValue<number>;
-  y?: MotionValue<number>;
+  index: number;
 }) {
   const [hovered, setHovered] = useState(false);
 
@@ -73,10 +69,11 @@ function Tile({
     <Link href={tile.url || "#"} className="flex flex-col" style={{ height: "100%" }}>
       <motion.div
         className="tile"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, delay: index * 0.15 + 0.1 }}
         style={{
-          opacity,
-          x,
-          y,
           minHeight: "420px",
           height: "100%",
           display: "flex",
@@ -151,38 +148,27 @@ function Tile({
 }
 
 export default function NavigationGrid() {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 85%", "start 35%"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const xTitle = useTransform(scrollYProgress, [0, 1], [-50, 0]);
-  const xTile0 = useTransform(scrollYProgress, [0, 1], [-80, 0]);
-  const yTile1 = useTransform(scrollYProgress, [0, 1], [80, 0]);
-  const xTile2 = useTransform(scrollYProgress, [0, 1], [80, 0]);
-
   const { ref: swapRef, past } = useScrollSwap(0.35);
 
   return (
     <section
       id="grid"
-      ref={containerRef}
-      style={{ background: "#000000", paddingTop: "7rem", paddingBottom: "7rem" }}
+      style={{ background: "#000000", paddingTop: "7rem", paddingBottom: "7rem", overflow: "hidden" }}
     >
       <hr className="divider" />
 
       <div className="container" style={{ paddingTop: "5rem" }}>
         {/* Section header */}
         <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
           style={{
             display: "flex",
             flexDirection: "column",
             gap: "0.5rem",
             marginBottom: "4rem",
-            opacity,
-            x: xTitle,
           }}
         >
           <span className="section-label">// 02 — entdecken</span>
@@ -206,9 +192,7 @@ export default function NavigationGrid() {
             <Tile
               key={tile.id}
               tile={tile}
-              opacity={opacity}
-              x={i === 0 ? xTile0 : i === 2 ? xTile2 : undefined}
-              y={i === 1 ? yTile1 : undefined}
+              index={i}
             />
           ))}
         </div>

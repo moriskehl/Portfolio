@@ -18,33 +18,24 @@ const STATS = [
 ];
 
 export default function Intro() {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 85%", "start 35%"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const xLeft1 = useTransform(scrollYProgress, [0, 1], [-40, 0]);
-  const xLeft2 = useTransform(scrollYProgress, [0, 1], [-60, 0]);
-  const xLeft3 = useTransform(scrollYProgress, [0, 1], [-80, 0]);
-  const xRight = useTransform(scrollYProgress, [0, 1], [60, 0]);
-
   const { ref: swapRef, past } = useScrollSwap(0.35);
 
   return (
     <section
       id="intro"
-      ref={containerRef}
-      style={{ background: "#000000", paddingTop: "7rem", paddingBottom: "7rem" }}
+      style={{ background: "#000000", paddingTop: "7rem", paddingBottom: "7rem", overflow: "hidden" }}
     >
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-
+          
           {/* Left — text */}
           <div>
             {/* Headshot */}
             <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               style={{
                 width: "90px",
                 height: "90px",
@@ -52,8 +43,6 @@ export default function Intro() {
                 overflow: "hidden",
                 border: "2px solid rgba(59,130,246,0.3)",
                 marginBottom: "1.5rem",
-                opacity,
-                x: xLeft1,
               }}
             >
               <img
@@ -62,13 +51,14 @@ export default function Intro() {
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </motion.div>
+            
             <motion.span
               className="section-label"
-              style={{
-                opacity,
-                x: xLeft1,
-                display: "block",
-              }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              style={{ display: "block" }}
             >
               // 01 — über mich
             </motion.span>
@@ -76,10 +66,10 @@ export default function Intro() {
             <motion.h2
               ref={swapRef as React.RefObject<HTMLHeadingElement>}
               className="section-heading"
-              style={{
-                opacity,
-                x: xLeft2,
-              }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
               <span style={{ color: past ? "#ffffff" : "#3b82f6", transition: "color 0.6s ease" }}>Von der Piste</span><br />
               <span style={{ color: past ? "#3b82f6" : "#ffffff", transition: "color 0.6s ease" }}>zum Code.</span>
@@ -87,10 +77,10 @@ export default function Intro() {
 
             <motion.div
               className="border-accent"
-              style={{
-                opacity,
-                x: xLeft3,
-              }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
               <p
                 style={{
@@ -112,10 +102,10 @@ export default function Intro() {
 
           {/* Right — stats + terminal */}
           <motion.div
-            style={{
-              opacity,
-              x: xRight,
-            }}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.7, delay: 0.2 }}
           >
             {/* Stats */}
             <div
