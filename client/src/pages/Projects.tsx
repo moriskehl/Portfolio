@@ -69,7 +69,6 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
         marginBottom: "1px",
         cursor: "default",
         boxShadow: hovered ? "0 0 30px rgba(59,130,246,0.06)" : "none",
-        transition2: "border-color 0.3s, box-shadow 0.3s",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
