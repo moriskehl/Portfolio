@@ -7,13 +7,13 @@ export default function Projects() {
       </header>
       <section className="projects-container">
         <div className="project-item">
-          <h3>Projekt Eins</h3>
-          <p>Standalone Web-App</p>
+          <h3>Abiball Portal</h3>
+          <p>Mock-System für Planung & Organisation (PHP Applikation)</p>
           <div className="iframe-container">
-            {/* The paths changed because projects/ is now in public/ so it resolves from the root / */}
-            <iframe src="/projects/project-one/index.html" title="Projekt Eins"></iframe>
+            {/* Das lokale PHP Projekt läuft auf Port 8080. Für Produktion muss hier eine Live-URL rein! */}
+            <iframe src="http://localhost:8080/" title="Abiball Portal"></iframe>
           </div>
-          <a href="/projects/project-one/index.html" target="_blank" rel="noopener noreferrer" className="btn">Vollbild öffnen</a>
+          <a href="http://localhost:8080/" target="_blank" rel="noopener noreferrer" className="btn">Vollbild öffnen</a>
         </div>
         <div className="project-item">
           <h3>Projekt Zwei</h3>
