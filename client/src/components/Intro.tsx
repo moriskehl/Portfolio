@@ -100,22 +100,11 @@ export default function Intro() {
                   marginBottom: "1.2rem",
                 }}
               >
-                Ich bin Moris — Wirtschaftsinformatik-Abiturient am BSZ Leonberg
+                Ich bin Moris, Abiturient am BSZ Leonberg
                 und ab Oktober dualer Student an der DHBW mit SV Informatik GmbH.
+                <br />
                 Gleichzeitig fahre ich seit meinem dritten Lebensjahr Skirennlauf
                 und starte mit dem Ski Team Seibelseckle in der Deutschen Ski Liga.
-              </p>
-              <p
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: "1rem",
-                  lineHeight: 1.85,
-                  color: "#a1a1aa",
-                }}
-              >
-                Piste und Code haben mehr gemeinsam, als man denkt:
-                Präzision, Geschwindigkeit und die Fähigkeit,
-                das Gelände vorausschauend zu lesen.
               </p>
             </motion.div>
           </div>

@@ -132,7 +132,7 @@ export default function Hero() {
             animation: "fade-up 0.7s ease 0.2s forwards",
           }}
         >
-          // portfolio.init()
+          // 00 - portfolio.init()
         </span>
 
         <h1
@@ -167,24 +167,7 @@ export default function Hero() {
           )}
         </h1>
 
-        {showSub && (
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "clamp(0.8rem, 1.8vw, 1rem)",
-              fontWeight: 300,
-              letterSpacing: "0.22em",
-              color: "#3b82f6",
-              marginBottom: "3rem",
-              textTransform: "uppercase",
-              opacity: 0,
-              animation: "fade-up 0.7s ease forwards",
-              textShadow: "0 0 20px rgba(0,0,0,0.9)",
-            }}
-          >
-            Wirtschaftsinformatiker&nbsp;&nbsp;·&nbsp;&nbsp;Skirennfahrer
-          </p>
-        )}
+        
       </div>
 
       {/* Small scroll indicator arrow */}
