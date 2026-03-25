@@ -290,14 +290,22 @@ export default function AsciiMountain({ onPauseChange, onLoad }: Props) {
     };
 
     const resize = () => {
-      const w = container.clientWidth || window.innerWidth;
-      const h = container.clientHeight || window.innerHeight;
+      const wActual = container.clientWidth || window.innerWidth;
+      const hActual = container.clientHeight || window.innerHeight;
+      
+      const isMobile = wActual < 768;
+      // On mobile, render virtually larger so the ASCII characters shrink relative to the mountain
+      const virtualMult = isMobile ? 1.8 : 1.0; 
+      
+      const w = Math.round(wActual * virtualMult);
+      const h = Math.round(hActual * virtualMult);
+      
       const dpr = window.devicePixelRatio || 1;
 
       canvas2d.width = w * dpr;
       canvas2d.height = h * dpr;
-      canvas2d.style.width = `${w}px`;
-      canvas2d.style.height = `${h}px`;
+      canvas2d.style.width = `${wActual}px`;
+      canvas2d.style.height = `${hActual}px`;
       
       const ctx = canvas2d.getContext("2d")!;
       ctx.scale(dpr, dpr);
@@ -313,14 +321,11 @@ export default function AsciiMountain({ onPauseChange, onLoad }: Props) {
       camera.updateProjectionMatrix();
 
       if (meshRef.current) {
-        const isMobile = w < 768;
-        const scaleMult = isMobile ? 0.45 : 1.0;
-        meshRef.current.scale.setScalar(cc.scale * scaleMult);
+        meshRef.current.scale.setScalar(cc.scale);
         
         const bboxHeight = bboxRef.current ? bboxRef.current.max.z - bboxRef.current.min.z : 0;
-        const posMult = isMobile ? 0.8 : 1.0; 
         meshRef.current.position.x = cc.posX * bboxHeight;
-        meshRef.current.position.y = (cc.posY * posMult) * bboxHeight;
+        meshRef.current.position.y = cc.posY * bboxHeight;
       }
     };
 
@@ -345,15 +350,11 @@ export default function AsciiMountain({ onPauseChange, onLoad }: Props) {
         scene.add(mesh);
 
         const c = ctrlRef.current;
-        const w = container.clientWidth || window.innerWidth;
-        const isMobile = w < 768;
-        const scaleMult = isMobile ? 0.45 : 1.0;
-        const posMult = isMobile ? 0.8 : 1.0;
         
-        mesh.scale.setScalar(c.scale * scaleMult);
+        mesh.scale.setScalar(c.scale);
         const bboxHeight = bbox.max.z - bbox.min.z;
         mesh.position.x = c.posX * bboxHeight;
-        mesh.position.y = (c.posY * posMult) * bboxHeight;
+        mesh.position.y = c.posY * bboxHeight;
         mesh.rotation.x = (c.rotX * Math.PI) / 180;
         mesh.rotation.y = (c.rotY * Math.PI) / 180;
         mesh.rotation.z = (c.rotZ * Math.PI) / 180;
