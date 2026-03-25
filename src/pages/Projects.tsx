@@ -10,10 +10,10 @@ export default function Projects() {
           <h3>Abiball Portal</h3>
           <p>Mock-System für Planung & Organisation (PHP Applikation)</p>
           <div className="iframe-container">
-            {/* Das lokale PHP Projekt läuft auf Port 8080. Für Produktion muss hier eine Live-URL rein! */}
-            <iframe src="http://localhost:8080/" title="Abiball Portal"></iframe>
+            {/* Das Projekt läuft live unter bsz.app */}
+            <iframe src="https://bsz.app" title="Abiball Portal"></iframe>
           </div>
-          <a href="http://localhost:8080/" target="_blank" rel="noopener noreferrer" className="btn">Vollbild öffnen</a>
+          <a href="https://bsz.app" target="_blank" rel="noopener noreferrer" className="btn">Vollbild öffnen</a>
         </div>
         <div className="project-item">
           <h3>Projekt Zwei</h3>
