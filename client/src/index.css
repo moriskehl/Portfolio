@@ -537,9 +537,9 @@
    ═══════════════════════════════════════ */
 
 .iframe-scaler {
-  width: 200%;
-  height: 200%;
-  transform: scale(0.5);
+  width: 150%;
+  height: 150%;
+  transform: scale(0.667);
   transform-origin: top left;
 }
 

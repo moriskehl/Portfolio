@@ -25,8 +25,8 @@ function useVisible(threshold = 0.1) {
 const PROJECTS = [
   {
     title: "Abiball Portal",
-    desc: "Full-Stack Event-Management-System für die Abiball-Planung. PHP-Backend mit Benutzer-Authentifizierung, Sitzplan-Editor und Zahlungsverfolgung.",
-    tech: ["PHP", "MySQL", "JavaScript", "CSS"],
+    desc: "Full-Stack Event-Management-System für die Abiball-Planung. PHP-Backend mit Benutzer-Authentifizierung, Teilnehmer-Management, Essensbestellungen und Zahlungsverfolgung.",
+    tech: ["PHP", "JavaScript", "CSS"],
     url: "https://bsz.app",
     iframe: true,
   },
@@ -39,8 +39,8 @@ const PROJECTS = [
   },
   {
     title: "Blackjack AI",
-    desc: "Kartenzähl-KI für Blackjack — entwickelt als Seminarkurs-Projekt zum Thema Künstliche Intelligenz. Implementiert verschiedene Zählstrategien.",
-    tech: ["Python", "Machine Learning", "Statistik"],
+    desc: "Kartenzähl-KI für Blackjack — entwickelt als Seminarkurs-Projekt zum Thema Künstliche Intelligenz. Verbindet Kartenzählung mit Bilderkennung um die optimale Spielstrategie zu ermitteln.",
+    tech: ["Python", "Machine Learning", "Yolov8", "Statistik"],
     url: null,
     iframe: false,
   },
@@ -175,7 +175,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
             style={{
               position: "relative",
               width: "100%",
-              maxWidth: aspectRatio === "9/16" ? "360px" : "100%",
+              maxWidth: aspectRatio === "9/16" ? "300px" : "800px",
               margin: aspectRatio === "9/16" ? "0 auto" : "0",
               aspectRatio,
               overflow: "hidden",
