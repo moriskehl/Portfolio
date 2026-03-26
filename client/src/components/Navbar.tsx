@@ -1,12 +1,15 @@
 /*
  * Navbar — Strict B/W/Blue
- * Transparent → black frosted on scroll.
+ * Transparent → frosted on scroll.
  * Blue underline on active section.
  * Mobile hamburger menu on small screens.
+ * Theme toggle (sun/moon).
  */
 
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
+import { useTheme } from "../contexts/ThemeContext";
+import { Sun, Moon } from "lucide-react";
 
 const NAV_ROUTES = [
   { label: "Projekte", href: "/projects" },
@@ -27,6 +30,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => {
@@ -83,9 +87,9 @@ export default function Navbar() {
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          background: scrolled || menuOpen ? "rgba(0,0,0,0.92)" : "transparent",
+          background: scrolled || menuOpen ? "var(--t-nav-bg)" : "transparent",
           backdropFilter: scrolled || menuOpen ? "blur(16px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "1px solid transparent",
+          borderBottom: scrolled ? "1px solid var(--t-border)" : "1px solid transparent",
         }}
       >
         <div className="container flex items-center justify-between py-5">
@@ -96,14 +100,14 @@ export default function Navbar() {
               fontFamily: "'Share Tech Mono', monospace",
               fontSize: "0.95rem",
               letterSpacing: "0.12em",
-              color: "#ffffff",
+              color: "var(--t-text)",
               textDecoration: "none",
               zIndex: 60,
               position: "relative",
             }}
             onClick={() => setMenuOpen(false)}
           >
-            MK<span style={{ color: "#3b82f6" }}>.</span>
+            MK<span style={{ color: "var(--t-accent)" }}>.</span>
           </Link>
 
           {/* Desktop Links */}
@@ -125,6 +129,18 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
+
+            {/* Theme toggle */}
+            <li className="hidden sm:block">
+              <button
+                className="theme-toggle"
+                onClick={toggleTheme}
+                aria-label={theme === "dark" ? "Zu Light Mode wechseln" : "Zu Dark Mode wechseln"}
+              >
+                {theme === "dark" ? <Sun /> : <Moon />}
+              </button>
+            </li>
+
             <li className="hidden sm:block">
               <a
                 href="#contact"
@@ -181,6 +197,15 @@ export default function Navbar() {
             </a>
           )
         )}
+        {/* Mobile theme toggle */}
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label={theme === "dark" ? "Zu Light Mode wechseln" : "Zu Dark Mode wechseln"}
+          style={{ marginTop: "0.5rem" }}
+        >
+          {theme === "dark" ? <Sun /> : <Moon />}
+        </button>
       </div>
     </>
   );

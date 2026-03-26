@@ -1,6 +1,5 @@
 /*
  * SubPageFooter — Minimal footer bar for sub-pages
- * Matches the bottom bar from ContactFooter but standalone
  */
 
 import { Link } from "wouter";
@@ -15,9 +14,9 @@ export default function SubPageFooter() {
   return (
     <footer
       style={{
-        borderTop: "1px solid rgba(255,255,255,0.05)",
+        borderTop: "1px solid var(--t-border)",
         padding: "1.5rem 0",
-        background: "#000",
+        background: "var(--t-bg)",
       }}
     >
       <div
@@ -36,7 +35,7 @@ export default function SubPageFooter() {
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: "0.62rem",
             letterSpacing: "0.15em",
-            color: "rgba(255,255,255,0.18)",
+            color: "var(--t-text-micro)",
           }}
         >
           © {new Date().getFullYear()} Moris Kehl
@@ -50,16 +49,16 @@ export default function SubPageFooter() {
                 fontFamily: "'Share Tech Mono', monospace",
                 fontSize: "0.6rem",
                 letterSpacing: "0.18em",
-                color: "rgba(255,255,255,0.18)",
+                color: "var(--t-text-micro)",
                 textDecoration: "none",
                 textTransform: "uppercase" as const,
                 transition: "color 0.2s",
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) =>
-                (e.currentTarget.style.color = "#3b82f6")
+                (e.currentTarget.style.color = "var(--t-accent)")
               }
               onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) =>
-                (e.currentTarget.style.color = "rgba(255,255,255,0.18)")
+                (e.currentTarget.style.color = "var(--t-text-micro)")
               }
             >
               {item.label}
@@ -71,16 +70,16 @@ export default function SubPageFooter() {
               fontFamily: "'Share Tech Mono', monospace",
               fontSize: "0.6rem",
               letterSpacing: "0.18em",
-              color: "rgba(255,255,255,0.18)",
+              color: "var(--t-text-micro)",
               textDecoration: "none",
               textTransform: "uppercase" as const,
               transition: "color 0.2s",
             }}
             onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) =>
-              (e.currentTarget.style.color = "#3b82f6")
+              (e.currentTarget.style.color = "var(--t-accent)")
             }
             onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) =>
-              (e.currentTarget.style.color = "rgba(255,255,255,0.18)")
+              (e.currentTarget.style.color = "var(--t-text-micro)")
             }
           >
             Impressum

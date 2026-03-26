@@ -6,6 +6,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import AsciiMountain from "./AsciiMountain";
+import { useTheme } from "../contexts/ThemeContext";
 
 const NAME = "MORIS_KEHL";
 
@@ -58,6 +59,8 @@ export default function Hero() {
   const [showSub, setShowSub] = useState(false);
   const [loading, setLoading] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   useEffect(() => {
     const onScroll = () => {
@@ -84,25 +87,27 @@ export default function Hero() {
     <section
       id="hero"
       className="relative w-full overflow-hidden"
-      style={{ height: "100svh", minHeight: "450px", background: "#000000" }}
+      style={{ height: "100svh", minHeight: "450px", background: "var(--t-bg)" }}
     >
       <div 
         className="absolute inset-0"
         style={{ 
           opacity: loading ? 0 : 1, 
-          transition: "opacity 2.5s ease", /* Fades in smoothly as soon as loaded */
+          transition: "opacity 2.5s ease",
           zIndex: 1 
         }}
       >
-        <AsciiMountain onLoad={() => setLoading(false)} />
+        <AsciiMountain onLoad={() => setLoading(false)} light={isLight} />
       </div>
 
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           zIndex: 3,
-          background:
-            "radial-gradient(ellipse 90% 80% at 50% 55%, transparent 20%, rgba(0,0,0,0.65) 100%)",
+          background: isLight
+            ? "radial-gradient(ellipse 90% 80% at 50% 55%, transparent 20%, rgba(245,245,247,0.65) 100%)"
+            : "radial-gradient(ellipse 90% 80% at 50% 55%, transparent 20%, rgba(0,0,0,0.65) 100%)",
+          transition: "background 0.3s ease",
         }}
       />
 
@@ -111,7 +116,7 @@ export default function Hero() {
         style={{
           zIndex: 4,
           height: "220px",
-          background: "linear-gradient(to bottom, transparent, #000000)",
+          background: "linear-gradient(to bottom, transparent, var(--t-bg))",
         }}
       />
 
@@ -124,7 +129,7 @@ export default function Hero() {
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: "0.65rem",
             letterSpacing: "0.32em",
-            color: "#3b82f6",
+            color: "var(--t-accent)",
             textTransform: "uppercase",
             display: "block",
             marginBottom: "1.4rem",
@@ -142,9 +147,10 @@ export default function Hero() {
             fontWeight: 400,
             letterSpacing: "0.06em",
             lineHeight: 1,
-            color: "#FFFFFF",
-            textShadow:
-              "0 0 60px rgba(0,0,0,0.9), 0 2px 40px rgba(0,0,0,0.8)",
+            color: isLight ? "#1a1a2e" : "#FFFFFF",
+            textShadow: isLight
+              ? "0 0 60px rgba(245,245,247,0.9), 0 2px 40px rgba(245,245,247,0.8)"
+              : "0 0 60px rgba(0,0,0,0.9), 0 2px 40px rgba(0,0,0,0.8)",
             marginBottom: "1.4rem",
             whiteSpace: "nowrap",
             pointerEvents: "all",
@@ -155,7 +161,7 @@ export default function Hero() {
           {!done && (
             <span
               style={{
-                color: "#3b82f6",
+                color: "var(--t-accent)",
                 fontWeight: 400,
                 marginLeft: "4px",
                 textShadow: "0 0 10px rgba(59,130,246,0.9)",
@@ -191,8 +197,8 @@ export default function Hero() {
           style={{
             width: "20px",
             height: "20px",
-            borderRight: "2px solid rgba(255,255,255,0.4)",
-            borderBottom: "2px solid rgba(255,255,255,0.4)",
+            borderRight: "2px solid var(--t-text-muted)",
+            borderBottom: "2px solid var(--t-text-muted)",
             transform: "rotate(45deg)",
             animation: "scroll-bounce 3.5s ease-in-out infinite",
           }}

@@ -1,14 +1,13 @@
 /*
  * NotFound — 404 Page
- * Dark theme matching the rest of the portfolio
+ * Themed to match the portfolio
  */
 
 import { Link } from "wouter";
-import Navbar from "../components/Navbar";
 
 export default function NotFound() {
   return (
-    <div style={{ background: "#000", minHeight: "100dvh" }}>
+    <div style={{ background: "var(--t-bg)", minHeight: "100dvh" }}>
       <div
         style={{
           display: "flex",
@@ -25,7 +24,7 @@ export default function NotFound() {
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: "0.65rem",
             letterSpacing: "0.3em",
-            color: "#3b82f6",
+            color: "var(--t-accent)",
             textTransform: "uppercase",
             marginBottom: "1.5rem",
           }}
@@ -38,19 +37,19 @@ export default function NotFound() {
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: "clamp(4rem, 12vw, 8rem)",
             fontWeight: 400,
-            color: "#ffffff",
+            color: "var(--t-text)",
             lineHeight: 1,
             marginBottom: "1rem",
           }}
         >
-          4<span style={{ color: "#3b82f6" }}>0</span>4
+          4<span style={{ color: "var(--t-accent)" }}>0</span>4
         </h1>
 
         <p
           style={{
             fontFamily: "'DM Sans', sans-serif",
             fontSize: "1rem",
-            color: "#a1a1aa",
+            color: "var(--t-text-secondary)",
             marginBottom: "0.5rem",
             maxWidth: "400px",
             lineHeight: 1.7,
@@ -62,7 +61,7 @@ export default function NotFound() {
           style={{
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: "0.7rem",
-            color: "rgba(255,255,255,0.2)",
+            color: "var(--t-text-faint)",
             marginBottom: "3rem",
             letterSpacing: "0.1em",
           }}

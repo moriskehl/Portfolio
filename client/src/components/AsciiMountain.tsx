@@ -100,19 +100,23 @@ const DEFAULTS: Controls = {
 interface Props {
   onPauseChange?: (paused: boolean) => void;
   onLoad?: () => void;
+  light?: boolean;
 }
 
-function lumToColor(lum: number, gamma: number): string {
+function lumToColor(lum: number, gamma: number, invert: boolean): string {
   const boosted = Math.pow(lum, gamma);
-  const v = Math.round(boosted * 255);
+  const v = invert
+    ? Math.round((1 - boosted) * 255)   // dark chars on light bg
+    : Math.round(boosted * 255);         // light chars on dark bg
   return `rgb(${v},${v},${v})`;
 }
 
-export default function AsciiMountain({ onPauseChange, onLoad }: Props) {
+export default function AsciiMountain({ onPauseChange, onLoad, light = false }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pausedRef = useRef(false);
   const ctrlRef = useRef<Controls>({ ...DEFAULTS });
+  const lightRef2 = useRef(light);
   const pivotRef = useRef<THREE.Group | null>(null);
   const meshRef = useRef<THREE.Mesh | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
@@ -162,13 +166,25 @@ export default function AsciiMountain({ onPauseChange, onLoad }: Props) {
     );
   }, [ctrl]);
 
+  // Keep lightRef2 in sync so the render loop can read it
+  useEffect(() => { lightRef2.current = light; }, [light]);
+
+  // Apply theme-specific overrides
+  useEffect(() => {
+    setCtrl((prev) => ({
+      ...prev,
+      brightness: light ? 1.3 : DEFAULTS.brightness,
+      lightH: light ? 1.7 : DEFAULTS.lightH,
+    }));
+  }, [light]);
+
   useEffect(() => {
     const container = containerRef.current;
     const canvas2d = canvasRef.current;
     if (!container || !canvas2d) return;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000);
+    scene.background = new THREE.Color(lightRef2.current ? 0xf5f5f7 : 0x000000);
 
     const pointLight = new THREE.PointLight(0xffffff, 1, 0, 0);
     scene.add(pointLight);
@@ -269,6 +285,12 @@ export default function AsciiMountain({ onPauseChange, onLoad }: Props) {
         }
       }
 
+      // Update scene bg and canvas bg based on current theme
+      const isLight = lightRef2.current;
+      const bgColor = isLight ? "#f5f5f7" : "#000";
+      scene.background = new THREE.Color(isLight ? 0xf5f5f7 : 0x000000);
+      canvas2d.style.background = bgColor;
+
       ctx.clearRect(0, 0, canvas2d.width, canvas2d.height);
       ctx.font = `${cc.fontSize}px monospace`;
       ctx.textBaseline = "top";
@@ -279,8 +301,19 @@ export default function AsciiMountain({ onPauseChange, onLoad }: Props) {
           if (!cell) continue;
           const lum = sampleLum(c, ROWS - 1 - r);
           const x = c * cc.cellW;
-          if (cell.token === " " || lum < 0.02) continue;
-          ctx.fillStyle = lumToColor(lum, cc.brightness);
+          if (cell.token === " ") continue;
+          // Skip background-colored areas: dark bg → skip dark pixels, light bg → skip bright pixels
+          if (isLight ? lum > 0.82 : lum < 0.02) continue;
+
+          // In light mode, fade out characters near edges to prevent block artifacts
+          if (isLight) {
+            const edgeMargin = 0.08; // 8% margin on each side
+            const colPct = c / COLS;
+            const rowPct = r / ROWS;
+            if (colPct < edgeMargin || colPct > 1 - edgeMargin || rowPct < edgeMargin) continue;
+          }
+
+          ctx.fillStyle = lumToColor(lum, cc.brightness, isLight);
           ctx.fillText(cell.token, x, r * cc.rowH);
           const tokenW = ctx.measureText(cell.token).width;
           const skipCols = Math.max(0, Math.floor(tokenW / cc.cellW) - 1);
@@ -431,7 +464,7 @@ export default function AsciiMountain({ onPauseChange, onLoad }: Props) {
     >
       <canvas
         ref={canvasRef}
-        style={{ position: "absolute", inset: 0, background: "#000" }}
+        style={{ position: "absolute", inset: 0, background: light ? "#f5f5f7" : "#000", transition: "background 0.3s ease" }}
       />
 
       {/* ── Control Panel (commented out — uncomment to re-enable tuning) ──

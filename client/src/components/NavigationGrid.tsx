@@ -2,7 +2,6 @@
  * NavigationGrid — 50%–85% scroll zone
  * Responsive 3-column (desktop) / 1-column (mobile) tile grid.
  * Tiles: Software & Systems, Alpine Sport, Career.
- * Black bg, white text, blue hover (border + glow + icon).
  */
 
 import { useRef, useState } from "react";
@@ -88,7 +87,7 @@ function Tile({
           style={{
             fontSize: "1.2rem",
             letterSpacing: "0.05em",
-            color: hovered ? "#3b82f6" : "rgba(255,255,255,0.2)",
+            color: hovered ? "var(--t-accent)" : "var(--t-text-faint)",
             transition: "color 0.3s ease",
           }}
         >
@@ -118,9 +117,9 @@ function Tile({
               style={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: "0.82rem",
-                color: "rgba(255,255,255,0.35)",
+                color: "var(--t-text-faint)",
                 paddingLeft: "1rem",
-                borderLeft: `1px solid ${hovered ? "rgba(59,130,246,0.4)" : "rgba(255,255,255,0.1)"}`,
+                borderLeft: `1px solid ${hovered ? "var(--t-accent-border)" : "var(--t-item-border-left)"}`,
                 transition: "border-color 0.3s ease",
                 lineHeight: 1.5,
               }}
@@ -135,7 +134,7 @@ function Tile({
           className="tile-arrow"
           style={{
             marginTop: "auto",
-            color: hovered ? "#3b82f6" : "rgba(255,255,255,0.2)",
+            color: hovered ? "var(--t-accent)" : "var(--t-text-faint)",
             transform: hovered ? "translateX(6px)" : "none",
             transition: "color 0.3s ease, transform 0.3s ease",
           }}
@@ -153,7 +152,7 @@ export default function NavigationGrid() {
   return (
     <section
       id="grid"
-      style={{ background: "#000000", paddingTop: "7rem", paddingBottom: "7rem", overflow: "hidden" }}
+      style={{ background: "var(--t-bg)", paddingTop: "7rem", paddingBottom: "7rem", overflow: "hidden" }}
     >
       <hr className="divider" />
 
@@ -173,8 +172,8 @@ export default function NavigationGrid() {
         >
           <span className="section-label">// 02 — entdecken</span>
           <h2 ref={swapRef as React.RefObject<HTMLHeadingElement>} className="section-heading" style={{ marginBottom: 0 }}>
-            <span style={{ color: past ? "#ffffff" : "#3b82f6", transition: "color 0.6s ease" }}>Erkunde das</span>{" "}
-            <span style={{ color: past ? "#3b82f6" : "#ffffff", transition: "color 0.6s ease" }}>Terrain.</span>
+            <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>Erkunde das</span>{" "}
+            <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>Terrain.</span>
           </h2>
         </motion.div>
 
@@ -185,7 +184,7 @@ export default function NavigationGrid() {
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
             gap: "1px",
-            background: "rgba(255,255,255,0.06)",
+            background: "var(--t-grid-gap-bg)",
           }}
         >
           {TILES.map((tile, i) => (

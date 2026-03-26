@@ -1,6 +1,6 @@
 /*
  * Resume / CV — Werdegang
- * Dark theme timeline with scroll animations and hover effects
+ * Timeline with scroll animations and hover effects, themed
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -101,7 +101,7 @@ function TimelineItem({ item, index }: { item: typeof EXPERIENCE[0]; index: numb
           fontFamily: "'Share Tech Mono', monospace",
           fontSize: "0.65rem",
           letterSpacing: "0.1em",
-          color: item.upcoming ? "#3b82f6" : "rgba(255,255,255,0.25)",
+          color: item.upcoming ? "var(--t-accent)" : "var(--t-text-faint)",
           textAlign: "right",
           paddingTop: "0.3rem",
           lineHeight: 1.6,
@@ -117,23 +117,23 @@ function TimelineItem({ item, index }: { item: typeof EXPERIENCE[0]; index: numb
             width: "8px",
             height: "8px",
             borderRadius: "50%",
-            background: hovered ? "#3b82f6" : (item.upcoming ? "#3b82f6" : "rgba(255,255,255,0.15)"),
-            border: `2px solid ${hovered ? "#3b82f6" : (item.upcoming ? "#3b82f6" : "rgba(255,255,255,0.08)")}`,
+            background: hovered ? "var(--t-accent)" : (item.upcoming ? "var(--t-accent)" : "var(--t-text-faint)"),
+            border: `2px solid ${hovered ? "var(--t-accent)" : (item.upcoming ? "var(--t-accent)" : "var(--t-border-medium)")}`,
             transition: "all 0.3s",
             marginTop: "0.4rem",
             zIndex: 1,
           }}
         />
-        <div style={{ width: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
+        <div style={{ width: "1px", flex: 1, background: "var(--t-border)" }} />
       </div>
 
       {/* Content card */}
       <div
         style={{
-          background: hovered ? "rgba(59,130,246,0.03)" : "#0a0a0a",
-          border: `1px solid ${hovered ? "rgba(59,130,246,0.25)" : "rgba(255,255,255,0.06)"}`,
+          background: hovered ? "var(--t-card-hover-bg)" : "var(--t-bg-card)",
+          border: `1px solid ${hovered ? "var(--t-border-hover)" : "var(--t-border)"}`,
           padding: "1.5rem",
-          boxShadow: hovered ? "0 0 30px rgba(59,130,246,0.05)" : "none",
+          boxShadow: hovered ? "0 0 30px var(--t-card-hover-shadow)" : "none",
           transition: "all 0.3s",
         }}
         onMouseEnter={() => setHovered(true)}
@@ -146,9 +146,9 @@ function TimelineItem({ item, index }: { item: typeof EXPERIENCE[0]; index: numb
               fontSize: "0.55rem",
               letterSpacing: "0.15em",
               padding: "0.2rem 0.5rem",
-              border: "1px solid rgba(59,130,246,0.4)",
-              background: "rgba(59,130,246,0.1)",
-              color: "#3b82f6",
+              border: "1px solid var(--t-accent-border)",
+              background: "var(--t-accent-subtle)",
+              color: "var(--t-accent)",
               display: "inline-block",
               marginBottom: "0.8rem",
             }}
@@ -160,7 +160,7 @@ function TimelineItem({ item, index }: { item: typeof EXPERIENCE[0]; index: numb
           style={{
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: "1rem",
-            color: "#ffffff",
+            color: "var(--t-text)",
             marginBottom: "0.3rem",
           }}
         >
@@ -170,7 +170,7 @@ function TimelineItem({ item, index }: { item: typeof EXPERIENCE[0]; index: numb
           style={{
             fontFamily: "'DM Sans', sans-serif",
             fontSize: "0.78rem",
-            color: "#3b82f6",
+            color: "var(--t-accent)",
             marginBottom: "0.7rem",
           }}
         >
@@ -181,7 +181,7 @@ function TimelineItem({ item, index }: { item: typeof EXPERIENCE[0]; index: numb
             fontFamily: "'DM Sans', sans-serif",
             fontSize: "0.88rem",
             lineHeight: 1.7,
-            color: "#a1a1aa",
+            color: "var(--t-text-secondary)",
             marginBottom: "0.8rem",
           }}
         >
@@ -196,8 +196,8 @@ function TimelineItem({ item, index }: { item: typeof EXPERIENCE[0]; index: numb
                 fontSize: "0.55rem",
                 letterSpacing: "0.08em",
                 padding: "0.25rem 0.55rem",
-                border: "1px solid rgba(255,255,255,0.08)",
-                color: "rgba(255,255,255,0.35)",
+                border: "1px solid var(--t-tag-border)",
+                color: "var(--t-tag-color)",
               }}
             >
               {t}
@@ -216,7 +216,7 @@ export default function Resume() {
   const { ref: swapRef, past } = useScrollSwap(0.35);
 
   return (
-    <div className="page-enter" style={{ background: "#000", minHeight: "100dvh" }}>
+    <div className="page-enter" style={{ background: "var(--t-bg)", minHeight: "100dvh" }}>
 
       {/* Header */}
       <div ref={headerRef} className="container" style={{ paddingTop: "8rem", paddingBottom: "4rem" }}>
@@ -239,8 +239,8 @@ export default function Resume() {
             transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
           }}
         >
-          <span style={{ color: past ? "#ffffff" : "#3b82f6", transition: "color 0.6s ease" }}>Erfahrung &</span><br />
-          <span style={{ color: past ? "#3b82f6" : "#ffffff", transition: "color 0.6s ease" }}>Ausbildung.</span>
+          <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>Erfahrung &</span><br />
+          <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>Ausbildung.</span>
         </h1>
       </div>
 
@@ -269,25 +269,25 @@ export default function Resume() {
                 opacity: eduVisible ? 1 : 0,
                 transform: eduVisible ? "none" : "translateY(24px)",
                 transition: `opacity 0.7s ease ${i * 120}ms, transform 0.7s ease ${i * 120}ms`,
-                background: "#0a0a0a",
-                border: "1px solid rgba(255,255,255,0.06)",
+                background: "var(--t-bg-secondary)",
+                border: "1px solid var(--t-border)",
                 padding: "1.8rem",
               }}
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "0.5rem" }}>
                 <div>
-                  <h3 style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: "1rem", color: "#fff", marginBottom: "0.3rem" }}>
+                  <h3 style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: "1rem", color: "var(--t-text)", marginBottom: "0.3rem" }}>
                     {item.title}
                   </h3>
-                  <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.78rem", color: "#3b82f6", marginBottom: "0.6rem" }}>
+                  <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.78rem", color: "var(--t-accent)", marginBottom: "0.6rem" }}>
                     {item.org}
                   </div>
                 </div>
-                <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: "0.65rem", color: "rgba(255,255,255,0.25)", letterSpacing: "0.1em" }}>
+                <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: "0.65rem", color: "var(--t-text-faint)", letterSpacing: "0.1em" }}>
                   {item.period}
                 </span>
               </div>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem", lineHeight: 1.7, color: "#a1a1aa" }}>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem", lineHeight: 1.7, color: "var(--t-text-secondary)" }}>
                 {item.desc}
               </p>
             </div>
@@ -304,7 +304,7 @@ export default function Resume() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px"
           style={{
             marginTop: "2rem",
-            border: "1px solid rgba(255,255,255,0.06)",
+            border: "1px solid var(--t-border)",
             opacity: skillVisible ? 1 : 0,
             transform: skillVisible ? "none" : "translateY(24px)",
             transition: "opacity 0.7s ease, transform 0.7s ease",
@@ -315,7 +315,7 @@ export default function Resume() {
               key={group.category}
               style={{
                 padding: "1.5rem",
-                background: "#0a0a0a",
+                background: "var(--t-bg-secondary)",
               }}
             >
               <div
@@ -323,7 +323,7 @@ export default function Resume() {
                   fontFamily: "'Share Tech Mono', monospace",
                   fontSize: "0.65rem",
                   letterSpacing: "0.15em",
-                  color: "#3b82f6",
+                  color: "var(--t-accent)",
                   marginBottom: "1rem",
                   textTransform: "uppercase",
                 }}
@@ -337,9 +337,9 @@ export default function Resume() {
                     style={{
                       fontFamily: "'DM Sans', sans-serif",
                       fontSize: "0.82rem",
-                      color: "rgba(255,255,255,0.5)",
+                      color: "var(--t-text-muted)",
                       paddingLeft: "0.8rem",
-                      borderLeft: "1px solid rgba(255,255,255,0.08)",
+                      borderLeft: "1px solid var(--t-border-medium)",
                       lineHeight: 1.5,
                     }}
                   >

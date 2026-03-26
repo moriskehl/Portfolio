@@ -1,6 +1,6 @@
 /*
  * Achievements — Skirennlauf Erfolge
- * Dark theme with scroll animations and hover effects
+ * Themed with scroll animations and hover effects
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -77,11 +77,11 @@ function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0] & { ima
         transform: visible ? "none" : "translateY(28px)",
         transition: `opacity 0.7s ease ${index * 120}ms, transform 0.7s ease ${index * 120}ms`,
         padding: "2.5rem 2rem",
-        background: hovered ? "rgba(59,130,246,0.03)" : "#0a0a0a",
-        border: `1px solid ${hovered ? "rgba(59,130,246,0.25)" : "rgba(255,255,255,0.06)"}`,
+        background: hovered ? "var(--t-card-hover-bg)" : "var(--t-bg-secondary)",
+        border: `1px solid ${hovered ? "var(--t-border-hover)" : "var(--t-border)"}`,
         marginBottom: "1px",
         cursor: "default",
-        boxShadow: hovered ? "0 0 40px rgba(59,130,246,0.05)" : "none",
+        boxShadow: hovered ? "0 0 40px var(--t-card-hover-shadow)" : "none",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -93,7 +93,7 @@ function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0] & { ima
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: "0.7rem",
             letterSpacing: "0.15em",
-            color: hovered ? "#3b82f6" : "rgba(255,255,255,0.2)",
+            color: hovered ? "var(--t-accent)" : "var(--t-text-faint)",
             transition: "color 0.3s",
             writingMode: "vertical-lr",
             transform: "rotate(180deg)",
@@ -113,9 +113,9 @@ function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0] & { ima
               fontSize: "0.62rem",
               letterSpacing: "0.1em",
               padding: "0.3rem 0.7rem",
-              border: "1px solid rgba(59,130,246,0.3)",
-              background: "rgba(59,130,246,0.08)",
-              color: "#3b82f6",
+              border: "1px solid var(--t-accent-border)",
+              background: "var(--t-accent-subtle)",
+              color: "var(--t-accent)",
               display: "inline-flex",
               alignItems: "center",
               gap: "0.35rem",
@@ -129,7 +129,7 @@ function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0] & { ima
           style={{
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: "1.2rem",
-            color: "#ffffff",
+            color: "var(--t-text)",
             marginBottom: "0.8rem",
           }}
         >
@@ -141,7 +141,7 @@ function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0] & { ima
             fontFamily: "'DM Sans', sans-serif",
             fontSize: "0.92rem",
             lineHeight: 1.75,
-            color: "#a1a1aa",
+            color: "var(--t-text-secondary)",
             marginBottom: "0.8rem",
           }}
         >
@@ -153,7 +153,7 @@ function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0] & { ima
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: "0.6rem",
             letterSpacing: "0.15em",
-            color: "rgba(255,255,255,0.2)",
+            color: "var(--t-text-faint)",
           }}
         >
           {item.detail}
@@ -164,7 +164,7 @@ function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0] & { ima
             marginTop: "1.5rem", 
             maxWidth: "380px",
             overflow: "hidden", 
-            border: "1px solid rgba(255,255,255,0.15)",
+            border: "1px solid var(--t-border-input)",
             clipPath: "polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)",
           }}>
             <img
@@ -190,7 +190,7 @@ export default function Achievements() {
   const { ref: swapRef, past } = useScrollSwap(0.35);
 
   return (
-    <div className="page-enter" style={{ background: "#000", minHeight: "100dvh" }}>
+    <div className="page-enter" style={{ background: "var(--t-bg)", minHeight: "100dvh" }}>
 
       {/* Header */}
       <div ref={headerRef} className="container" style={{ paddingTop: "8rem", paddingBottom: "4rem" }}>
@@ -213,8 +213,8 @@ export default function Achievements() {
             transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
           }}
         >
-          <span style={{ color: past ? "#ffffff" : "#3b82f6", transition: "color 0.6s ease" }}>Skirennlauf &</span><br />
-          <span style={{ color: past ? "#3b82f6" : "#ffffff", transition: "color 0.6s ease" }}>Erfolge.</span>
+          <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>Skirennlauf &</span><br />
+          <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>Erfolge.</span>
         </h1>
       </div>
 
@@ -225,7 +225,7 @@ export default function Achievements() {
         <div
           className="grid grid-cols-2 sm:grid-cols-4 gap-px"
           style={{
-            border: "1px solid rgba(255,255,255,0.06)",
+            border: "1px solid var(--t-border)",
             opacity: statsVisible ? 1 : 0,
             transform: statsVisible ? "none" : "translateY(20px)",
             transition: "opacity 0.7s ease, transform 0.7s ease",
@@ -236,8 +236,8 @@ export default function Achievements() {
               key={s.label}
               style={{
                 padding: "1.5rem",
-                background: "#0a0a0a",
-                borderRight: i < 3 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                background: "var(--t-bg-secondary)",
+                borderRight: i < 3 ? "1px solid var(--t-border)" : "none",
                 textAlign: "center",
               }}
             >
@@ -245,7 +245,7 @@ export default function Achievements() {
                 style={{
                   fontFamily: "'Share Tech Mono', monospace",
                   fontSize: "1.8rem",
-                  color: "#3b82f6",
+                  color: "var(--t-accent)",
                   lineHeight: 1,
                   marginBottom: "0.4rem",
                 }}
@@ -257,7 +257,7 @@ export default function Achievements() {
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.68rem",
                   letterSpacing: "0.1em",
-                  color: "rgba(255,255,255,0.3)",
+                  color: "var(--t-text-faint)",
                   textTransform: "uppercase",
                 }}
               >

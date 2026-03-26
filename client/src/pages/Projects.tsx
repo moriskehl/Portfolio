@@ -1,6 +1,6 @@
 /*
- * Projects — Full-page dark theme with scroll animations
- * Matches landing page design: B/W/Blue, Share Tech Mono + DM Sans
+ * Projects — Full-page with scroll animations
+ * Matches landing page design, supports theme toggle
  */
 
 import { useState, useEffect, useRef } from "react";
@@ -65,12 +65,12 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
         opacity: visible ? 1 : 0,
         transform: visible ? "none" : "translateY(32px)",
         transition: `opacity 0.7s ease ${index * 120}ms, transform 0.7s ease ${index * 120}ms`,
-        background: "#0a0a0a",
-        border: `1px solid ${hovered ? "rgba(59,130,246,0.3)" : "rgba(255,255,255,0.06)"}`,
+        background: "var(--t-bg-secondary)",
+        border: `1px solid ${hovered ? "var(--t-border-hover)" : "var(--t-border)"}`,
         padding: "2rem",
         marginBottom: "1px",
         cursor: "default",
-        boxShadow: hovered ? "0 0 30px rgba(59,130,246,0.06)" : "none",
+        boxShadow: hovered ? "0 0 30px var(--t-card-hover-shadow)" : "none",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -83,7 +83,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
               fontFamily: "'Share Tech Mono', monospace",
               fontSize: "0.6rem",
               letterSpacing: "0.2em",
-              color: hovered ? "#3b82f6" : "rgba(255,255,255,0.2)",
+              color: hovered ? "var(--t-accent)" : "var(--t-text-faint)",
               transition: "color 0.3s",
             }}
           >
@@ -93,7 +93,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
             style={{
               fontFamily: "'Share Tech Mono', monospace",
               fontSize: "1.3rem",
-              color: "#ffffff",
+              color: "var(--t-text)",
               marginTop: "0.4rem",
               marginBottom: "0.6rem",
             }}
@@ -120,7 +120,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
           fontFamily: "'DM Sans', sans-serif",
           fontSize: "0.92rem",
           lineHeight: 1.75,
-          color: "#a1a1aa",
+          color: "var(--t-text-secondary)",
           marginBottom: "1.2rem",
         }}
       >
@@ -137,9 +137,9 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
               fontSize: "0.62rem",
               letterSpacing: "0.1em",
               padding: "0.3rem 0.7rem",
-              border: "1px solid rgba(255,255,255,0.08)",
-              color: "rgba(255,255,255,0.4)",
-              background: "rgba(255,255,255,0.02)",
+              border: "1px solid var(--t-tag-border)",
+              color: "var(--t-tag-color)",
+              background: "var(--t-tag-bg)",
             }}
           >
             {t}
@@ -160,9 +160,9 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
                   fontSize: "0.6rem",
                   letterSpacing: "0.1em",
                   padding: "0.35rem 0.8rem",
-                  border: `1px solid ${aspectRatio === ratio ? "rgba(59,130,246,0.5)" : "rgba(255,255,255,0.1)"}`,
-                  background: aspectRatio === ratio ? "rgba(59,130,246,0.1)" : "transparent",
-                  color: aspectRatio === ratio ? "#3b82f6" : "rgba(255,255,255,0.3)",
+                  border: `1px solid ${aspectRatio === ratio ? "var(--t-accent-border)" : "var(--t-border-input)"}`,
+                  background: aspectRatio === ratio ? "var(--t-accent-subtle)" : "transparent",
+                  color: aspectRatio === ratio ? "var(--t-accent)" : "var(--t-text-faint)",
                   cursor: "pointer",
                   transition: "all 0.2s",
                 }}
@@ -179,8 +179,8 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
               margin: aspectRatio === "9/16" ? "0 auto" : "0",
               aspectRatio,
               overflow: "hidden",
-              border: "1px solid rgba(255,255,255,0.06)",
-              background: "#000",
+              border: "1px solid var(--t-border)",
+              background: "var(--t-bg)",
             }}
           >
             <div className="iframe-scaler">
@@ -198,7 +198,7 @@ export default function Projects() {
   const { ref: swapRef, past } = useScrollSwap(0.35);
 
   return (
-    <div className="page-enter" style={{ background: "#000", minHeight: "100dvh" }}>
+    <div className="page-enter" style={{ background: "var(--t-bg)", minHeight: "100dvh" }}>
 
       {/* Header */}
       <div
@@ -225,15 +225,15 @@ export default function Projects() {
             transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
           }}
         >
-          <span style={{ color: past ? "#ffffff" : "#3b82f6", transition: "color 0.6s ease" }}>Software &</span><br />
-          <span style={{ color: past ? "#3b82f6" : "#ffffff", transition: "color 0.6s ease" }}>Systeme.</span>
+          <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>Software &</span><br />
+          <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>Systeme.</span>
         </h1>
         <p
           style={{
             fontFamily: "'DM Sans', sans-serif",
             fontSize: "1rem",
             lineHeight: 1.7,
-            color: "#a1a1aa",
+            color: "var(--t-text-secondary)",
             maxWidth: "500px",
             opacity: headerVisible ? 1 : 0,
             transform: headerVisible ? "none" : "translateY(20px)",

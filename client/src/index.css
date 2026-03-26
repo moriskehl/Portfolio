@@ -1,13 +1,8 @@
 /*
- * DESIGN SYSTEM: Strict Modern Dark Mode
+ * DESIGN SYSTEM: Dark / Light Mode
  * ─────────────────────────────────────────
- * Background:  #000000 / #0a0a0a
- * Text:        #FFFFFF / #a1a1aa (muted)
- * Accent Blue: #3b82f6 (primary) / #2563eb (hover) / #1d4ed8 (deep)
- * Border:      rgba(255,255,255,0.08) base / rgba(59,130,246,0.4) hover
- *
- * NO GREEN. Palette is strictly Black + White + Blue.
- *
+ * Default: Dark.  Add .light on <html> for light mode.
+ * Accent Blue: #3b82f6 (primary) / #2563eb (hover)
  * Typography: Share Tech Mono (display) + DM Sans (body)
  */
 
@@ -43,41 +38,70 @@
   --font-sans: 'DM Sans', sans-serif;
 }
 
+/* ═══════════════════════════════════════
+   THEME TOKENS (dark = default)
+   ═══════════════════════════════════════ */
+
 :root {
   --radius: 0px;
 
-  /* Core */
+  /* Core palette */
   --background: oklch(0.04 0 0);
   --foreground: oklch(0.98 0 0);
-
-  /* Cards */
   --card: oklch(0.07 0 0);
   --card-foreground: oklch(0.98 0 0);
   --popover: oklch(0.07 0 0);
   --popover-foreground: oklch(0.98 0 0);
-
-  /* Blue primary */
   --primary: oklch(0.60 0.20 250);
   --primary-foreground: oklch(0.98 0 0);
-
-  /* Secondary */
   --secondary: oklch(0.10 0 0);
   --secondary-foreground: oklch(0.80 0 0);
-
-  /* Muted */
   --muted: oklch(0.12 0 0);
   --muted-foreground: oklch(0.55 0 0);
-
-  /* Accent blue */
   --accent: oklch(0.60 0.20 250);
   --accent-foreground: oklch(0.98 0 0);
-
   --destructive: oklch(0.65 0.25 25);
   --border: oklch(0.98 0 0 / 8%);
   --input: oklch(0.10 0 0);
   --ring: oklch(0.60 0.20 250);
 
-  /* Named tokens */
+  /* ── Theme semantic tokens ── */
+  --t-bg:             #000000;
+  --t-bg-secondary:   #0a0a0a;
+  --t-bg-card:        #0a0a0a;
+  --t-text:           #ffffff;
+  --t-text-secondary: #a1a1aa;
+  --t-text-muted:     rgba(255,255,255,0.45);
+  --t-text-faint:     rgba(255,255,255,0.2);
+  --t-text-micro:     rgba(255,255,255,0.18);
+  --t-border:         rgba(255,255,255,0.06);
+  --t-border-medium:  rgba(255,255,255,0.08);
+  --t-border-input:   rgba(255,255,255,0.1);
+  --t-border-hover:   rgba(59,130,246,0.3);
+  --t-accent:         #3b82f6;
+  --t-accent-hover:   #2563eb;
+  --t-accent-deep:    #1d4ed8;
+  --t-accent-glow:    rgba(59,130,246,0.35);
+  --t-accent-subtle:  rgba(59,130,246,0.06);
+  --t-accent-border:  rgba(59,130,246,0.3);
+  --t-nav-bg:         rgba(0,0,0,0.92);
+  --t-overlay-bg:     rgba(0,0,0,0.97);
+  --t-selection:      rgba(59,130,246,0.3);
+  --t-scrollbar-track: #000000;
+  --t-scrollbar-thumb: #3b82f6;
+  --t-hamburger:      #ffffff;
+  --t-card-hover-bg:  rgba(59,130,246,0.03);
+  --t-card-hover-shadow: rgba(59,130,246,0.05);
+  --t-tag-color:      rgba(255,255,255,0.4);
+  --t-tag-border:     rgba(255,255,255,0.08);
+  --t-tag-bg:         rgba(255,255,255,0.02);
+  --t-input-bg:       #0a0a0a;
+  --t-input-placeholder: rgba(255,255,255,0.2);
+  --t-grid-gap-bg:    rgba(255,255,255,0.06);
+  --t-hero-gradient-end: #000000;
+  --t-item-border-left: rgba(255,255,255,0.1);
+
+  /* Legacy aliases */
   --blue:       #3b82f6;
   --blue-hover: #2563eb;
   --blue-deep:  #1d4ed8;
@@ -85,6 +109,63 @@
   --white:      #ffffff;
   --grey:       #a1a1aa;
   --void:       #000000;
+}
+
+/* ── Light mode overrides ── */
+:root.light {
+  --background: oklch(0.97 0 0);
+  --foreground: oklch(0.15 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0 0);
+  --primary: oklch(0.55 0.20 250);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0.30 0 0);
+  --muted: oklch(0.93 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.55 0.20 250);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.55 0.25 25);
+  --border: oklch(0.15 0 0 / 10%);
+  --input: oklch(0.95 0 0);
+  --ring: oklch(0.55 0.20 250);
+
+  --t-bg:             #f5f5f7;
+  --t-bg-secondary:   #ffffff;
+  --t-bg-card:        #ffffff;
+  --t-text:           #1a1a2e;
+  --t-text-secondary: #4a4a5a;
+  --t-text-muted:     rgba(0,0,0,0.45);
+  --t-text-faint:     rgba(0,0,0,0.25);
+  --t-text-micro:     rgba(0,0,0,0.35);
+  --t-border:         rgba(0,0,0,0.06);
+  --t-border-medium:  rgba(0,0,0,0.08);
+  --t-border-input:   rgba(0,0,0,0.12);
+  --t-border-hover:   rgba(37,99,235,0.35);
+  --t-accent:         #2563eb;
+  --t-accent-hover:   #1d4ed8;
+  --t-accent-deep:    #1e40af;
+  --t-accent-glow:    rgba(37,99,235,0.15);
+  --t-accent-subtle:  rgba(37,99,235,0.06);
+  --t-accent-border:  rgba(37,99,235,0.25);
+  --t-nav-bg:         rgba(255,255,255,0.92);
+  --t-overlay-bg:     rgba(255,255,255,0.97);
+  --t-selection:      rgba(37,99,235,0.2);
+  --t-scrollbar-track: #f0f0f0;
+  --t-scrollbar-thumb: #2563eb;
+  --t-hamburger:      #1a1a2e;
+  --t-card-hover-bg:  rgba(37,99,235,0.03);
+  --t-card-hover-shadow: rgba(37,99,235,0.08);
+  --t-tag-color:      rgba(0,0,0,0.45);
+  --t-tag-border:     rgba(0,0,0,0.1);
+  --t-tag-bg:         rgba(0,0,0,0.03);
+  --t-input-bg:       #f5f5f7;
+  --t-input-placeholder: rgba(0,0,0,0.3);
+  --t-grid-gap-bg:    rgba(0,0,0,0.06);
+  --t-hero-gradient-end: #f5f5f7;
+  --t-item-border-left: rgba(0,0,0,0.12);
 }
 
 /* ═══════════════════════════════════════
@@ -132,19 +213,20 @@
   html {
     scroll-behavior: smooth;
     scrollbar-width: thin;
-    scrollbar-color: #3b82f6 #000000;
+    scrollbar-color: var(--t-scrollbar-thumb) var(--t-scrollbar-track);
   }
 
   html::-webkit-scrollbar { width: 8px; }
-  html::-webkit-scrollbar-track { background: #000; }
-  html::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; border: 2px solid #000; }
+  html::-webkit-scrollbar-track { background: var(--t-scrollbar-track); }
+  html::-webkit-scrollbar-thumb { background: var(--t-scrollbar-thumb); border-radius: 4px; border: 2px solid var(--t-scrollbar-track); }
 
   body {
     @apply bg-background text-foreground;
     font-family: 'DM Sans', sans-serif;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: var(--t-bg);
+    color: var(--t-text);
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -153,8 +235,8 @@
   }
 
   ::selection {
-    background: rgba(59, 130, 246, 0.3);
-    color: #fff;
+    background: var(--t-selection);
+    color: var(--t-text);
   }
 
   button:not(:disabled),
@@ -195,7 +277,7 @@
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.68rem;
     letter-spacing: 0.3em;
-    color: #3b82f6;
+    color: var(--t-accent);
     text-transform: uppercase;
     display: block;
     margin-bottom: 0.75rem;
@@ -205,7 +287,7 @@
   .section-heading {
     font-family: 'Share Tech Mono', monospace;
     font-size: clamp(1.6rem, 3.5vw, 2.8rem);
-    color: #ffffff;
+    color: var(--t-text);
     line-height: 1.15;
     margin-bottom: 1.5rem;
   }
@@ -214,26 +296,26 @@
   .accent-line {
     display: block;
     height: 1px;
-    background: #3b82f6;
-    box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+    background: var(--t-accent);
+    box-shadow: 0 0 8px var(--t-accent-glow);
     animation: slide-right 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   /* ── Section left border ── */
   .border-accent {
-    border-left: 1px solid #3b82f6;
+    border-left: 1px solid var(--t-accent);
     padding-left: 1.5rem;
   }
 
   /* ── Tile card ── */
   .tile {
-    background: #000000;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--t-bg);
+    border: 1px solid var(--t-border-medium);
     padding: 2.5rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     cursor: pointer;
     text-decoration: none;
     color: inherit;
@@ -245,7 +327,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.04) 0%, transparent 60%);
+    background: linear-gradient(135deg, var(--t-accent-subtle) 0%, transparent 60%);
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -259,17 +341,17 @@
 
   .tile-icon {
     font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.25);
+    color: var(--t-text-faint);
     transition: color 0.3s ease;
     font-family: 'Share Tech Mono', monospace;
   }
 
-  .tile:hover .tile-icon { color: #3b82f6; }
+  .tile:hover .tile-icon { color: var(--t-accent); }
 
   .tile-title {
     font-family: 'Share Tech Mono', monospace;
     font-size: 1.1rem;
-    color: #ffffff;
+    color: var(--t-text);
     letter-spacing: 0.05em;
   }
 
@@ -277,7 +359,7 @@
     font-family: 'DM Sans', sans-serif;
     font-size: 0.88rem;
     line-height: 1.7;
-    color: #a1a1aa;
+    color: var(--t-text-secondary);
   }
 
   .tile-arrow {
@@ -285,31 +367,31 @@
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.7rem;
     letter-spacing: 0.15em;
-    color: rgba(255, 255, 255, 0.2);
+    color: var(--t-text-faint);
     text-transform: uppercase;
     transition: color 0.3s ease, transform 0.3s ease;
     display: inline-block;
   }
 
   .tile:hover .tile-arrow {
-    color: #3b82f6;
+    color: var(--t-accent);
     transform: translateX(6px);
   }
 
   /* ── Input / form ── */
   .input-dark {
     width: 100%;
-    background: #0a0a0a;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #ffffff;
+    background: var(--t-input-bg);
+    border: 1px solid var(--t-border-input);
+    color: var(--t-text);
     font-family: 'DM Sans', sans-serif;
     font-size: 0.9rem;
     padding: 0.8rem 1rem;
     outline: none;
-    transition: border-color 0.25s, box-shadow 0.25s;
+    transition: border-color 0.25s, box-shadow 0.25s, background-color 0.3s;
   }
 
-  .input-dark::placeholder { color: rgba(255, 255, 255, 0.2); }
+  .input-dark::placeholder { color: var(--t-input-placeholder); }
 
   .input-dark:focus {
     border-color: rgba(59, 130, 246, 0.6);
@@ -323,8 +405,8 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: #ffffff;
-    background: #3b82f6;
-    border: 1px solid #3b82f6;
+    background: var(--t-accent);
+    border: 1px solid var(--t-accent);
     padding: 0.75rem 2rem;
     transition: background 0.25s, box-shadow 0.25s;
     display: inline-block;
@@ -333,8 +415,8 @@
   }
 
   .btn-primary:hover {
-    background: #2563eb;
-    box-shadow: 0 0 24px rgba(59, 130, 246, 0.4);
+    background: var(--t-accent-hover);
+    box-shadow: 0 0 24px var(--t-accent-glow);
     transform: translateY(-2px);
   }
 
@@ -362,9 +444,9 @@
     font-size: 0.78rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--t-text-muted);
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--t-text-faint);
     padding: 0.75rem 2rem;
     transition: border-color 0.25s, color 0.25s, box-shadow 0.25s;
     display: inline-block;
@@ -374,7 +456,7 @@
 
   .btn-outline:hover {
     border-color: rgba(59, 130, 246, 0.6);
-    color: #3b82f6;
+    color: var(--t-accent);
     box-shadow: 0 0 16px rgba(59, 130, 246, 0.15);
   }
 
@@ -383,14 +465,14 @@
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.72rem;
     letter-spacing: 0.18em;
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--t-text-muted);
     text-transform: uppercase;
     text-decoration: none;
     transition: color 0.2s;
   }
 
   .nav-link:hover, .nav-link.active {
-    color: #ffffff;
+    color: var(--t-text);
   }
 
   /* ── Tag ── */
@@ -398,24 +480,24 @@
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.1em;
-    color: #3b82f6;
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    background: rgba(59, 130, 246, 0.06);
+    color: var(--t-accent);
+    border: 1px solid var(--t-accent-border);
+    background: var(--t-accent-subtle);
     padding: 0.2rem 0.55rem;
   }
 
   /* ── Skill bar ── */
   .skill-bar {
     height: 1px;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--t-border-medium);
     position: relative;
     overflow: hidden;
   }
 
   .skill-bar-fill {
     height: 100%;
-    background: #3b82f6;
-    box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+    background: var(--t-accent);
+    box-shadow: 0 0 8px var(--t-accent-glow);
     transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
     width: 0%;
   }
@@ -424,14 +506,14 @@
   .divider {
     border: none;
     height: 1px;
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--t-border);
     margin: 0;
   }
 
   /* ── Cursor blink ── */
   .cursor-blink::after {
     content: '|';
-    color: #3b82f6;
+    color: var(--t-accent);
     animation: blink 1s step-end infinite;
     margin-left: 2px;
   }
@@ -456,7 +538,7 @@
   display: block;
   width: 22px;
   height: 1.5px;
-  background: #fff;
+  background: var(--t-hamburger);
   transition: transform 0.3s, opacity 0.3s;
 }
 
@@ -473,7 +555,7 @@
 .mobile-menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.97);
+  background: var(--t-overlay-bg);
   backdrop-filter: blur(20px);
   z-index: 55;
   display: flex;
@@ -495,14 +577,14 @@
   font-family: 'Share Tech Mono', monospace;
   font-size: 1.2rem;
   letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--t-text-muted);
   text-decoration: none;
   text-transform: uppercase;
   transition: color 0.2s;
 }
 
 .mobile-menu-overlay a:hover {
-  color: #3b82f6;
+  color: var(--t-accent);
 }
 
 @media (max-width: 639px) {
@@ -547,4 +629,33 @@
   width: 100%;
   height: 100%;
   border: none;
+}
+
+/* ═══════════════════════════════════════
+   THEME TOGGLE BUTTON
+   ═══════════════════════════════════════ */
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--t-text-muted);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.25s, transform 0.3s;
+  padding: 0;
+}
+
+.theme-toggle:hover {
+  color: var(--t-accent);
+  transform: rotate(15deg);
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.4s ease;
 }

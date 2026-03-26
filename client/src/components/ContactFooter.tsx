@@ -1,7 +1,6 @@
 /*
  * ContactFooter — 85%–100% scroll zone
  * Minimal footer with contact info and social links.
- * Black background, white text, blue hover accents.
  */
 
 import { useRef, useState } from "react";
@@ -41,7 +40,6 @@ export default function ContactFooter() {
     e.preventDefault();
     setLoading(true);
 
-    // Dein Formspree-Endpoint
     const FORMSPREE_URL = "https://formspree.io/f/mwvwkvbb";
 
     try {
@@ -73,14 +71,14 @@ export default function ContactFooter() {
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "#0a0a0a",
-    border: "1px solid rgba(255,255,255,0.1)",
-    color: "#ffffff",
+    background: "var(--t-input-bg)",
+    border: "1px solid var(--t-border-input)",
+    color: "var(--t-text)",
     fontFamily: "'DM Sans', sans-serif",
     fontSize: "0.9rem",
     padding: "0.8rem 1rem",
     outline: "none",
-    transition: "border-color 0.25s, box-shadow 0.25s",
+    transition: "border-color 0.25s, box-shadow 0.25s, background-color 0.3s",
   };
 
   const onFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -88,7 +86,7 @@ export default function ContactFooter() {
     e.target.style.boxShadow = "0 0 0 3px rgba(59,130,246,0.08)";
   };
   const onBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.target.style.borderColor = "rgba(255,255,255,0.1)";
+    e.target.style.borderColor = "var(--t-border-input)";
     e.target.style.boxShadow = "none";
   };
 
@@ -96,7 +94,7 @@ export default function ContactFooter() {
     <footer
       id="contact"
       ref={containerRef}
-      style={{ background: "#000000" }}
+      style={{ background: "var(--t-bg)" }}
     >
       <hr className="divider" />
 
@@ -120,8 +118,8 @@ export default function ContactFooter() {
               className="section-heading"
               style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)" }}
             >
-              <span style={{ color: past ? "#ffffff" : "#3b82f6", transition: "color 0.6s ease" }}>Lass uns etwas</span><br />
-              <span style={{ color: past ? "#3b82f6" : "#ffffff", transition: "color 0.6s ease" }}>Großes bauen.</span>
+              <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>Lass uns etwas</span><br />
+              <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>Großes bauen.</span>
             </h2>
 
             <p
@@ -129,7 +127,7 @@ export default function ContactFooter() {
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: "0.95rem",
                 lineHeight: 1.8,
-                color: "#a1a1aa",
+                color: "var(--t-text-secondary)",
                 marginBottom: "2.5rem",
                 maxWidth: "420px",
               }}
@@ -146,7 +144,7 @@ export default function ContactFooter() {
                       fontFamily: "'Share Tech Mono', monospace",
                       fontSize: "0.62rem",
                       letterSpacing: "0.2em",
-                      color: "rgba(255,255,255,0.25)",
+                      color: "var(--t-text-faint)",
                       textTransform: "uppercase",
                       minWidth: "72px",
                     }}
@@ -159,17 +157,17 @@ export default function ContactFooter() {
                       style={{
                         fontFamily: "'DM Sans', sans-serif",
                         fontSize: "0.92rem",
-                        color: "#ffffff",
+                        color: "var(--t-text)",
                         textDecoration: "none",
                         transition: "color 0.2s",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "#3b82f6")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = "#ffffff")}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--t-accent)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--t-text)")}
                     >
                       {item.value}
                     </a>
                   ) : (
-                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.92rem", color: "#ffffff" }}>
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.92rem", color: "var(--t-text)" }}>
                       {item.value}
                     </span>
                   )}
@@ -197,8 +195,8 @@ export default function ContactFooter() {
             style={{
               opacity,
               x: xRight,
-              border: "1px solid rgba(255,255,255,0.06)",
-              background: "#0a0a0a",
+              border: "1px solid var(--t-border)",
+              background: "var(--t-bg-secondary)",
               padding: "2.5rem",
             }}
           >
@@ -208,16 +206,16 @@ export default function ContactFooter() {
                   style={{
                     fontFamily: "'Share Tech Mono', monospace",
                     fontSize: "2rem",
-                    color: "#3b82f6",
+                    color: "var(--t-accent)",
                     marginBottom: "1rem",
                   }}
                 >
                   ✓
                 </div>
-                <p style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: "0.85rem", color: "#fff", marginBottom: "0.5rem" }}>
+                <p style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: "0.85rem", color: "var(--t-text)", marginBottom: "0.5rem" }}>
                   Nachricht gesendet.
                 </p>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.82rem", color: "#a1a1aa" }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.82rem", color: "var(--t-text-secondary)" }}>
                   Ich melde mich bald bei dir zurück.
                 </p>
               </div>
@@ -229,7 +227,7 @@ export default function ContactFooter() {
                       fontFamily: "'Share Tech Mono', monospace",
                       fontSize: "0.62rem",
                       letterSpacing: "0.2em",
-                      color: "rgba(255,255,255,0.3)",
+                      color: "var(--t-text-faint)",
                       textTransform: "uppercase",
                       display: "block",
                       marginBottom: "0.5rem",
@@ -254,7 +252,7 @@ export default function ContactFooter() {
                       fontFamily: "'Share Tech Mono', monospace",
                       fontSize: "0.62rem",
                       letterSpacing: "0.2em",
-                      color: "rgba(255,255,255,0.3)",
+                      color: "var(--t-text-faint)",
                       textTransform: "uppercase",
                       display: "block",
                       marginBottom: "0.5rem",
@@ -279,7 +277,7 @@ export default function ContactFooter() {
                       fontFamily: "'Share Tech Mono', monospace",
                       fontSize: "0.62rem",
                       letterSpacing: "0.2em",
-                      color: "rgba(255,255,255,0.3)",
+                      color: "var(--t-text-faint)",
                       textTransform: "uppercase",
                       display: "block",
                       marginBottom: "0.5rem",
@@ -310,7 +308,7 @@ export default function ContactFooter() {
       {/* Minimal footer bar */}
       <div
         style={{
-          borderTop: "1px solid rgba(255,255,255,0.05)",
+          borderTop: "1px solid var(--t-border)",
           padding: "1.5rem 0",
         }}
       >
@@ -330,7 +328,7 @@ export default function ContactFooter() {
               fontFamily: "'Share Tech Mono', monospace",
               fontSize: "0.62rem",
               letterSpacing: "0.15em",
-              color: "rgba(255,255,255,0.18)",
+              color: "var(--t-text-micro)",
             }}
           >
             © {new Date().getFullYear()} Moris Kehl
@@ -348,13 +346,13 @@ export default function ContactFooter() {
                   fontFamily: "'Share Tech Mono', monospace",
                   fontSize: "0.6rem",
                   letterSpacing: "0.18em",
-                  color: "rgba(255,255,255,0.18)",
+                  color: "var(--t-text-micro)",
                   textDecoration: "none",
                   textTransform: "uppercase",
                   transition: "color 0.2s",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#3b82f6")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.18)")}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--t-accent)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--t-text-micro)")}
               >
                 {item.label}
               </a>
@@ -365,13 +363,13 @@ export default function ContactFooter() {
                 fontFamily: "'Share Tech Mono', monospace",
                 fontSize: "0.6rem",
                 letterSpacing: "0.18em",
-                color: "rgba(255,255,255,0.18)",
+                color: "var(--t-text-micro)",
                 textDecoration: "none",
                 textTransform: "uppercase",
                 transition: "color 0.2s",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#3b82f6")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.18)")}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--t-accent)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--t-text-micro)")}
             >
               Impressum
             </Link>
