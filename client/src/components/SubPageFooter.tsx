@@ -49,7 +49,7 @@ export default function SubPageFooter() {
                 fontFamily: "'Share Tech Mono', monospace",
                 fontSize: "0.6rem",
                 letterSpacing: "0.18em",
-                color: "var(--t-text-micro)",
+                color: "var(--t-text-muted)",
                 textDecoration: "none",
                 textTransform: "uppercase" as const,
                 transition: "color 0.2s",
@@ -58,7 +58,7 @@ export default function SubPageFooter() {
                 (e.currentTarget.style.color = "var(--t-accent)")
               }
               onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) =>
-                (e.currentTarget.style.color = "var(--t-text-micro)")
+                (e.currentTarget.style.color = "var(--t-text-muted)")
               }
             >
               {item.label}
@@ -70,7 +70,7 @@ export default function SubPageFooter() {
               fontFamily: "'Share Tech Mono', monospace",
               fontSize: "0.6rem",
               letterSpacing: "0.18em",
-              color: "var(--t-text-micro)",
+              color: "var(--t-text-muted)",
               textDecoration: "none",
               textTransform: "uppercase" as const,
               transition: "color 0.2s",
@@ -79,7 +79,7 @@ export default function SubPageFooter() {
               (e.currentTarget.style.color = "var(--t-accent)")
             }
             onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) =>
-              (e.currentTarget.style.color = "var(--t-text-micro)")
+              (e.currentTarget.style.color = "var(--t-text-muted)")
             }
           >
             Impressum

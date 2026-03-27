@@ -346,13 +346,13 @@ export default function ContactFooter() {
                   fontFamily: "'Share Tech Mono', monospace",
                   fontSize: "0.6rem",
                   letterSpacing: "0.18em",
-                  color: "var(--t-text-micro)",
+                  color: "var(--t-text-muted)",
                   textDecoration: "none",
                   textTransform: "uppercase",
                   transition: "color 0.2s",
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "var(--t-accent)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--t-text-micro)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--t-text-muted)")}
               >
                 {item.label}
               </a>
@@ -363,13 +363,13 @@ export default function ContactFooter() {
                 fontFamily: "'Share Tech Mono', monospace",
                 fontSize: "0.6rem",
                 letterSpacing: "0.18em",
-                color: "var(--t-text-micro)",
+                color: "var(--t-text-muted)",
                 textDecoration: "none",
                 textTransform: "uppercase",
                 transition: "color 0.2s",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "var(--t-accent)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--t-text-micro)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--t-text-muted)")}
             >
               Impressum
             </Link>
