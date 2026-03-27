@@ -39,14 +39,14 @@ const PROJECTS = [
   },
   {
     title: "Blackjack AI",
-    desc: "Kartenzähl-KI für Blackjack — entwickelt als Seminarkurs-Projekt zum Thema Künstliche Intelligenz. Verbindet Kartenzählung mit Bilderkennung um die optimale Spielstrategie zu ermitteln.",
+    desc: "Kartenzähl-KI für Blackjack, entwickelt als Seminarkurs-Projekt zum Thema Künstliche Intelligenz. Verbindet Kartenzählung mit Bilderkennung um die optimale Spielstrategie zu ermitteln.",
     tech: ["Python", "Machine Learning", "Yolov8", "Statistik"],
     url: null,
     iframe: false,
   },
   {
     title: "Portfolio Website",
-    desc: "Diese Website — gebaut mit React, Three.js und einem custom ASCII-Renderer der ein 3D-STL-Modell als Code-Zeichen darstellt.",
+    desc: "Diese Website, gebaut mit React, Three.js und einem custom ASCII-Renderer der ein 3D-STL-Modell als Code-Zeichen darstellt.",
     tech: ["React", "TypeScript", "Three.js", "Vite"],
     url: null,
     iframe: false,
