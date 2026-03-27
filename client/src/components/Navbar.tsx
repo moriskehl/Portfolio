@@ -9,7 +9,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useTheme } from "../contexts/ThemeContext";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Home, Briefcase, Trophy, GraduationCap, FileText } from "lucide-react";
 
 const NAV_ROUTES = [
   { label: "Projekte", href: "/projects" },
@@ -18,12 +18,11 @@ const NAV_ROUTES = [
 ];
 
 const MOBILE_LINKS = [
-  { label: "Über mich", href: "/#intro" },
-  { label: "Bereiche", href: "/#grid" },
-  { label: "Projekte", href: "/projects" },
-  { label: "Erfolge", href: "/achievements" },
-  { label: "Werdegang", href: "/cv" },
-  { label: "Kontakt", href: "/#contact" },
+  { label: "Startseite", href: "/", icon: Home },
+  { label: "Projekte", href: "/projects", icon: Briefcase },
+  { label: "Erfolge", href: "/achievements", icon: Trophy },
+  { label: "Werdegang", href: "/cv", icon: GraduationCap },
+  { label: "Impressum", href: "/impressum", icon: FileText },
 ];
 
 export default function Navbar() {
@@ -171,18 +170,16 @@ export default function Navbar() {
 
       {/* Mobile overlay */}
       <div className={`mobile-menu-overlay ${menuOpen ? "open" : ""}`}>
-        {!isHome && (
-          <Link href="/" onClick={() => setMenuOpen(false)}>
-            Startseite
-          </Link>
-        )}
-        {MOBILE_LINKS.map((item) =>
-          item.href.startsWith("/") && !item.href.startsWith("/#") ? (
+        {MOBILE_LINKS.map((item) => {
+          const Icon = item.icon;
+          return item.href.startsWith("/") && !item.href.startsWith("/#") ? (
             <Link
               key={item.label}
               href={item.href}
               onClick={() => setMenuOpen(false)}
+              style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
             >
+              <Icon size={20} />
               {item.label}
             </Link>
           ) : (
@@ -193,11 +190,13 @@ export default function Navbar() {
                 e.preventDefault();
                 handleMobileLink(item.href);
               }}
+              style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
             >
+              <Icon size={20} />
               {item.label}
             </a>
-          )
-        )}
+          );
+        })}
         {/* Mobile theme toggle */}
         <button
           className="theme-toggle"

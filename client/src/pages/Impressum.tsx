@@ -57,8 +57,12 @@ export default function Impressum() {
         </div>
         
         <div style={{ marginTop: "4rem" }}>
-          <Link href="/" className="btn-primary" style={{ textDecoration: "none" }}>
-            Zurück zur Startseite
+          <Link 
+            href="/" 
+            className="btn-primary btn-slanted" 
+            style={{ padding: "0.45rem 1.1rem", fontSize: "0.7rem", textDecoration: "none" }}
+          >
+            <span>Zurück zur Startseite</span>
           </Link>
         </div>
       </div>
