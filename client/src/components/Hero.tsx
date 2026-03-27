@@ -121,7 +121,7 @@ export default function Hero() {
       />
 
       <div
-        className="absolute inset-0 flex flex-col items-center justify-start sm:justify-center text-center px-6 pt-[18vh] sm:pt-0"
+        className="absolute inset-0 flex flex-col items-center justify-start sm:justify-center text-center px-6 pt-[22vh] sm:pt-0"
         style={{ zIndex: 5, pointerEvents: "none" }}
       >
         <span

@@ -150,8 +150,9 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
 
     // Position offset
     const bboxHeight = bbox.max.z - bbox.min.z;
+    const isMobile = window.innerWidth < 768;
     mesh.position.x = ctrl.posX * bboxHeight;
-    mesh.position.y = ctrl.posY * bboxHeight;
+    mesh.position.y = (isMobile ? -0.3 : ctrl.posY) * bboxHeight;
 
     const d = ctrl.camDist;
     camera.position.set(bbox.max.x * 4 * d, bbox.max.y * d, bbox.max.z * 3 * d);
@@ -350,7 +351,7 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
         
         const bboxHeight = bboxRef.current ? bboxRef.current.max.z - bboxRef.current.min.z : 0;
         meshRef.current.position.x = cc.posX * bboxHeight;
-        meshRef.current.position.y = cc.posY * bboxHeight;
+        meshRef.current.position.y = (isMobile ? -0.3 : cc.posY) * bboxHeight;
       }
     };
 
@@ -378,8 +379,9 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
         
         mesh.scale.setScalar(c.scale);
         const bboxHeight = bbox.max.z - bbox.min.z;
+        const isMobileInit = window.innerWidth < 768;
         mesh.position.x = c.posX * bboxHeight;
-        mesh.position.y = c.posY * bboxHeight;
+        mesh.position.y = (isMobileInit ? -0.3 : c.posY) * bboxHeight;
         mesh.rotation.x = (c.rotX * Math.PI) / 180;
         mesh.rotation.y = (c.rotY * Math.PI) / 180;
         mesh.rotation.z = (c.rotZ * Math.PI) / 180;
