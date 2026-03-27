@@ -184,7 +184,7 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
     if (!container || !canvas2d) return;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(lightRef2.current ? 0xf5f5f7 : 0x000000);
+    scene.background = new THREE.Color(0x000000);
 
     const pointLight = new THREE.PointLight(0xffffff, 1, 0, 0);
     scene.add(pointLight);
@@ -288,7 +288,7 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
       // Update scene bg and canvas bg based on current theme
       const isLight = lightRef2.current;
       const bgColor = isLight ? "#f5f5f7" : "#000";
-      scene.background = new THREE.Color(isLight ? 0xf5f5f7 : 0x000000);
+      scene.background = new THREE.Color(0x000000);
       canvas2d.style.background = bgColor;
 
       ctx.clearRect(0, 0, canvas2d.width, canvas2d.height);
@@ -302,16 +302,8 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
           const lum = sampleLum(c, ROWS - 1 - r);
           const x = c * cc.cellW;
           if (cell.token === " ") continue;
-          // Skip background-colored areas: dark bg → skip dark pixels, light bg → skip bright pixels
-          if (isLight ? lum > 0.82 : lum < 0.02) continue;
-
-          // In light mode, fade out characters near edges to prevent block artifacts
-          if (isLight) {
-            const edgeMargin = 0.08; // 8% margin on each side
-            const colPct = c / COLS;
-            const rowPct = r / ROWS;
-            if (colPct < edgeMargin || colPct > 1 - edgeMargin || rowPct < edgeMargin) continue;
-          }
+          // Skip background areas. Since WebGL scene is always black, background lum is ~0 for both themes
+          if (lum < 0.02) continue;
 
           ctx.fillStyle = lumToColor(lum, cc.brightness, isLight);
           ctx.fillText(cell.token, x, r * cc.rowH);
