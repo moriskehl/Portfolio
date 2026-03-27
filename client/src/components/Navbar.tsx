@@ -170,42 +170,44 @@ export default function Navbar() {
 
       {/* Mobile overlay */}
       <div className={`mobile-menu-overlay ${menuOpen ? "open" : ""}`}>
-        {MOBILE_LINKS.map((item) => {
-          const Icon = item.icon;
-          return item.href.startsWith("/") && !item.href.startsWith("/#") ? (
-            <Link
-              key={item.label}
-              href={item.href}
-              onClick={() => setMenuOpen(false)}
-              style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
-            >
-              <Icon size={20} />
-              {item.label}
-            </Link>
-          ) : (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={(e) => {
-                e.preventDefault();
-                handleMobileLink(item.href);
-              }}
-              style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
-            >
-              <Icon size={20} />
-              {item.label}
-            </a>
-          );
-        })}
-        {/* Mobile theme toggle */}
-        <button
-          className="theme-toggle"
-          onClick={toggleTheme}
-          aria-label={theme === "dark" ? "Zu Light Mode wechseln" : "Zu Dark Mode wechseln"}
-          style={{ marginTop: "0.5rem" }}
-        >
-          {theme === "dark" ? <Sun /> : <Moon />}
-        </button>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "2.5rem" }}>
+          {MOBILE_LINKS.map((item) => {
+            const Icon = item.icon;
+            return item.href.startsWith("/") && !item.href.startsWith("/#") ? (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
+              >
+                <Icon size={20} />
+                {item.label}
+              </Link>
+            ) : (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleMobileLink(item.href);
+                }}
+                style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
+              >
+                <Icon size={20} />
+                {item.label}
+              </a>
+            );
+          })}
+          {/* Mobile theme toggle */}
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Zu Light Mode wechseln" : "Zu Dark Mode wechseln"}
+            style={{ marginTop: "0.5rem" }}
+          >
+            {theme === "dark" ? <Sun /> : <Moon />}
+          </button>
+        </div>
       </div>
     </>
   );
