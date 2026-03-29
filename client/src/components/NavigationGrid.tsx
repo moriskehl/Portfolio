@@ -8,58 +8,14 @@ import { useRef, useState } from "react";
 import { GraduationCap, Code2, FileText, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import { useTranslation } from "react-i18next";
 import { useScrollSwap } from "../hooks/useScrollSwap";
-
-const TILES = [
-  {
-    id: "software",
-    icon: "{ }",
-    title: "Software & Projekte",
-    desc: "Web-Entwicklung, KI-Experimente und Full-Stack Projekte — von PHP-Portalen bis hin zu Kartenzähl-Algorithmen.",
-    cta: "Projekte ansehen",
-    url: "/projects",
-    items: [
-      "Abiball Portal — PHP-Eventmanagement (bsz.app)",
-      "IT-Puzzle — Bewerber-Testplattform (SSC-Services)",
-      "Blackjack AI — Kartenzähl-KI (Seminarkurs)",
-      "Portfolio — React + Three.js + ASCII-Renderer",
-    ],
-  },
-  {
-    id: "alpine",
-    icon: "/\\",
-    title: "Skirennlauf",
-    desc: "Seit dem Alter von 2,5 Jahren auf Ski. Aktiver Rennläufer im Ski Team Seibelseckle in der Deutschen Ski Liga.",
-    cta: "Erfolge ansehen",
-    url: "/achievements",
-    items: [
-      "2026 — 2. Platz Deutsche Ski Liga (Team)",
-      "2025 — 2. Platz Deutsche Ski Liga (Team)",
-      "Ski Team Seibelseckle — Aktiver Rennläufer",
-      "17+ Saisons auf Schnee",
-    ],
-  },
-  {
-    id: "career",
-    icon: <FileText size={22} className="card-icon" />,
-    title: "Werdegang",
-    desc: "Vom Abitur zum dualen Studium — mit Praxiserfahrung in IT und Einzelhandel.",
-    cta: "Lebenslauf ansehen",
-    url: "/cv",
-    items: [
-      "Ab Okt. 2026 — Duales Studium DHBW, SV Informatik GmbH",
-      "2025 — Praktikum, SSC-Services GmbH (JavaScript, Node.js)",
-      "2023–2026 — Abitur Wirtschaft, BSZ Leonberg",
-      "2017–2023 — Sport Profil, Maria Von Linden-Gymnasium",
-    ],
-  },
-];
 
 function Tile({
   tile,
   index,
 }: {
-  tile: (typeof TILES)[0];
+  tile: any;
   index: number;
 }) {
   const [hovered, setHovered] = useState(false);
@@ -111,7 +67,7 @@ function Tile({
             gap: "0.5rem",
           }}
         >
-          {tile.items.map((item) => (
+          {tile.items.map((item: string) => (
             <li
               key={item}
               style={{
@@ -147,7 +103,53 @@ function Tile({
 }
 
 export default function NavigationGrid() {
+  const { t } = useTranslation();
   const { ref: swapRef, past } = useScrollSwap(0.35);
+
+  const TILES = [
+    {
+      id: "software",
+      icon: "{ }",
+      title: t("navGrid.software.title"),
+      desc: t("navGrid.software.desc"),
+      cta: t("navGrid.software.cta"),
+      url: "/projects",
+      items: [
+        t("navGrid.software.item1"),
+        t("navGrid.software.item2"),
+        t("navGrid.software.item3"),
+        t("navGrid.software.item4"),
+      ],
+    },
+    {
+      id: "alpine",
+      icon: "/\\",
+      title: t("navGrid.alpine.title"),
+      desc: t("navGrid.alpine.desc"),
+      cta: t("navGrid.alpine.cta"),
+      url: "/achievements",
+      items: [
+        t("navGrid.alpine.item1"),
+        t("navGrid.alpine.item2"),
+        t("navGrid.alpine.item3"),
+        t("navGrid.alpine.item4"),
+      ],
+    },
+    {
+      id: "career",
+      icon: <FileText size={22} className="card-icon" />,
+      title: t("navGrid.career.title"),
+      desc: t("navGrid.career.desc"),
+      cta: t("navGrid.career.cta"),
+      url: "/cv",
+      items: [
+        t("navGrid.career.item1"),
+        t("navGrid.career.item2"),
+        t("navGrid.career.item3"),
+        t("navGrid.career.item4"),
+      ],
+    },
+  ];
 
   return (
     <section
@@ -170,10 +172,10 @@ export default function NavigationGrid() {
             marginBottom: "4rem",
           }}
         >
-          <span className="section-label">// 02 — entdecken</span>
+          <span className="section-label" aria-hidden="true">{t("navGrid.label")}</span>
           <h2 ref={swapRef as React.RefObject<HTMLHeadingElement>} className="section-heading" style={{ marginBottom: 0 }}>
-            <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>Erkunde das</span>{" "}
-            <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>Terrain.</span>
+            <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>{t("navGrid.headingMain")}</span>{" "}
+            <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>{t("navGrid.headingAccent")}</span>
           </h2>
         </motion.div>
 

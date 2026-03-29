@@ -9,16 +9,18 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Trophy } from "lucide-react";
 import { useScrollSwap } from "../hooks/useScrollSwap";
-
-const STATS = [
-  { value: "17+", label: "Jahre auf Ski" },
-  { value: "2×", label: "2. Platz DSL" },
-  { value: "5+", label: "Projekte" },
-  { value: "∞", label: "Motivation" },
-];
+import { useTranslation } from "react-i18next";
 
 export default function Intro() {
+  const { t } = useTranslation();
   const { ref: swapRef, past } = useScrollSwap(0.35);
+
+  const STATS = [
+    { value: "17+", label: t("intro.stats.yearsSkiing") },
+    { value: "2×", label: t("intro.stats.dslRank") },
+    { value: "5+", label: t("intro.stats.projects") },
+    { value: "∞", label: t("intro.stats.motivation") },
+  ];
 
   return (
     <section
@@ -54,13 +56,14 @@ export default function Intro() {
             
             <motion.span
               className="section-label"
+              aria-hidden="true"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: 0.1 }}
               style={{ display: "block" }}
             >
-              // 01 — über mich
+              {t("intro.label")}
             </motion.span>
 
             <motion.h2
@@ -71,8 +74,8 @@ export default function Intro() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>Von der Piste</span><br />
-              <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>zum Code.</span>
+              <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>{t("intro.heading1")}</span><br />
+              <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>{t("intro.heading2")}</span>
             </motion.h2>
 
             <motion.div
@@ -91,11 +94,7 @@ export default function Intro() {
                   marginBottom: "1.2rem",
                 }}
               >
-                Ich bin Moris, Abiturient am BSZ Leonberg
-                und ab Oktober dualer Student an der DHBW mit SV Informatik GmbH.
-                <br />
-                Gleichzeitig fahre ich seit meinem dritten Lebensjahr Skirennlauf
-                und starte mit dem Ski Team Seibelseckle in der Deutschen Ski Liga.
+                {t("intro.bio")}
               </p>
             </motion.div>
           </div>
@@ -195,9 +194,9 @@ export default function Intro() {
               >
                 {[
                   { cmd: "whoami", out: "moris_kehl" },
-                  { cmd: "cat status.txt", out: "Dualer Student ab Okt. 2026" },
-                  { cmd: "cat location.txt", out: "Stuttgart, Deutschland" },
-                  { cmd: "ski --ranking", out: <span style={{display: "inline-flex", alignItems: "center", gap: "0.4rem"}}>2. Platz Deutsche Ski Liga <Trophy size={12} /></span> },
+                  { cmd: "cat status.txt", out: t("intro.terminal.status") },
+                  { cmd: "cat location.txt", out: t("intro.terminal.location") },
+                  { cmd: "ski --ranking", out: <span style={{display: "inline-flex", alignItems: "center", gap: "0.4rem"}}>{t("intro.terminal.ranking")} <Trophy size={12} /></span> },
                 ].map((line, i) => (
                   <div key={i}>
                     <span style={{ color: "var(--t-text-faint)" }}>$ </span>

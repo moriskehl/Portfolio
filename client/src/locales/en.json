@@ -1,0 +1,210 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "achievements": "Achievements",
+    "cv": "Resume",
+    "contact": "Contact",
+    "impressum": "Legal"
+  },
+  "hero": {
+    "label": "// 00 - portfolio.init()"
+  },
+  "intro": {
+    "label": "// 01 — about me",
+    "heading1": "From the slope",
+    "heading2": "to the code.",
+    "bio": "I'm Moris, a student at BSZ Leonberg and starting October, a dual student at DHBW with SV Informatik GmbH. At the same time, I've been ski racing since I was three years old and compete with the Ski Team Seibelseckle in the German Ski League.",
+    "stats": {
+      "yearsSkiing": "Years on skis",
+      "dslRank": "2nd place DSL",
+      "projects": "Projects",
+      "motivation": "∞ Motivation"
+    },
+    "terminal": {
+      "status": "Dual student as of Oct. 2026",
+      "location": "Stuttgart, Germany",
+      "ranking": "2nd place German Ski League"
+    }
+  },
+  "navGrid": {
+    "label": "// 02 — explore",
+    "headingMain": "Explore the",
+    "headingAccent": "Terrain.",
+    "software": {
+      "title": "Software & Projects",
+      "desc": "Web development, AI experiments and full-stack projects.",
+      "cta": "View projects",
+      "item1": "Prom Portal – PHP Event Management (bsz.app)",
+      "item2": "IT Puzzle – Applicant Testing Platform (SSC-Services)",
+      "item3": "Blackjack AI – Card Counting AI (Seminar Course)",
+      "item4": "Portfolio – React + Three.js + ASCII Renderer (moriskehl.tech)"
+    },
+    "alpine": {
+      "title": "Ski Racing",
+      "desc": "On skis since age 2.5. Active racer in the Ski Team Seibelseckle.",
+      "cta": "View achievements",
+      "item1": "2026 – 2nd Place German Ski League (Team)",
+      "item2": "2025 – 2nd Place German Ski League (Team)",
+      "item3": "Ski Team Seibelseckle – Active Racer",
+      "item4": "17+ Seasons on Snow"
+    },
+    "career": {
+      "title": "Career",
+      "desc": "From high school to dual studies, with experience in IT and retail.",
+      "cta": "View resume",
+      "item1": "From Oct. 2026 – Dual Studies DHBW, SV Informatik GmbH",
+      "item2": "2025 – Internship, SSC-Services GmbH (JavaScript, Node.js)",
+      "item3": "2023–2026 – Business High School, BSZ Leonberg",
+      "item4": "2017–2023 – Sports Profile, Maria Von Linden-Gymnasium"
+    }
+  },
+  "contact": {
+    "label": "// 03 — contact",
+    "heading1": "Let's build something",
+    "heading2": "great.",
+    "subtext": "Open for projects, collaboration and new challenges.",
+    "info": {
+      "email": "Email",
+      "location": "Location",
+      "status": "Status",
+      "statusValue": "Dual student as of Oct. 2026",
+      "locationValue": "Stuttgart, Germany"
+    },
+    "form": {
+      "nameLabel": "Name",
+      "namePlaceholder": "Your Name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "your@email.com",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Tell me about your project...",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "successTitle": "Message sent.",
+      "successDesc": "I'll get back to you soon.",
+      "errorSend": "Error sending!",
+      "errorNetwork": "Network error. Please try again later."
+    }
+  },
+  "footer": {
+    "about": "About me",
+    "sections": "Sections",
+    "contact": "Contact"
+  },
+  "projects": {
+    "label": "// projects",
+    "heading1": "Software &",
+    "heading2": "Systems.",
+    "subtext": "Full-stack web applications, AI experiments and more.",
+    "ctaLive": "Live View →",
+    "abiball": {
+      "title": "Prom Portal",
+      "desc": "Event management system for prom planning. PHP backend with authentication, participant management, meal orders and payment tracking."
+    },
+    "itPuzzle": {
+      "title": "IT Puzzle",
+      "desc": "Web platform for testing applicants with IT-related puzzles and challenges. Built during my internship at SSC-Services."
+    },
+    "blackjack": {
+      "title": "Blackjack AI",
+      "desc": "Card-counting AI for blackjack, developed as a seminar project. Combines card counting with image recognition for optimal strategy."
+    },
+    "portfolio": {
+      "title": "Portfolio Website",
+      "desc": "This website, built with React, Three.js and a custom ASCII renderer that displays a 3D STL model as code characters."
+    }
+  },
+  "achievements": {
+    "label": "// achievements",
+    "heading1": "Ski Racing &",
+    "heading2": "Success.",
+    "stats": {
+      "saisons": "Seasons",
+      "dslSilber": "DSL Silver",
+      "teamEntry": "Team Entry",
+      "passion": "Passion"
+    },
+    "items": {
+      "a2026": {
+        "title": "2nd Place German Ski League",
+        "badge": "Silver",
+        "desc": "Defended second place in the team standings of the German Ski League.",
+        "detail": "German Ski League · Team Standings"
+      },
+      "a2025": {
+        "title": "2nd Place German Ski League",
+        "badge": "Silver",
+        "desc": "Major success at the national level.",
+        "detail": "German Ski League · Team Standings"
+      },
+      "seibelseckle": {
+        "title": "Ski Team Seibelseckle",
+        "badge": "Active",
+        "desc": "Training and competitions with the Ski Team Seibelseckle.",
+        "detail": "Ski Racing · Black Forest"
+      },
+      "ssvNord": {
+        "title": "SSV Nord District",
+        "badge": "Career Start",
+        "desc": "Joined at age 6. Over a decade of race training foundation.",
+        "detail": "Fundamentals & Race Training"
+      }
+    }
+  },
+  "resume": {
+    "label": "// career",
+    "heading1": "Experience &",
+    "heading2": "Education.",
+    "upcoming": "UPCOMING",
+    "labels": {
+      "experience": "// experience",
+      "education": "// education",
+      "skills": "// skills"
+    },
+    "experience": {
+      "dhbw": {
+        "title": "Dual Studies in Business Informatics",
+        "desc": "Dual study program with hands-on software development experience."
+      },
+      "sportStall": {
+        "title": "Minijob Cashier & Sales",
+        "desc": "Cashiering and customer service in winter sports retail."
+      },
+      "ssc": {
+        "title": "Internship",
+        "desc": "Built an IT puzzle platform for applicant testing with JavaScript and Node.js."
+      },
+      "gww": {
+        "title": "Social Internship",
+        "desc": "Working with people with disabilities in social institutions."
+      }
+    },
+    "education": {
+      "abitur": {
+        "title": "General Higher Education Entrance Qualification (Abitur)",
+        "desc": "Seminar course in AI (Blackjack algorithm)."
+      },
+      "gymnasium": {
+        "title": "Grammar School",
+        "desc": "General education with sports profile."
+      }
+    },
+    "skills": {
+      "soft": {
+        "teamwork": "Teamwork",
+        "discipline": "Discipline",
+        "problemSolving": "Problem Solving",
+        "initiative": "Self-initiative"
+      }
+    }
+  },
+  "impressum": {
+    "title": "Legal Notice",
+    "back": "Back to Home"
+  },
+  "notFound": {
+    "title": "404 - System Error",
+    "desc": "The terrain you're looking for doesn't exist.",
+    "back": "Back to Base"
+  }
+}

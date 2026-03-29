@@ -10,22 +10,25 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useTheme } from "../contexts/ThemeContext";
 import { Sun, Moon, Home, Briefcase, Trophy, GraduationCap, FileText } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const NAV_ROUTES = [
-  { label: "Projekte", href: "/projects" },
-  { label: "Erfolge", href: "/achievements" },
-  { label: "Werdegang", href: "/cv" },
+  { labelKey: "nav.projects", href: "/projects" },
+  { labelKey: "nav.achievements", href: "/achievements" },
+  { labelKey: "nav.cv", href: "/cv" },
 ];
 
 const MOBILE_LINKS = [
-  { label: "Startseite", href: "/", icon: Home },
-  { label: "Projekte", href: "/projects", icon: Briefcase },
-  { label: "Erfolge", href: "/achievements", icon: Trophy },
-  { label: "Werdegang", href: "/cv", icon: GraduationCap },
-  { label: "Impressum", href: "/impressum", icon: FileText },
+  { labelKey: "nav.home", href: "/", icon: Home },
+  { labelKey: "nav.projects", href: "/projects", icon: Briefcase },
+  { labelKey: "nav.achievements", href: "/achievements", icon: Trophy },
+  { labelKey: "nav.cv", href: "/cv", icon: GraduationCap },
+  { labelKey: "nav.impressum", href: "/impressum", icon: FileText },
 ];
 
 export default function Navbar() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -115,20 +118,25 @@ export default function Navbar() {
             {!isHome && (
               <li className="hidden sm:block">
                 <Link href="/" className="nav-link">
-                  Startseite
+                  {t("nav.home")}
                 </Link>
               </li>
             )}
             {NAV_ROUTES.map((item) => (
-              <li key={item.label} className="hidden sm:block">
+              <li key={item.labelKey} className="hidden sm:block">
                 <Link
                   href={item.href}
                   className="nav-link"
                 >
-                  {item.label}
+                  {t(item.labelKey)}
                 </Link>
               </li>
             ))}
+
+            {/* Language Switcher */}
+            <li className="hidden sm:block">
+              <LanguageSwitcher />
+            </li>
 
             {/* Theme toggle */}
             <li className="hidden sm:block">
@@ -148,7 +156,7 @@ export default function Navbar() {
                 className="btn-primary btn-slanted"
                 style={{ padding: "0.45rem 1.1rem", fontSize: "0.7rem" }}
               >
-                <span>Kontakt</span>
+                <span>{t("nav.contact")}</span>
               </a>
             </li>
 
@@ -158,6 +166,7 @@ export default function Navbar() {
                 className={`mobile-menu-btn ${menuOpen ? "open" : ""}`}
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Menü"
+                aria-expanded={menuOpen}
               >
                 <span />
                 <span />
@@ -175,17 +184,17 @@ export default function Navbar() {
             const Icon = item.icon;
             return item.href.startsWith("/") && !item.href.startsWith("/#") ? (
               <Link
-                key={item.label}
+                key={item.labelKey}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
                 style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
               >
                 <Icon size={20} />
-                {item.label}
+                {t(item.labelKey)}
               </Link>
             ) : (
               <a
-                key={item.label}
+                key={item.labelKey}
                 href={item.href}
                 onClick={(e) => {
                   e.preventDefault();
@@ -194,19 +203,21 @@ export default function Navbar() {
                 style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
               >
                 <Icon size={20} />
-                {item.label}
+                {t(item.labelKey)}
               </a>
             );
           })}
-          {/* Mobile theme toggle */}
-          <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            aria-label={theme === "dark" ? "Zu Light Mode wechseln" : "Zu Dark Mode wechseln"}
-            style={{ marginTop: "0.5rem" }}
-          >
-            {theme === "dark" ? <Sun /> : <Moon />}
-          </button>
+          <div style={{ display: "flex", gap: "1rem", marginTop: "0.5rem", alignItems: "center" }}>
+            <LanguageSwitcher />
+            {/* Mobile theme toggle */}
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              aria-label={theme === "dark" ? "Zu Light Mode wechseln" : "Zu Dark Mode wechseln"}
+            >
+              {theme === "dark" ? <Sun /> : <Moon />}
+            </button>
+          </div>
         </div>
       </div>
     </>

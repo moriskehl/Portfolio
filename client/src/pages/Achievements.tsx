@@ -8,6 +8,7 @@ import { Link } from "wouter";
 import { Medal, Activity, PlayCircle } from "lucide-react";
 import SubPageFooter from "../components/SubPageFooter";
 import { useScrollSwap } from "../hooks/useScrollSwap";
+import { useTranslation } from "react-i18next";
 
 function useVisible(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -23,46 +24,7 @@ function useVisible(threshold = 0.1) {
   return { ref, visible };
 }
 
-const ACHIEVEMENTS = [
-  {
-    year: "2026",
-    title: "2. Platz Deutsche Ski Liga",
-    badge: <><Medal size={12} /> Silber</>,
-    desc: "Erneut auf dem Podium, wir konnten den zweiten Platz in der Teamwertung der Deutschen Ski Liga verteidigen.",
-    detail: "Deutsche Ski Liga · Teamwertung",
-  },
-  {
-    year: "2025",
-    title: "2. Platz Deutsche Ski Liga",
-    badge: <><Medal size={12} /> Silber</>,
-    desc: "Ein großer Erfolg auf nationaler Ebene.",
-    detail: "Deutsche Ski Liga · Teamwertung",
-  },
-  {
-    year: "seit 2025",
-    title: "Ski Team Seibelseckle",
-    badge: <><Activity size={12} /> Aktiv</>,
-    desc: "Training, Wettkämpfe und Leidenschaft für den Wintersport im Ski Team Seibelseckle.",
-    detail: "Skirennlauf · Schwarzwald",
-    image: "/seibelseckle.jpg"
-  },
-  {
-    year: "2013 – 2025",
-    title: "Bezirk SSV Nord",
-    badge: <><PlayCircle size={12} /> Start der Rennkarriere</>,
-    desc: "Mit 6 Jahren dem Bezirk SSV Nord beigetreten und dort über ein Jahrzehnt den Grundstein für die Skirennlauf-Karriere gelegt.",
-    detail: "Grundlagen & Renntraining",
-  },
-];
-
-const STATS = [
-  { value: "17+", label: "Saisons" },
-  { value: "2×", label: "DSL Silber" },
-  { value: "2013", label: "Team-Beitritt" },
-  { value: "∞", label: "Leidenschaft" },
-];
-
-function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0] & { image?: string }; index: number }) {
+function AchievementCard({ item, index }: { item: any; index: number }) {
   const { ref, visible } = useVisible();
   const [hovered, setHovered] = useState(false);
 
@@ -185,9 +147,49 @@ function AchievementCard({ item, index }: { item: typeof ACHIEVEMENTS[0] & { ima
 }
 
 export default function Achievements() {
+  const { t } = useTranslation();
   const { ref: headerRef, visible: headerVisible } = useVisible();
   const { ref: statsRef, visible: statsVisible } = useVisible();
   const { ref: swapRef, past } = useScrollSwap(0.35);
+
+  const ACHIEVEMENTS = [
+    {
+      year: "2026",
+      title: t("achievements.items.a2026.title"),
+      badge: <><Medal size={12} /> {t("achievements.items.a2026.badge")}</>,
+      desc: t("achievements.items.a2026.desc"),
+      detail: t("achievements.items.a2026.detail"),
+    },
+    {
+      year: "2025",
+      title: t("achievements.items.a2025.title"),
+      badge: <><Medal size={12} /> {t("achievements.items.a2025.badge")}</>,
+      desc: t("achievements.items.a2025.desc"),
+      detail: t("achievements.items.a2025.detail"),
+    },
+    {
+      year: "seit 2025",
+      title: t("achievements.items.seibelseckle.title"),
+      badge: <><Activity size={12} /> {t("achievements.items.seibelseckle.badge")}</>,
+      desc: t("achievements.items.seibelseckle.desc"),
+      detail: t("achievements.items.seibelseckle.detail"),
+      image: "/seibelseckle.jpg"
+    },
+    {
+      year: "2013 – 2025",
+      title: t("achievements.items.ssvNord.title"),
+      badge: <><PlayCircle size={12} /> {t("achievements.items.ssvNord.badge")}</>,
+      desc: t("achievements.items.ssvNord.desc"),
+      detail: t("achievements.items.ssvNord.detail"),
+    },
+  ];
+
+  const STATS = [
+    { value: "17+", label: t("achievements.stats.saisons") },
+    { value: "2×", label: t("achievements.stats.dslSilber") },
+    { value: "2013", label: t("achievements.stats.teamEntry") },
+    { value: "∞", label: t("achievements.stats.passion") },
+  ];
 
   return (
     <div className="page-enter" style={{ background: "var(--t-bg)", minHeight: "100dvh" }}>
@@ -196,13 +198,14 @@ export default function Achievements() {
       <div ref={headerRef} className="container" style={{ paddingTop: "8rem", paddingBottom: "4rem" }}>
         <span
           className="section-label"
+          aria-hidden="true"
           style={{
             opacity: headerVisible ? 1 : 0,
             transform: headerVisible ? "none" : "translateY(16px)",
             transition: "opacity 0.7s ease, transform 0.7s ease",
           }}
         >
-          // erfolge
+          {t("achievements.label")}
         </span>
         <h1
           ref={swapRef as React.RefObject<HTMLHeadingElement>}
@@ -213,8 +216,8 @@ export default function Achievements() {
             transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
           }}
         >
-          <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>Skirennlauf &</span><br />
-          <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>Erfolge.</span>
+          <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>{t("achievements.heading1")}</span><br />
+          <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>{t("achievements.heading2")}</span>
         </h1>
       </div>
 

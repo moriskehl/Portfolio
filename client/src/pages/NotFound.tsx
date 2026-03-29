@@ -20,6 +20,7 @@ export default function NotFound() {
         }}
       >
         <span
+          aria-hidden="true"
           style={{
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: "0.65rem",

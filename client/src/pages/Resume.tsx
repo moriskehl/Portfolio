@@ -6,6 +6,7 @@
 import { useEffect, useRef, useState } from "react";
 import SubPageFooter from "../components/SubPageFooter";
 import { useScrollSwap } from "../hooks/useScrollSwap";
+import { useTranslation } from "react-i18next";
 
 function useVisible(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -21,64 +22,7 @@ function useVisible(threshold = 0.1) {
   return { ref, visible };
 }
 
-const EXPERIENCE = [
-  {
-    period: "Ab Okt. 2026",
-    title: "Duales Studium Wirtschaftsinformatik",
-    org: "DHBW · SV Informatik GmbH",
-    desc: "Dualer Studiengang mit gleichzeitiger Praxiserfahrung in der Softwareentwicklung.",
-    tags: ["Wirtschaftsinformatik", "Dual", "DHBW"],
-    upcoming: true,
-  },
-  {
-    period: "Nov. 2025 – Heute",
-    title: "Minijob Kassierer & Verkauf",
-    org: "Sport Stall – Urs und Kai Frohnmaier GbR",
-    desc: "Verbindung meiner Leidenschaft als aktiver Skirennläufer mit wertvoller Praxiserfahrung im Wintersport-Einzelhandel. Kassenführung und Kundenberatung.",
-    tags: ["Einzelhandel", "Kundenberatung", "Wintersport"],
-    upcoming: false,
-  },
-  {
-    period: "Juni 2025",
-    title: "Praktikum",
-    org: "SSC-Services GmbH · Böblingen",
-    desc: "Entwicklung einer interaktiven IT-Puzzle-Plattform zum Bewerber-Testing mit JavaScript und Node.js. Teamarbeit mit modernen Web-Technologien.",
-    tags: ["JavaScript", "Node.js", "Web Development"],
-    upcoming: false,
-  },
-  {
-    period: "Mai 2022",
-    title: "Sozialpraktikum",
-    org: "GWW – Gemeinnützige Werkstätten und Wohnstätten GmbH",
-    desc: "Einblicke in soziale Einrichtungen und die Arbeit mit Menschen mit Beeinträchtigungen.",
-    tags: ["Soziales Engagement", "Herrenberg"],
-    upcoming: false,
-  },
-];
-
-const EDUCATION = [
-  {
-    period: "2023 – 2026",
-    title: "Allgemeine Hochschulreife (Abitur)",
-    org: "Berufliches Schulzentrum Leonberg",
-    desc: "Seminarkurs im Bereich KI (Entwicklung eines Algorithmus basierend auf Blackjack).",
-  },
-  {
-    period: "2017 – 2023",
-    title: "Gymnasium",
-    org: "Maria Von Linden-Gymnasium",
-    desc: "Schulische Grundausbildung. Grundlage für selbstständiges und diszipliniertes Arbeiten.",
-  },
-];
-
-const SKILLS = [
-  { category: "Web", items: ["HTML/CSS", "JavaScript", "React", "TypeScript", "Node.js", "PHP"] },
-  { category: "Backend", items: ["Java", "Python", "MySQL", "REST APIs"] },
-  { category: "Tools", items: ["Git", "VS Code", "Vite", "Three.js"] },
-  { category: "Soft", items: ["Teamarbeit", "Disziplin", "Problemlösung", "Eigeninitiative"] },
-];
-
-function TimelineItem({ item, index }: { item: typeof EXPERIENCE[0]; index: number }) {
+function TimelineItem({ item, index }: { item: { period: string; title: string; org: string; desc: string; tags: string[]; upcoming: boolean; upcomingLabel?: string }; index: number }) {
   const { ref, visible } = useVisible();
   const [hovered, setHovered] = useState(false);
 
@@ -153,7 +97,7 @@ function TimelineItem({ item, index }: { item: typeof EXPERIENCE[0]; index: numb
               marginBottom: "0.8rem",
             }}
           >
-            BEVORSTEHEND
+            {item.upcomingLabel}
           </span>
         )}
         <h3
@@ -188,9 +132,9 @@ function TimelineItem({ item, index }: { item: typeof EXPERIENCE[0]; index: numb
           {item.desc}
         </p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
-          {item.tags.map((t) => (
+          {item.tags.map((tag) => (
             <span
-              key={t}
+              key={tag}
               style={{
                 fontFamily: "'Share Tech Mono', monospace",
                 fontSize: "0.55rem",
@@ -200,7 +144,7 @@ function TimelineItem({ item, index }: { item: typeof EXPERIENCE[0]; index: numb
                 color: "var(--t-tag-color)",
               }}
             >
-              {t}
+              {tag}
             </span>
           ))}
         </div>
@@ -210,10 +154,77 @@ function TimelineItem({ item, index }: { item: typeof EXPERIENCE[0]; index: numb
 }
 
 export default function Resume() {
+  const { t } = useTranslation();
   const { ref: headerRef, visible: headerVisible } = useVisible();
   const { ref: eduRef, visible: eduVisible } = useVisible();
   const { ref: skillRef, visible: skillVisible } = useVisible();
   const { ref: swapRef, past } = useScrollSwap(0.35);
+
+  const EXPERIENCE = [
+    {
+      period: "Ab Okt. 2026",
+      title: t("resume.experience.dhbw.title"),
+      org: "DHBW · SV Informatik GmbH",
+      desc: t("resume.experience.dhbw.desc"),
+      tags: ["Wirtschaftsinformatik", "Dual", "DHBW"],
+      upcoming: true,
+      upcomingLabel: t("resume.upcoming"),
+    },
+    {
+      period: "Nov. 2025 – Heute",
+      title: t("resume.experience.sportStall.title"),
+      org: "Sport Stall – Urs und Kai Frohnmaier GbR",
+      desc: t("resume.experience.sportStall.desc"),
+      tags: ["Einzelhandel", "Kundenberatung", "Wintersport"],
+      upcoming: false,
+    },
+    {
+      period: "Juni 2025",
+      title: t("resume.experience.ssc.title"),
+      org: "SSC-Services GmbH · Böblingen",
+      desc: t("resume.experience.ssc.desc"),
+      tags: ["JavaScript", "Node.js", "Web Development"],
+      upcoming: false,
+    },
+    {
+      period: "Mai 2022",
+      title: t("resume.experience.gww.title"),
+      org: "GWW – Gemeinnützige Werkstätten und Wohnstätten GmbH",
+      desc: t("resume.experience.gww.desc"),
+      tags: ["Soziales Engagement", "Herrenberg"],
+      upcoming: false,
+    },
+  ];
+
+  const EDUCATION = [
+    {
+      period: "2023 – 2026",
+      title: t("resume.education.abitur.title"),
+      org: "Berufliches Schulzentrum Leonberg",
+      desc: t("resume.education.abitur.desc"),
+    },
+    {
+      period: "2017 – 2023",
+      title: t("resume.education.gymnasium.title"),
+      org: "Maria Von Linden-Gymnasium",
+      desc: t("resume.education.gymnasium.desc"),
+    },
+  ];
+
+  const SKILLS = [
+    { category: "Web", items: ["HTML/CSS", "JavaScript", "React", "TypeScript", "Node.js", "PHP"] },
+    { category: "Backend", items: ["Java", "Python", "MySQL", "REST APIs"] },
+    { category: "Tools", items: ["Git", "VS Code", "Vite", "Three.js"] },
+    {
+      category: "Soft",
+      items: [
+        t("resume.skills.soft.teamwork"),
+        t("resume.skills.soft.discipline"),
+        t("resume.skills.soft.problemSolving"),
+        t("resume.skills.soft.initiative"),
+      ],
+    },
+  ];
 
   return (
     <div className="page-enter" style={{ background: "var(--t-bg)", minHeight: "100dvh" }}>
@@ -222,13 +233,14 @@ export default function Resume() {
       <div ref={headerRef} className="container" style={{ paddingTop: "8rem", paddingBottom: "4rem" }}>
         <span
           className="section-label"
+          aria-hidden="true"
           style={{
             opacity: headerVisible ? 1 : 0,
             transform: headerVisible ? "none" : "translateY(16px)",
             transition: "opacity 0.7s ease, transform 0.7s ease",
           }}
         >
-          // werdegang
+          {t("resume.label")}
         </span>
         <h1
           ref={swapRef as React.RefObject<HTMLHeadingElement>}
@@ -239,8 +251,8 @@ export default function Resume() {
             transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
           }}
         >
-          <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>Erfahrung &</span><br />
-          <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>Ausbildung.</span>
+          <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>{t("resume.heading1")}</span><br />
+          <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>{t("resume.heading2")}</span>
         </h1>
       </div>
 
@@ -248,7 +260,7 @@ export default function Resume() {
 
       {/* Experience Timeline */}
       <div className="container" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
-        <span className="section-label">// erfahrung</span>
+        <span className="section-label" aria-hidden="true">{t("resume.labels.experience")}</span>
         <div style={{ marginTop: "2rem" }}>
           {EXPERIENCE.map((item, i) => (
             <TimelineItem key={item.title + item.period} item={item} index={i} />
@@ -260,7 +272,7 @@ export default function Resume() {
 
       {/* Education */}
       <div ref={eduRef} className="container" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
-        <span className="section-label">// ausbildung</span>
+        <span className="section-label" aria-hidden="true">{t("resume.labels.education")}</span>
         <div style={{ marginTop: "2rem", display: "flex", flexDirection: "column", gap: "1px" }}>
           {EDUCATION.map((item, i) => (
             <div
@@ -299,7 +311,7 @@ export default function Resume() {
 
       {/* Skills */}
       <div ref={skillRef} className="container" style={{ paddingTop: "3rem", paddingBottom: "6rem" }}>
-        <span className="section-label">// skills</span>
+        <span className="section-label" aria-hidden="true">{t("resume.labels.skills")}</span>
         <div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px"
           style={{

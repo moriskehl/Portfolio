@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from "react";
 import SubPageFooter from "../components/SubPageFooter";
 import { Link } from "wouter";
 import { useScrollSwap } from "../hooks/useScrollSwap";
+import { useTranslation } from "react-i18next";
 
 function useVisible(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,38 +23,106 @@ function useVisible(threshold = 0.1) {
   return { ref, visible };
 }
 
-const PROJECTS = [
-  {
-    title: "Abiball Portal",
-    desc: "Full-Stack Event-Management-System für die Abiball-Planung. PHP-Backend mit Benutzer-Authentifizierung, Teilnehmer-Management, Essensbestellungen und Zahlungsverfolgung.",
-    tech: ["PHP", "JavaScript", "CSS"],
-    url: "https://bsz.app",
-    iframe: true,
-  },
-  {
-    title: "IT-Puzzle",
-    desc: "Interaktive Web-Plattform zum Testen von Bewerbern mit IT-bezogenen Rätseln und Challenges. Erstellt während meines Praktikums bei SSC-Services.",
-    tech: ["JavaScript", "Node.js", "HTML/CSS"],
-    url: null,
-    iframe: false,
-  },
-  {
-    title: "Blackjack AI",
-    desc: "Kartenzähl-KI für Blackjack, entwickelt als Seminarkurs-Projekt zum Thema Künstliche Intelligenz. Verbindet Kartenzählung mit Bilderkennung um die optimale Spielstrategie zu ermitteln.",
-    tech: ["Python", "Machine Learning", "Yolov8", "Statistik"],
-    url: null,
-    iframe: false,
-  },
-  {
-    title: "Portfolio Website",
-    desc: "Diese Website, gebaut mit React, Three.js und einem custom ASCII-Renderer der ein 3D-STL-Modell als Code-Zeichen darstellt.",
-    tech: ["React", "TypeScript", "Three.js", "Vite"],
-    url: null,
-    iframe: false,
-  },
-];
+export default function Projects() {
+  const { t } = useTranslation();
+  const { ref: headerRef, visible: headerVisible } = useVisible();
+  const { ref: swapRef, past } = useScrollSwap(0.35);
 
-function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: number }) {
+  const PROJECTS = [
+    {
+      title: t("projects.abiball.title"),
+      desc: t("projects.abiball.desc"),
+      tech: ["PHP", "JavaScript", "CSS"],
+      url: "https://bsz.app",
+      iframe: true,
+    },
+    {
+      title: t("projects.itPuzzle.title"),
+      desc: t("projects.itPuzzle.desc"),
+      tech: ["JavaScript", "Node.js", "HTML/CSS"],
+      url: null,
+      iframe: false,
+    },
+    {
+      title: t("projects.blackjack.title"),
+      desc: t("projects.blackjack.desc"),
+      tech: ["Python", "Machine Learning", "Yolov8", "Statistik"],
+      url: null,
+      iframe: false,
+    },
+    {
+      title: t("projects.portfolio.title"),
+      desc: t("projects.portfolio.desc"),
+      tech: ["React", "TypeScript", "Three.js", "Vite"],
+      url: "https://moriskehl.tech",
+      iframe: true,
+    },
+  ];
+
+  return (
+    <div className="page-enter" style={{ background: "var(--t-bg)", minHeight: "100dvh" }}>
+
+      {/* Header */}
+      <div
+        ref={headerRef}
+        className="container"
+        style={{ paddingTop: "8rem", paddingBottom: "4rem" }}
+      >
+        <span
+          className="section-label"
+          aria-hidden="true"
+          style={{
+            opacity: headerVisible ? 1 : 0,
+            transform: headerVisible ? "none" : "translateY(16px)",
+            transition: "opacity 0.7s ease, transform 0.7s ease",
+          }}
+        >
+          {t("projects.label")}
+        </span>
+        <h1
+          ref={swapRef as React.RefObject<HTMLHeadingElement>}
+          className="section-heading"
+          style={{
+            opacity: headerVisible ? 1 : 0,
+            transform: headerVisible ? "none" : "translateY(20px)",
+            transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
+          }}
+        >
+          <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>{t("projects.heading1")}</span><br />
+          <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>{t("projects.heading2")}</span>
+        </h1>
+        <p
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: "1rem",
+            lineHeight: 1.7,
+            color: "var(--t-text-secondary)",
+            maxWidth: "500px",
+            opacity: headerVisible ? 1 : 0,
+            transform: headerVisible ? "none" : "translateY(20px)",
+            transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
+          }}
+        >
+          {t("projects.subtext")}
+        </p>
+      </div>
+
+      <hr className="divider" />
+
+      {/* Project cards */}
+      <div className="container" style={{ paddingTop: "3rem", paddingBottom: "6rem" }}>
+        {PROJECTS.map((project, i) => (
+          <ProjectCard key={project.title} project={project} index={i} />
+        ))}
+      </div>
+
+      <SubPageFooter />
+    </div>
+  );
+}
+
+function ProjectCard({ project, index }: { project: any; index: number }) {
+  const { t } = useTranslation();
   const { ref, visible } = useVisible();
   const [hovered, setHovered] = useState(false);
   const [aspectRatio, setAspectRatio] = useState<"16/9" | "9/16">("16/9");
@@ -86,6 +155,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
               color: hovered ? "var(--t-accent)" : "var(--t-text-faint)",
               transition: "color 0.3s",
             }}
+            aria-hidden="true"
           >
             // projekt_{String(index + 1).padStart(2, "0")}
           </span>
@@ -109,7 +179,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
             className="btn-outline"
             style={{ padding: "0.4rem 0.9rem", fontSize: "0.65rem", pointerEvents: "all" }}
           >
-            Live ansehen →
+            {t("projects.ctaLive")}
           </a>
         )}
       </div>
@@ -129,9 +199,9 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
 
       {/* Tech tags */}
       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: project.iframe ? "1.5rem" : 0 }}>
-        {project.tech.map((t) => (
+        {project.tech.map((tech: string) => (
           <span
-            key={t}
+            key={tech}
             style={{
               fontFamily: "'Share Tech Mono', monospace",
               fontSize: "0.62rem",
@@ -142,7 +212,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
               background: "var(--t-tag-bg)",
             }}
           >
-            {t}
+            {tech}
           </span>
         ))}
       </div>
@@ -172,14 +242,12 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
             ))}
           </div>
           <div
+            className="slanted-frame"
             style={{
-              position: "relative",
               width: "100%",
               maxWidth: aspectRatio === "9/16" ? "300px" : "800px",
               margin: aspectRatio === "9/16" ? "0 auto" : "0",
               aspectRatio,
-              overflow: "hidden",
-              border: "1px solid var(--t-border)",
               background: "var(--t-bg)",
             }}
           >
@@ -193,68 +261,4 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
   );
 }
 
-export default function Projects() {
-  const { ref: headerRef, visible: headerVisible } = useVisible();
-  const { ref: swapRef, past } = useScrollSwap(0.35);
 
-  return (
-    <div className="page-enter" style={{ background: "var(--t-bg)", minHeight: "100dvh" }}>
-
-      {/* Header */}
-      <div
-        ref={headerRef}
-        className="container"
-        style={{ paddingTop: "8rem", paddingBottom: "4rem" }}
-      >
-        <span
-          className="section-label"
-          style={{
-            opacity: headerVisible ? 1 : 0,
-            transform: headerVisible ? "none" : "translateY(16px)",
-            transition: "opacity 0.7s ease, transform 0.7s ease",
-          }}
-        >
-          // projekte
-        </span>
-        <h1
-          ref={swapRef as React.RefObject<HTMLHeadingElement>}
-          className="section-heading"
-          style={{
-            opacity: headerVisible ? 1 : 0,
-            transform: headerVisible ? "none" : "translateY(20px)",
-            transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
-          }}
-        >
-          <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>Software &</span><br />
-          <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>Systeme.</span>
-        </h1>
-        <p
-          style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: "1rem",
-            lineHeight: 1.7,
-            color: "var(--t-text-secondary)",
-            maxWidth: "500px",
-            opacity: headerVisible ? 1 : 0,
-            transform: headerVisible ? "none" : "translateY(20px)",
-            transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
-          }}
-        >
-          Einblicke in meine Arbeit — von Full-Stack Webanwendungen
-          bis zu KI-Experimenten.
-        </p>
-      </div>
-
-      <hr className="divider" />
-
-      {/* Project cards */}
-      <div className="container" style={{ paddingTop: "3rem", paddingBottom: "6rem" }}>
-        {PROJECTS.map((project, i) => (
-          <ProjectCard key={project.title} project={project} index={i} />
-        ))}
-      </div>
-
-      <SubPageFooter />
-    </div>
-  );
-}

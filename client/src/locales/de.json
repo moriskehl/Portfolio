@@ -1,0 +1,210 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "projects": "Projekte",
+    "achievements": "Erfolge",
+    "cv": "Werdegang",
+    "contact": "Kontakt",
+    "impressum": "Impressum"
+  },
+  "hero": {
+    "label": "// 00 - portfolio.init()"
+  },
+  "intro": {
+    "label": "// 01 — über mich",
+    "heading1": "Von der Piste",
+    "heading2": "zum Code.",
+    "bio": "Ich bin Moris, Abiturient am BSZ Leonberg und ab Oktober dualer Student an der DHBW mit SV Informatik GmbH. Gleichzeitig fahre ich seit meinem dritten Lebensjahr Skirennlauf und starte mit dem Ski Team Seibelseckle in der Deutschen Ski Liga.",
+    "stats": {
+      "yearsSkiing": "Jahre auf Ski",
+      "dslRank": "2. Platz DSL",
+      "projects": "Projekte",
+      "motivation": "∞ Motivation"
+    },
+    "terminal": {
+      "status": "Dualer Student ab Okt. 2026",
+      "location": "Stuttgart, Deutschland",
+      "ranking": "2. Platz Deutsche Ski Liga"
+    }
+  },
+  "navGrid": {
+    "label": "// 02 — entdecken",
+    "headingMain": "Erkunde das",
+    "headingAccent": "Terrain.",
+    "software": {
+      "title": "Software & Projekte",
+      "desc": "Web-Entwicklung, KI-Experimente und Full-Stack Projekte.",
+      "cta": "Projekte ansehen",
+      "item1": "Abiball Portal – PHP-Eventmanagement (bsz.app)",
+      "item2": "IT-Puzzle – Bewerber-Testplattform (SSC-Services)",
+      "item3": "Blackjack AI – Kartenzähl-KI (Seminarkurs)",
+      "item4": "Portfolio – React + Three.js + ASCII-Renderer (moriskehl.tech)"
+    },
+    "alpine": {
+      "title": "Skirennlauf",
+      "desc": "Seit dem Alter von 2,5 Jahren auf Ski. Aktiver Rennläufer im Ski Team Seibelseckle.",
+      "cta": "Erfolge ansehen",
+      "item1": "2026 – 2. Platz Deutsche Ski Liga (Team)",
+      "item2": "2025 – 2. Platz Deutsche Ski Liga (Team)",
+      "item3": "Ski Team Seibelseckle – Aktiver Rennläufer",
+      "item4": "17+ Saisons auf Schnee"
+    },
+    "career": {
+      "title": "Werdegang",
+      "desc": "Vom Abitur zum dualen Studium, mit Praxiserfahrung in IT und Einzelhandel.",
+      "cta": "Lebenslauf ansehen",
+      "item1": "Ab Okt. 2026 – Duales Studium DHBW, SV Informatik GmbH",
+      "item2": "2025 – Praktikum, SSC-Services GmbH (JavaScript, Node.js)",
+      "item3": "2023–2026 – Abitur Wirtschaft, BSZ Leonberg",
+      "item4": "2017–2023 – Sport Profil, Maria Von Linden-Gymnasium"
+    }
+  },
+  "contact": {
+    "label": "// 03 — kontakt",
+    "heading1": "Lass uns etwas",
+    "heading2": "Großes bauen.",
+    "subtext": "Offen für Projekte, fachlichen Austausch und neue Herausforderungen.",
+    "info": {
+      "email": "Email",
+      "location": "Standort",
+      "status": "Status",
+      "statusValue": "Dualer Student ab Okt. 2026",
+      "locationValue": "Stuttgart, Deutschland"
+    },
+    "form": {
+      "nameLabel": "Name",
+      "namePlaceholder": "Dein Name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "deine@email.de",
+      "messageLabel": "Nachricht",
+      "messagePlaceholder": "Erzähl mir von deinem Projekt...",
+      "send": "Nachricht senden",
+      "sending": "Wird gesendet...",
+      "successTitle": "Nachricht gesendet.",
+      "successDesc": "Ich melde mich bald bei dir zurück.",
+      "errorSend": "Fehler beim Senden!",
+      "errorNetwork": "Netzwerkfehler. Bitte versuche es später noch einmal."
+    }
+  },
+  "footer": {
+    "about": "Über mich",
+    "sections": "Bereiche",
+    "contact": "Kontakt"
+  },
+  "projects": {
+    "label": "// projekte",
+    "heading1": "Software &",
+    "heading2": "Systeme.",
+    "subtext": "Full-Stack Webanwendungen, KI-Experimente und mehr.",
+    "ctaLive": "Live ansehen →",
+    "abiball": {
+      "title": "Abiball Portal",
+      "desc": "Event-Management-System für die Abiball-Planung. PHP-Backend mit Authentifizierung, Teilnehmer-Management, Essensbestellungen und Zahlungsverfolgung."
+    },
+    "itPuzzle": {
+      "title": "IT-Puzzle",
+      "desc": "Web-Plattform zum Testen von Bewerbern mit IT-bezogenen Rätseln. Erstellt während meines Praktikums bei SSC-Services."
+    },
+    "blackjack": {
+      "title": "Blackjack AI",
+      "desc": "Kartenzähl-KI für Blackjack, entwickelt als Seminarkurs-Projekt. Verbindet Kartenzählung mit Bilderkennung zur optimalen Spielstrategie."
+    },
+    "portfolio": {
+      "title": "Portfolio Website",
+      "desc": "Diese Website, gebaut mit React, Three.js und einem custom ASCII-Renderer der ein 3D-STL-Modell als Code-Zeichen darstellt."
+    }
+  },
+  "achievements": {
+    "label": "// erfolge",
+    "heading1": "Skirennlauf &",
+    "heading2": "Erfolge.",
+    "stats": {
+      "saisons": "Saisons",
+      "dslSilber": "DSL Silber",
+      "teamEntry": "Team-Beitritt",
+      "passion": "Leidenschaft"
+    },
+    "items": {
+      "a2026": {
+        "title": "2. Platz Deutsche Ski Liga",
+        "badge": "Silber",
+        "desc": "Zweiten Platz in der Teamwertung der Deutschen Ski Liga verteidigt.",
+        "detail": "Deutsche Ski Liga · Teamwertung"
+      },
+      "a2025": {
+        "title": "2. Platz Deutsche Ski Liga",
+        "badge": "Silber",
+        "desc": "Großer Erfolg auf nationaler Ebene.",
+        "detail": "Deutsche Ski Liga · Teamwertung"
+      },
+      "seibelseckle": {
+        "title": "Ski Team Seibelseckle",
+        "badge": "Aktiv",
+        "desc": "Training und Wettkämpfe im Ski Team Seibelseckle.",
+        "detail": "Skirennlauf · Schwarzwald"
+      },
+      "ssvNord": {
+        "title": "Bezirk SSV Nord",
+        "badge": "Start der Rennkarriere",
+        "desc": "Mit 6 Jahren beigetreten. Über ein Jahrzehnt Grundstein für die Rennkarriere.",
+        "detail": "Grundlagen & Renntraining"
+      }
+    }
+  },
+  "resume": {
+    "label": "// werdegang",
+    "heading1": "Erfahrung &",
+    "heading2": "Ausbildung.",
+    "upcoming": "BEVORSTEHEND",
+    "labels": {
+      "experience": "// erfahrung",
+      "education": "// ausbildung",
+      "skills": "// skills"
+    },
+    "experience": {
+      "dhbw": {
+        "title": "Duales Studium Wirtschaftsinformatik",
+        "desc": "Dualer Studiengang mit Praxiserfahrung in der Softwareentwicklung."
+      },
+      "sportStall": {
+        "title": "Minijob Kassierer & Verkauf",
+        "desc": "Kassenführung und Kundenberatung im Wintersport-Einzelhandel."
+      },
+      "ssc": {
+        "title": "Praktikum",
+        "desc": "Entwicklung einer IT-Puzzle-Plattform zum Bewerber-Testing mit JavaScript und Node.js."
+      },
+      "gww": {
+        "title": "Sozialpraktikum",
+        "desc": "Arbeit mit Menschen mit Beeinträchtigungen in sozialen Einrichtungen."
+      }
+    },
+    "education": {
+      "abitur": {
+        "title": "Allgemeine Hochschulreife (Abitur)",
+        "desc": "Seminarkurs im Bereich KI (Blackjack-Algorithmus)."
+      },
+      "gymnasium": {
+        "title": "Gymnasium",
+        "desc": "Schulische Grundausbildung mit Sport-Profil."
+      }
+    },
+    "skills": {
+      "soft": {
+        "teamwork": "Teamarbeit",
+        "discipline": "Disziplin",
+        "problemSolving": "Problemlösung",
+        "initiative": "Eigeninitiative"
+      }
+    }
+  },
+  "impressum": {
+    "title": "Impressum",
+    "back": "Zurück zur Startseite"
+  },
+  "notFound": {
+    "title": "404 - Systemfehler",
+    "desc": "Das Terrain existiert nicht oder wurde verschoben.",
+    "back": "Zurück zur Basis"
+  }
+}

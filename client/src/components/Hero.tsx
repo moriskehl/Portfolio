@@ -7,6 +7,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import AsciiMountain from "./AsciiMountain";
 import { useTheme } from "../contexts/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 const NAME = "MORIS_KEHL";
 
@@ -55,6 +56,7 @@ function useMatrixReveal(text: string, startDelay = 400) {
 }
 
 export default function Hero() {
+  const { t } = useTranslation();
   const { displayed, done } = useMatrixReveal(NAME, 800);
   const [showSub, setShowSub] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -125,6 +127,7 @@ export default function Hero() {
         style={{ zIndex: 5, pointerEvents: "none" }}
       >
         <span
+          aria-hidden="true"
           style={{
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: "0.65rem",
@@ -137,7 +140,7 @@ export default function Hero() {
             animation: "fade-up 0.7s ease 0.2s forwards",
           }}
         >
-          // 00 - portfolio.init()
+          {t("hero.label")}
         </span>
 
         <h1

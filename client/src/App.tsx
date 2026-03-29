@@ -12,17 +12,32 @@ import NotFound from "./pages/NotFound";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
+const pageVariants = {
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  exit:    { opacity: 0, y: -12 },
+};
+
+const pageTransition = {
+  duration: 0.35,
+  ease: [0.22, 1, 0.36, 1] as const,
+};
+
 function Router() {
   const [location] = useLocation();
   
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence
+      mode="wait"
+      onExitComplete={() => window.scrollTo({ top: 0 })}
+    >
       <motion.div
         key={location}
-        initial={{ opacity: 0, filter: "blur(2px)" }}
-        animate={{ opacity: 1, filter: "blur(0px)" }}
-        exit={{ opacity: 0, filter: "blur(2px)" }}
-        transition={{ duration: 0.15, ease: [0.2, 0.8, 0.2, 1] }}
+        variants={pageVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        transition={pageTransition}
         style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", overflowX: "hidden", width: "100%", position: "relative" }}
       >
         <Switch location={location}>

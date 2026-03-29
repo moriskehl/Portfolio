@@ -1,0 +1,210 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "projects": "Projets",
+    "achievements": "Succès",
+    "cv": "CV",
+    "contact": "Contact",
+    "impressum": "Mentions légales"
+  },
+  "hero": {
+    "label": "// 00 - portfolio.init()"
+  },
+  "intro": {
+    "label": "// 01 — à propos",
+    "heading1": "De la piste",
+    "heading2": "au code.",
+    "bio": "Je suis Moris, lycéen au BSZ Leonberg et à partir d'octobre, étudiant en alternance à la DHBW avec SV Informatik GmbH. Parallèlement, je fais des courses de ski depuis l'âge de trois ans et je participe à la Ligue allemande de ski avec le Ski Team Seibelseckle.",
+    "stats": {
+      "yearsSkiing": "Années de ski",
+      "dslRank": "2e place DSL",
+      "projects": "Projets",
+      "motivation": "∞ Motivation"
+    },
+    "terminal": {
+      "status": "Étudiant en alternance dès oct. 2026",
+      "location": "Stuttgart, Allemagne",
+      "ranking": "2e place Ligue allemande de ski"
+    }
+  },
+  "navGrid": {
+    "label": "// 02 — explorer",
+    "headingMain": "Explorer le",
+    "headingAccent": "Terrain.",
+    "software": {
+      "title": "Logiciels & Projets",
+      "desc": "Développement web, expériences d'IA et projets full-stack.",
+      "cta": "Voir les projets",
+      "item1": "Portail de Bal – Gestion d'événements PHP (bsz.app)",
+      "item2": "IT Puzzle – Plateforme de test (SSC-Services)",
+      "item3": "Blackjack AI – IA de comptage de cartes (Séminaire)",
+      "item4": "Portfolio – React + Three.js + Rendu ASCII (moriskehl.tech)"
+    },
+    "alpine": {
+      "title": "Ski de Compétition",
+      "desc": "Sur des skis depuis l'âge de 2,5 ans. Coureur actif au Ski Team Seibelseckle.",
+      "cta": "Voir les succès",
+      "item1": "2026 – 2e place Ligue allemande de ski (Équipe)",
+      "item2": "2025 – 2e place Ligue allemande de ski (Équipe)",
+      "item3": "Ski Team Seibelseckle – Coureur actif",
+      "item4": "17+ saisons sur neige"
+    },
+    "career": {
+      "title": "Parcours",
+      "desc": "Du baccalauréat aux études en alternance, avec expérience en informatique et vente.",
+      "cta": "Voir le CV",
+      "item1": "Dès oct. 2026 – Études en alternance DHBW, SV Informatik GmbH",
+      "item2": "2025 – Stage, SSC-Services GmbH (JavaScript, Node.js)",
+      "item3": "2023–2026 – Baccalauréat Économie, BSZ Leonberg",
+      "item4": "2017–2023 – Profil Sport, Maria Von Linden-Gymnasium"
+    }
+  },
+  "contact": {
+    "label": "// 03 — contact",
+    "heading1": "Construisons quelque",
+    "heading2": "chose de grand.",
+    "subtext": "Ouvert aux projets, échanges et nouveaux défis.",
+    "info": {
+      "email": "Email",
+      "location": "Lieu",
+      "status": "Statut",
+      "statusValue": "Étudiant en alternance dès oct. 2026",
+      "locationValue": "Stuttgart, Allemagne"
+    },
+    "form": {
+      "nameLabel": "Nom",
+      "namePlaceholder": "Votre nom",
+      "emailLabel": "Email",
+      "emailPlaceholder": "votre@email.fr",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Parlez-moi de votre projet...",
+      "send": "Envoyer le message",
+      "sending": "Envoi en cours...",
+      "successTitle": "Message envoyé.",
+      "successDesc": "Je vous recontacte bientôt.",
+      "errorSend": "Erreur d'envoi !",
+      "errorNetwork": "Erreur réseau. Réessayez plus tard."
+    }
+  },
+  "footer": {
+    "about": "À propos",
+    "sections": "Sections",
+    "contact": "Contact"
+  },
+  "projects": {
+    "label": "// projets",
+    "heading1": "Logiciels &",
+    "heading2": "Systèmes.",
+    "subtext": "Applications web full-stack, expériences d'IA et plus.",
+    "ctaLive": "Voir en direct →",
+    "abiball": {
+      "title": "Portail de Bal",
+      "desc": "Système de gestion d'événements pour le bal de promo. Backend PHP avec authentification, gestion des participants, commandes de repas et suivi des paiements."
+    },
+    "itPuzzle": {
+      "title": "IT Puzzle",
+      "desc": "Plateforme web pour tester les candidats avec des énigmes informatiques. Créé lors de mon stage chez SSC-Services."
+    },
+    "blackjack": {
+      "title": "IA Blackjack",
+      "desc": "IA de comptage de cartes pour le blackjack, développée en projet de séminaire. Combine comptage de cartes et reconnaissance d'images."
+    },
+    "portfolio": {
+      "title": "Site Portfolio",
+      "desc": "Ce site web, construit avec React, Three.js et un rendu ASCII qui affiche un modèle 3D STL en caractères de code."
+    }
+  },
+  "achievements": {
+    "label": "// succès",
+    "heading1": "Ski de Compétition &",
+    "heading2": "Succès.",
+    "stats": {
+      "saisons": "Saisons",
+      "dslSilber": "DSL Argent",
+      "teamEntry": "Entrée équipe",
+      "passion": "Passion"
+    },
+    "items": {
+      "a2026": {
+        "title": "2e place Ligue allemande de ski",
+        "badge": "Argent",
+        "desc": "Deuxième place au classement par équipe défendue.",
+        "detail": "Ligue allemande de ski · Classement par équipe"
+      },
+      "a2025": {
+        "title": "2e place Ligue allemande de ski",
+        "badge": "Argent",
+        "desc": "Grand succès au niveau national.",
+        "detail": "Ligue allemande de ski · Classement par équipe"
+      },
+      "seibelseckle": {
+        "title": "Ski Team Seibelseckle",
+        "badge": "Actif",
+        "desc": "Entraînement et compétitions au Ski Team Seibelseckle.",
+        "detail": "Ski de compétition · Forêt-Noire"
+      },
+      "ssvNord": {
+        "title": "District SSV Nord",
+        "badge": "Début de carrière",
+        "desc": "Rejoint à 6 ans. Plus d'une décennie de formation.",
+        "detail": "Bases & Entraînement de course"
+      }
+    }
+  },
+  "resume": {
+    "label": "// parcours",
+    "heading1": "Expérience &",
+    "heading2": "Formation.",
+    "upcoming": "À VENIR",
+    "labels": {
+      "experience": "// expérience",
+      "education": "// formation",
+      "skills": "// compétences"
+    },
+    "experience": {
+      "dhbw": {
+        "title": "Études en alternance en informatique de gestion",
+        "desc": "Cursus en alternance avec expérience pratique en développement logiciel."
+      },
+      "sportStall": {
+        "title": "Minijob Caissier & Vente",
+        "desc": "Caisse et conseil client en vente d'articles de sports d'hiver."
+      },
+      "ssc": {
+        "title": "Stage",
+        "desc": "Développement d'une plateforme de puzzle IT pour le test de candidats avec JavaScript et Node.js."
+      },
+      "gww": {
+        "title": "Stage social",
+        "desc": "Travail avec des personnes en situation de handicap."
+      }
+    },
+    "education": {
+      "abitur": {
+        "title": "Baccalauréat général (Abitur)",
+        "desc": "Séminaire en IA (algorithme Blackjack)."
+      },
+      "gymnasium": {
+        "title": "Lycée",
+        "desc": "Formation scolaire avec profil sport."
+      }
+    },
+    "skills": {
+      "soft": {
+        "teamwork": "Travail d'équipe",
+        "discipline": "Discipline",
+        "problemSolving": "Résolution de problèmes",
+        "initiative": "Esprit d'initiative"
+      }
+    }
+  },
+  "impressum": {
+    "title": "Mentions Légales",
+    "back": "Retour à l'accueil"
+  },
+  "notFound": {
+    "title": "404 - Erreur Système",
+    "desc": "Le terrain recherché n'existe pas.",
+    "back": "Retour à la base"
+  }
+}

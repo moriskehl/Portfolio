@@ -9,7 +9,7 @@ export default function Impressum() {
   return (
     <div className="page-enter" style={{ background: "var(--t-bg)", minHeight: "100dvh", paddingTop: "8rem", paddingBottom: "4rem" }}>
       <div className="container">
-        <span className="section-label">// rechtliches</span>
+        <span className="section-label" aria-hidden="true">// rechtliches</span>
         <h1
           className="section-heading"
           style={{
