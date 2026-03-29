@@ -85,7 +85,7 @@ export default function Hero() {
 
   return (
     <section
-      id="hero"
+      id="start"
       className="relative w-full overflow-hidden"
       style={{ height: "100svh", minHeight: "450px", background: "var(--t-bg)" }}
     >

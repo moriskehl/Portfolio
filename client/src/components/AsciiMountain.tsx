@@ -125,6 +125,7 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
 
   const [ctrl, setCtrl] = useState<Controls>({ ...DEFAULTS });
   const [showPanel, setShowPanel] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   const handlePause = useCallback(
     (p: boolean) => {
@@ -265,12 +266,19 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
 
       renderer.render(scene, camera);
 
-      if (offW > 0 && offH > 0) {
-        if (!pixelBuf || pixelBuf.length !== offW * offH * 4) {
-          pixelBuf = new Uint8Array(offW * offH * 4);
+      try {
+        if (offW > 0 && offH > 0) {
+          if (!pixelBuf || pixelBuf.length !== offW * offH * 4) {
+            pixelBuf = new Uint8Array(offW * offH * 4);
+          }
+          const gl = renderer.getContext();
+          gl.readPixels(0, 0, offW, offH, gl.RGBA, gl.UNSIGNED_BYTE, pixelBuf);
         }
-        const gl = renderer.getContext();
-        gl.readPixels(0, 0, offW, offH, gl.RGBA, gl.UNSIGNED_BYTE, pixelBuf);
+      } catch (err) {
+        console.error("[AsciiMountain] canvas read error (blocked by extension?):", err);
+        setHasError(true);
+        pausedRef.current = true;
+        return;
       }
 
       const now = performance.now();
@@ -402,7 +410,11 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
         onLoad?.();
       },
       undefined,
-      (err) => console.error("[AsciiMountain] load error:", err)
+      (err) => {
+        console.error("[AsciiMountain] load error:", err);
+        setHasError(true);
+        onLoad?.(); // Still call onLoad so the parent Hero loading screen fades out
+      }
     );
 
     animId = requestAnimationFrame(tick);
@@ -460,6 +472,63 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
         ref={canvasRef}
         style={{ position: "absolute", inset: 0, background: light ? "#f5f5f7" : "#000", transition: "background 0.3s ease" }}
       />
+      {hasError && (
+        <div style={{
+          position: "absolute", inset: 0,
+          display: "flex", flexDirection: "column",
+          alignItems: "center", justifyContent: "center",
+          zIndex: 10, padding: "20px", pointerEvents: "none"
+        }}>
+          <div style={{
+            background: light ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.85)",
+            backdropFilter: "blur(4px)",
+            border: `1px solid ${light ? "rgba(220,38,38,0.3)" : "rgba(220,38,38,0.5)"}`,
+            borderRadius: "6px",
+            padding: "20px 24px",
+            maxWidth: "500px",
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+            pointerEvents: "all"
+          }}>
+            <h3 style={{
+              margin: 0,
+              color: light ? "#b91c1c" : "#ef4444",
+              fontFamily: "'Share Tech Mono', monospace",
+              fontSize: "1.1rem"
+            }}>// ERR: RENDER_BLOCKED</h3>
+            <p style={{
+              margin: 0,
+              color: light ? "#4b5563" : "#9ca3af",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "0.95rem",
+              lineHeight: 1.5
+            }}>
+              Das ASCII-Rendering wurde unerwartet gestoppt.
+            </p>
+            <p style={{
+              margin: 0,
+              color: light ? "#6b7280" : "#6b7280",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "0.85rem",
+              lineHeight: 1.5
+            }}>
+              Dies passiert häufig durch Adblocker (wie uBlock Origin Lite) oder Privacy-Erweiterungen, die den <span style={{ color: light ? "#b91c1c" : "#ef4444" }}>Canvas-Zugriff verweigern</span> ("Canvas Fingerprinting Protection") oder das Laden von <span style={{ color: light ? "#b91c1c" : "#ef4444" }}>3D-Modellen von CDNs blockieren</span>.
+            </p>
+            <p style={{
+              margin: 0,
+              color: light ? "#4b5563" : "#9ca3af",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "0.95rem",
+              lineHeight: 1.5,
+              marginTop: "4px"
+            }}>
+              Um das volle Erlebnis zu sehen, kannst du diese Seite bedenkenlos in deinem Blocker authorisieren (Whitelist).
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* ── Control Panel (commented out — uncomment to re-enable tuning) ──
       <button
