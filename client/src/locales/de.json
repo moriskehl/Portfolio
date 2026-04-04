@@ -206,5 +206,29 @@
     "title": "404 - Systemfehler",
     "desc": "Das Terrain existiert nicht oder wurde verschoben.",
     "back": "Zurück zur Basis"
+  },
+  "secret": {
+    "prompt": "[sudo] Passwort für moris:",
+    "denied": "Zugriff verweigert. Berechtigungsstufe unzureichend.",
+    "granted": "Zugriff gewährt. Betrete eingeschränkte Zone...",
+    "decrypting": "Entschlüssle Daten...",
+    "decryptError": "Entschlüsselung fehlgeschlagen. Sitzung ungültig.",
+    "encrypted": "AES-256-GCM verschlüsselt",
+    "exit": "exit",
+    "sessionWarning": "Daten werden nur für diese Sitzung entschlüsselt. Beim Schließen des Tabs werden sie gelöscht.",
+    "dashboard": {
+      "title": "// finanz-dashboard",
+      "addModule": "Modul hinzufügen",
+      "layoutFull": "Vollbild",
+      "layoutSplit2": "2er Split",
+      "layoutSplit4": "4er Grid",
+      "layoutCustom": "Frei positionieren",
+      "closeModule": "Modul schließen",
+      "expandModule": "Erweitern",
+      "collapseModule": "Einklappen",
+      "floatModule": "Ablösen",
+      "dockModule": "Andocken",
+      "emptySlot": "Modul hierhin ziehen oder klicken zum Hinzufügen"
+    }
   }
 }

@@ -206,5 +206,29 @@
     "title": "404 - Erreur Système",
     "desc": "Le terrain recherché n'existe pas.",
     "back": "Retour à la base"
+  },
+  "secret": {
+    "prompt": "[sudo] mot de passe pour moris :",
+    "denied": "Accès refusé. Niveau d'autorisation insuffisant.",
+    "granted": "Accès accordé. Entrée en zone restreinte...",
+    "decrypting": "Déchiffrement des données...",
+    "decryptError": "Échec du déchiffrement. Session invalide.",
+    "encrypted": "Chiffré AES-256-GCM",
+    "exit": "exit",
+    "sessionWarning": "Les données ne sont déchiffrées que pour cette session. Fermer l'onglet les effacera.",
+    "dashboard": {
+      "title": "// tableau-de-bord",
+      "addModule": "Ajouter un module",
+      "layoutFull": "Plein écran",
+      "layoutSplit2": "Split 2",
+      "layoutSplit4": "Grille 4",
+      "layoutCustom": "Position libre",
+      "closeModule": "Fermer le module",
+      "expandModule": "Développer",
+      "collapseModule": "Réduire",
+      "floatModule": "Détacher",
+      "dockModule": "Ancrer",
+      "emptySlot": "Glissez un module ici ou cliquez pour ajouter"
+    }
   }
 }

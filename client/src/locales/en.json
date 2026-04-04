@@ -206,5 +206,29 @@
     "title": "404 - System Error",
     "desc": "The terrain you're looking for doesn't exist.",
     "back": "Back to Base"
+  },
+  "secret": {
+    "prompt": "[sudo] password for moris:",
+    "denied": "Access denied. Permission level insufficient.",
+    "granted": "Access granted. Entering restricted zone...",
+    "decrypting": "Decrypting data...",
+    "decryptError": "Decryption failed. Session invalid.",
+    "encrypted": "AES-256-GCM encrypted",
+    "exit": "exit",
+    "sessionWarning": "Data is decrypted for this session only. Closing the tab will erase it.",
+    "dashboard": {
+      "title": "// finance-dashboard",
+      "addModule": "Add module",
+      "layoutFull": "Fullscreen",
+      "layoutSplit2": "Split 2",
+      "layoutSplit4": "4-Grid",
+      "layoutCustom": "Free position",
+      "closeModule": "Close module",
+      "expandModule": "Expand",
+      "collapseModule": "Collapse",
+      "floatModule": "Detach",
+      "dockModule": "Dock",
+      "emptySlot": "Drag a module here or click to add"
+    }
   }
 }

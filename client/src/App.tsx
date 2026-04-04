@@ -8,6 +8,7 @@ import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
 import Achievements from "./pages/Achievements";
 import Impressum from "./pages/Impressum";
+import Secret from "./pages/Secret";
 import NotFound from "./pages/NotFound";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -46,6 +47,7 @@ function Router() {
           <Route path={"/achievements"} component={Achievements} />
           <Route path={"/projects"} component={Projects} />
           <Route path={"/impressum"} component={Impressum} />
+          <Route path={"/secret"} component={Secret} />
           <Route path={"/404"} component={NotFound} />
           <Route component={NotFound} />
         </Switch>
@@ -55,12 +57,15 @@ function Router() {
 }
 
 function App() {
+  const [location] = useLocation();
+  const isSecret = location === "/secret";
+
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark" switchable>
         <TooltipProvider>
           <Toaster />
-          <Navbar />
+          {!isSecret && <Navbar />}
           <Router />
         </TooltipProvider>
       </ThemeProvider>
