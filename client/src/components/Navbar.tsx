@@ -138,7 +138,6 @@ export default function Navbar() {
               <LanguageSwitcher />
             </li>
 
-            {/* Theme toggle */}
             <li className="hidden sm:block">
               <button
                 className="theme-toggle"
@@ -209,6 +208,7 @@ export default function Navbar() {
           })}
           <div style={{ display: "flex", gap: "1rem", marginTop: "0.5rem", alignItems: "center" }}>
             <LanguageSwitcher />
+            
             {/* Mobile theme toggle */}
             <button
               className="theme-toggle"

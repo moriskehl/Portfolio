@@ -289,7 +289,7 @@
   /* ── Section heading ── */
   .section-heading {
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
     color: var(--t-text);
     line-height: 1.15;
     margin-bottom: 1.5rem;
@@ -638,34 +638,105 @@
 .slanted-frame {
   position: relative;
   overflow: hidden;
+  border: 1px solid var(--t-border-medium);
 }
 
-/* Top-left corner overlay */
-.slanted-frame::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 30px;
+/* Iframe corner overlays removed for clean border */
+
+.media-frame-digital {
+  position: relative;
+  border: 1px solid var(--t-accent-border);
+  clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
   background: var(--t-bg-secondary);
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-  z-index: 10;
-  pointer-events: none;
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.08);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Bottom-right corner overlay */
-.slanted-frame::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 30px;
-  height: 30px;
-  background: var(--t-bg-secondary);
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-  z-index: 10;
+.media-frame-digital:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 35px rgba(59, 130, 246, 0.15);
+}
+
+.image-full {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Projects layout, disk timeline and slanted cards ── */
+.disk-track {
+  position: fixed;
+  top: 50%;
+  left: -1050px;
+  width: 1400px;
+  height: 1400px;
+  border-radius: 50%;
+  z-index: 1;
   pointer-events: none;
+  transform: translateY(-50%) rotate(var(--disk-rotation, 0deg));
+  border: 1px solid var(--t-border-medium);
+  box-shadow: inset -5px 0 30px rgba(59, 130, 246, 0.05);
+  will-change: transform;
+}
+
+.disk-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -15px;
+  margin-left: -50px;
+  width: 100px;
+  transform-origin: center;
+  transform: rotate(var(--angle)) translateX(640px);
+  pointer-events: auto;
+  transition: transform 0.3s ease, color 0.3s ease;
+  background: transparent;
+  border: none;
+  color: var(--t-text-faint);
+  cursor: pointer;
+}
+
+.disk-item-number {
+  font-size: 1rem; /* Slightly smaller for 4 digits */
+  letter-spacing: 0.05em;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.disk-item:hover,
+.disk-item.is-active {
+  color: var(--t-accent);
+  transform: rotate(var(--angle)) translateX(640px) scale(1.1);
+}
+
+.projects-cards {
+  min-width: 0;
+}
+
+.project-card-slanted {
+  /* Slanted edges removed as requested */
+}
+
+/* ── Responsive helpers ── */
+@media (min-width: 768px) {
+  .projects-layout {
+    display: flex;
+    justify-content: flex-end; /* Pushes content to the right */
+  }
+
+  .projects-cards {
+    width: 85%; /* Leaves 15% empty space on the left for the timeline */
+  }
+
+  .mobile-only { display: none !important; }
+}
+
+@media (max-width: 767px) {
+  .disk-track {
+    display: none;
+  }
+  .desktop-only { display: none !important; }
 }
 
 /* ═══════════════════════════════════════
@@ -1142,5 +1213,18 @@
     grid-template-columns: 1fr !important;
   }
   .dashboard-floating { min-width: 280px; }
+}
+
+/* ═══════════════════════════════════════
+  ANIMATION HELPERS
+  ═══════════════════════════════════════ */
+
+.hover-distort {
+  transition: letter-spacing 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.hover-distort:hover {
+  letter-spacing: 0.05em;
+  text-shadow: 2px 0 var(--t-accent), -2px 0 #ef4444;
 }
 

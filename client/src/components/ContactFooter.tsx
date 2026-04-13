@@ -3,14 +3,17 @@
  * Minimal footer with contact info and social links.
  */
 
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useLayoutEffect } from "react";
 import { useScrollSwap } from "../hooks/useScrollSwap";
 import { toast } from "sonner";
-
 import { Link } from "wouter";
 import FooterBar from "./FooterBar";
 import { useTranslation } from "react-i18next";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import RadialHover from "./RadialHover";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const GitHubIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
@@ -52,21 +55,42 @@ export default function ContactFooter() {
     { label: t("contact.info.email"), value: "moris.kehl@gmail.com", href: "mailto:moris.kehl@gmail.com" },
     { label: t("contact.info.location"), value: t("contact.info.locationValue"), href: null },
     { label: t("contact.info.status"), value: t("contact.info.statusValue"), href: null },
+    { label: t("nav.cv"), value: "moriskehl.tech/cv", href: "/cv" }
   ];
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 90%", "start 40%"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const xLeft = useTransform(scrollYProgress, [0, 1], [-50, 0]);
-  const xRight = useTransform(scrollYProgress, [0, 1], [50, 0]);
 
   const { ref: swapRef, past } = useScrollSwap(0.35);
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+
+  /* GSAP Deterministic Scroll */
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const leftEl = document.querySelector(".contact-scrub-left");
+      const rightEl = document.querySelector(".contact-scrub-right");
+
+      if (leftEl) {
+        gsap.fromTo(leftEl, 
+          { opacity: 0, x: -50 },
+          {
+            opacity: 1, x: 0, ease: "none",
+            scrollTrigger: { trigger: containerRef.current, start: "top 90%", end: "top 40%", scrub: true }
+          }
+        );
+      }
+      
+      if (rightEl) {
+        gsap.fromTo(rightEl, 
+          { opacity: 0, x: 50 },
+          {
+            opacity: 1, x: 0, ease: "none",
+            scrollTrigger: { trigger: containerRef.current, start: "top 90%", end: "top 40%", scrub: true }
+          }
+        );
+      }
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -122,11 +146,19 @@ export default function ContactFooter() {
     e.target.style.boxShadow = "none";
   };
 
+  const commonHrefStyle = {
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: "0.92rem",
+    color: "var(--t-text)",
+    textDecoration: "none",
+    transition: "color 0.2s",
+  };
+
   return (
     <footer
       id="contact"
       ref={containerRef}
-      style={{ background: "var(--t-bg)" }}
+      style={{ background: "var(--t-bg)", overflow: "hidden" }}
     >
       <hr className="divider" />
 
@@ -138,21 +170,17 @@ export default function ContactFooter() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           {/* Left — info */}
-          <motion.div
-            style={{
-              opacity,
-              x: xLeft,
-            }}
-          >
+          <div className="contact-scrub-left">
             <span className="section-label" aria-hidden="true">{t("contact.label")}</span>
-            <h2
-              ref={swapRef as React.RefObject<HTMLHeadingElement>}
-              className="section-heading"
-              style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)" }}
-            >
-              <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>{t("contact.heading1")}</span><br />
-              <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>{t("contact.heading2")}</span>
-            </h2>
+            <RadialHover className="section-heading">
+              <h2
+                ref={swapRef as React.RefObject<HTMLHeadingElement>}
+                style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)", margin: 0 }}
+              >
+                <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>{t("contact.heading1")}</span><br />
+                <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>{t("contact.heading2")}</span>
+              </h2>
+            </RadialHover>
 
             <p
               style={{
@@ -184,22 +212,28 @@ export default function ContactFooter() {
                     {item.label}
                   </span>
                   {item.href ? (
-                    <a
-                      href={item.href}
-                      style={{
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontSize: "0.92rem",
-                        color: "var(--t-text)",
-                        textDecoration: "none",
-                        transition: "color 0.2s",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--t-accent)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--t-text)")}
-                    >
-                      {item.value}
-                    </a>
+                    item.href.startsWith("/") ? (
+                      <Link href={item.href} >
+                        <span
+                          style={{ ...commonHrefStyle, cursor: "pointer" }}
+                          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--t-accent)")}
+                          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--t-text)")}
+                        >
+                          {item.value}
+                        </span>
+                      </Link>
+                    ) : (
+                      <a
+                        href={item.href}
+                        style={commonHrefStyle}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--t-accent)")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "var(--t-text)")}
+                      >
+                        {item.value}
+                      </a>
+                    )
                   ) : (
-                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.92rem", color: "var(--t-text)" }}>
+                    <span style={{ ...commonHrefStyle }}>
                       {item.value}
                     </span>
                   )}
@@ -223,13 +257,12 @@ export default function ContactFooter() {
                 </a>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Right — form */}
-          <motion.div
+          <div
+            className="contact-scrub-right"
             style={{
-              opacity,
-              x: xRight,
               border: "1px solid var(--t-border)",
               background: "var(--t-bg-secondary)",
               padding: "2.5rem",
@@ -336,13 +369,13 @@ export default function ContactFooter() {
                 </button>
               </form>
             )}
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* Minimal footer bar */}
       <FooterBar 
-        links={[{label: t("footer.about"), id: "intro"}, {label: t("footer.sections"), id: "grid"}, {label: t("footer.contact"), id: "contact"}]}
+        links={[{label: t("footer.about"), id: "intro"}, {label: t("footer.sections"), id: "coding-summary"}, {label: t("footer.contact"), id: "contact"}]}
       />
     </footer>
   );

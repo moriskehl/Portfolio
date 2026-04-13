@@ -27,40 +27,22 @@
       "ranking": "2e place Ligue allemande de ski"
     }
   },
-  "navGrid": {
-    "label": "// 02 — explorer",
-    "headingMain": "Explorer le",
-    "headingAccent": "Terrain.",
-    "software": {
-      "title": "Logiciels & Projets",
-      "desc": "Développement web, expériences d'IA et projets full-stack.",
-      "cta": "Voir les projets",
-      "item1": "Portail de Bal – Gestion d'événements PHP (bsz.app)",
-      "item2": "IT Puzzle – Plateforme de test (SSC-Services)",
-      "item3": "Blackjack AI – IA de comptage de cartes (Séminaire)",
-      "item4": "Portfolio – React + Three.js + Rendu ASCII (moriskehl.tech)"
-    },
-    "alpine": {
-      "title": "Ski de Compétition",
-      "desc": "Sur des skis depuis l'âge de 2,5 ans. Coureur actif au Ski Team Seibelseckle.",
-      "cta": "Voir les succès",
-      "item1": "2026 – 2e place Ligue allemande de ski (Équipe)",
-      "item2": "2025 – 2e place Ligue allemande de ski (Équipe)",
-      "item3": "Ski Team Seibelseckle – Coureur actif",
-      "item4": "17+ saisons sur neige"
-    },
-    "career": {
-      "title": "Parcours",
-      "desc": "Du baccalauréat aux études en alternance, avec expérience en informatique et vente.",
-      "cta": "Voir le CV",
-      "item1": "Dès oct. 2026 – Études en alternance DHBW, SV Informatik GmbH",
-      "item2": "2025 – Stage, SSC-Services GmbH (JavaScript, Node.js)",
-      "item3": "2023–2026 – Baccalauréat Économie, BSZ Leonberg",
-      "item4": "2017–2023 – Profil Sport, Maria Von Linden-Gymnasium"
-    }
+  "skiingSummary": {
+    "label": "// 02 — ski alpin",
+    "heading1": "Sur la",
+    "heading2": "Piste.",
+    "desc": "Sur les skis depuis l'âge de 2 ans. Aujourd'hui, je suis coureur actif au Ski Team Seibelseckle et, avec eux, double médaillé d'argent de la Ligue allemande de ski.",
+    "cta": "Voir les succès →"
+  },
+  "codingSummary": {
+    "label": "// 03 — projets",
+    "heading1": "Derrière",
+    "heading2": "l'Écran.",
+    "desc": "Des plateformes de gestion d'événements en PHP aux tests interactifs et algorithmes de blackjack basés sur l'IA – je développe des solutions numériques par passion.",
+    "cta": "Voir les projets →"
   },
   "contact": {
-    "label": "// 03 — contact",
+    "label": "// 04 — contact",
     "heading1": "Construisons quelque",
     "heading2": "chose de grand.",
     "subtext": "Ouvert aux projets, échanges et nouveaux défis.",
@@ -99,19 +81,23 @@
     "ctaLive": "Voir en direct →",
     "abiball": {
       "title": "Portail de Bal",
-      "desc": "Système de gestion d'événements pour le bal de promo. Backend PHP avec authentification, gestion des participants, commandes de repas et suivi des paiements."
-    },
-    "itPuzzle": {
-      "title": "IT Puzzle",
-      "desc": "Plateforme web pour tester les candidats avec des énigmes informatiques. Créé lors de mon stage chez SSC-Services."
+      "date": "Oct. 2025 – Fév. 2026",
+      "desc": "Système complet de gestion d'événements conçu spécifiquement pour l'organisation de bals. Comprend un backend PHP sécurisé avec authentification, distribution de billets, gestion des participants en temps réel, commandes de repas personnalisables et suivi détaillé des paiements pour simplifier massivement la logistique."
     },
     "blackjack": {
       "title": "IA Blackjack",
-      "desc": "IA de comptage de cartes pour le blackjack, développée en projet de séminaire. Combine comptage de cartes et reconnaissance d'images."
+      "date": "Terminale",
+      "desc": "IA avancée de comptage de cartes développée dans le cadre d'un séminaire intensif. Cette application en Python combine les mathématiques traditionnelles de comptage avec la vision par ordinateur et la reconnaissance d'image en temps réel pour déterminer la stratégie de jeu statistiquement optimale."
     },
     "portfolio": {
       "title": "Site Portfolio",
-      "desc": "Ce site web, construit avec React, Three.js et un rendu ASCII qui affiche un modèle 3D STL en caractères de code."
+      "date": "Mars 2026",
+      "desc": "Cette application web moderne, entièrement conçue avec React, TypeScript et Vite. Elle intègre un moteur de rendu ASCII sur mesure utilisant Three.js pour afficher un modèle 3D STL de ski composé de caractères de code dynamiques, mêlant ma passion pour le web et les sports alpins."
+    },
+    "schluesselerlebnis": {
+      "title": "Schlüsselerlebnis",
+      "date": "Juin 2025",
+      "desc": "Une aventure immersive de type escape room par navigateur et un puzzle informatique sous Next.js. Développée pendant mon stage chez SSC-Services afin d'évaluer les capacités des candidats. Les joueurs y affrontent des énigmes logiques et déchiffrent des codes pour trouver la sortie."
     }
   },
   "achievements": {

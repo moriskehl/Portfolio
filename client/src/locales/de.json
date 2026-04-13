@@ -27,40 +27,22 @@
       "ranking": "2. Platz Deutsche Ski Liga"
     }
   },
-  "navGrid": {
-    "label": "// 02 — entdecken",
-    "headingMain": "Erkunde das",
-    "headingAccent": "Terrain.",
-    "software": {
-      "title": "Software & Projekte",
-      "desc": "Web-Entwicklung, KI-Experimente und Full-Stack Projekte.",
-      "cta": "Projekte ansehen",
-      "item1": "Abiball Portal – PHP-Eventmanagement (bsz.app)",
-      "item2": "IT-Puzzle – Bewerber-Testplattform (SSC-Services)",
-      "item3": "Blackjack AI – Kartenzähl-KI (Seminarkurs)",
-      "item4": "Portfolio – React + Three.js + ASCII-Renderer (moriskehl.tech)"
-    },
-    "alpine": {
-      "title": "Skirennlauf",
-      "desc": "Seit dem Alter von 2,5 Jahren auf Ski. Aktiver Rennläufer im Ski Team Seibelseckle.",
-      "cta": "Erfolge ansehen",
-      "item1": "2026 – 2. Platz Deutsche Ski Liga (Team)",
-      "item2": "2025 – 2. Platz Deutsche Ski Liga (Team)",
-      "item3": "Ski Team Seibelseckle – Aktiver Rennläufer",
-      "item4": "17+ Saisons auf Schnee"
-    },
-    "career": {
-      "title": "Werdegang",
-      "desc": "Vom Abitur zum dualen Studium, mit Praxiserfahrung in IT und Einzelhandel.",
-      "cta": "Lebenslauf ansehen",
-      "item1": "Ab Okt. 2026 – Duales Studium DHBW, SV Informatik GmbH",
-      "item2": "2025 – Praktikum, SSC-Services GmbH (JavaScript, Node.js)",
-      "item3": "2023–2026 – Abitur Wirtschaft, BSZ Leonberg",
-      "item4": "2017–2023 – Sport Profil, Maria Von Linden-Gymnasium"
-    }
+  "skiingSummary": {
+    "label": "// 02 — skirennlauf",
+    "heading1": "Auf der",
+    "heading2": "Piste.",
+    "desc": "Seit dem Alter von 2 Jahren auf Ski. Mittlerweile aktiver Rennläufer im Ski Team Seibelseckle und mit ihnen 2-facher Silbermedaillengewinner der Deutschen Ski Liga.",
+    "cta": "Erfolge ansehen →"
+  },
+  "codingSummary": {
+    "label": "// 03 — projekte",
+    "heading1": "Hinter dem",
+    "heading2": "Bildschirm.",
+    "desc": "Von Eventmanagement-Plattformen in PHP bis hin zu interaktiven Bewerbertests und KI-gestützten Blackjack-Algorithmen – ich entwickle digitale Lösungen aus Leidenschaft.",
+    "cta": "Projekte ansehen →"
   },
   "contact": {
-    "label": "// 03 — kontakt",
+    "label": "// 04 — kontakt",
     "heading1": "Lass uns etwas",
     "heading2": "Großes bauen.",
     "subtext": "Offen für Projekte, fachlichen Austausch und neue Herausforderungen.",
@@ -99,19 +81,23 @@
     "ctaLive": "Live ansehen →",
     "abiball": {
       "title": "Abiball Portal",
-      "desc": "Event-Management-System für die Abiball-Planung. PHP-Backend mit Authentifizierung, Teilnehmer-Management, Essensbestellungen und Zahlungsverfolgung."
-    },
-    "itPuzzle": {
-      "title": "IT-Puzzle",
-      "desc": "Web-Plattform zum Testen von Bewerbern mit IT-bezogenen Rätseln. Erstellt während meines Praktikums bei SSC-Services."
+      "date": "Okt. 2025 – Feb. 2026",
+      "desc": "Umfassendes Event-Management-System, das speziell für die Abiball-Planung entwickelt wurde. Es verfügt über ein sicheres PHP-Backend mit Benutzerauthentifizierung, Ticketverteilung, Echtzeit-Teilnehmerverwaltung, anpassbaren Essensbestellungen und einer detaillierten Zahlungsverfolgung, um die logitische Herausforderung eines solch großen Events zu vereinfachen."
     },
     "blackjack": {
       "title": "Blackjack AI",
-      "desc": "Kartenzähl-KI für Blackjack, entwickelt als Seminarkurs-Projekt. Verbindet Kartenzählung mit Bilderkennung zur optimalen Spielstrategie."
+      "date": "Klasse 12",
+      "desc": "Fortschrittliche Kartenzähl-KI, entwickelt als intensives Seminarkurs-Projekt. Diese Python-basierte Anwendung kombiniert die Mathematik des traditionellen Kartenzählens mit Echtzeit-Bilderkennung durch Computer Vision, um die statistisch optimale Spielstrategie in Echtzeit zu ermitteln."
     },
     "portfolio": {
       "title": "Portfolio Website",
-      "desc": "Diese Website, gebaut mit React, Three.js und einem custom ASCII-Renderer der ein 3D-STL-Modell als Code-Zeichen darstellt."
+      "date": "März 2026",
+      "desc": "Diese moderne Webanwendung, von Grund auf neu entwickelt mit React, TypeScript und Vite. Sie besticht durch einen Custom ASCII-Renderer, der mithilfe von Three.js ein 3D-STL-Skimodell vollständig aus dynamischen Codezeichen darstellt und so meine Leidenschaft für das Programmieren und den alpinen Skisport vereint."
+    },
+    "schluesselerlebnis": {
+      "title": "Schlüsselerlebnis",
+      "date": "Juni 2025",
+      "desc": "Ein immersives, browserbasiertes Escape-Room-Abenteuer und IT-Puzzle-Plattform in Next.js und Tailwind CSS. Entwickelt während meines Praktikums bei SSC-Services zur Evaluierung der IT-Fähigkeiten von Bewerbern. Die Spieler müssen logische Rätsel lösen, Codes entschlüsseln und Hinweise kombinieren, um den Weg hinaus zu finden."
     }
   },
   "achievements": {

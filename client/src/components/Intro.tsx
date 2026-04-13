@@ -8,13 +8,17 @@
  * that grants access to /secret when the correct password is entered.
  */
 
-import { useRef, useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
+import { useRef, useState, useEffect, useCallback, useLayoutEffect } from "react";
 import { Trophy } from "lucide-react";
 import { useScrollSwap } from "../hooks/useScrollSwap";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 import { hashPassword } from "../lib/crypto";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import RadialHover from "./RadialHover";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* SHA-256 hash of the dashboard password */
 const PASSWORD_HASH = "eabe6030fabfa54fefca1e4241c8f107083f589c40efe73a2436dd50580a1d47";
@@ -23,6 +27,7 @@ export default function Intro() {
   const { t } = useTranslation();
   const { ref: swapRef, past } = useScrollSwap(0.35);
   const [, navigate] = useLocation();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   /* Easter-egg state */
   const [secretMode, setSecretMode] = useState(false);
@@ -45,6 +50,35 @@ export default function Intro() {
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [secretMode]);
+
+  /* GSAP Deterministic Scroll */
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const leftElements = gsap.utils.toArray('.scrub-left');
+      const rightElements = gsap.utils.toArray('.scrub-right');
+
+      leftElements.forEach((el: any) => {
+        gsap.fromTo(el, 
+          { opacity: 0, x: -30, y: 10 },
+          {
+            opacity: 1, x: 0, y: 0, ease: "none",
+            scrollTrigger: { trigger: containerRef.current, start: "top 80%", end: "top 30%", scrub: true }
+          }
+        );
+      });
+
+      rightElements.forEach((el: any) => {
+        gsap.fromTo(el, 
+          { opacity: 0, x: 40, y: 10 },
+          {
+            opacity: 1, x: 0, y: 0, ease: "none",
+            scrollTrigger: { trigger: containerRef.current, start: "top 80%", end: "top 30%", scrub: true }
+          }
+        );
+      });
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
 
   /* Progress bar animation after access granted */
   useEffect(() => {
@@ -207,6 +241,7 @@ export default function Intro() {
   return (
     <section
       id="intro"
+      ref={containerRef}
       style={{ background: "var(--t-bg)", paddingTop: "7rem", paddingBottom: "7rem", overflow: "hidden" }}
     >
       <div className="container">
@@ -215,11 +250,8 @@ export default function Intro() {
           {/* Left — text */}
           <div>
             {/* Headshot */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+            <div
+              className="scrub-left"
               style={{
                 width: "90px",
                 height: "90px",
@@ -234,38 +266,25 @@ export default function Intro() {
                 alt="Moris Kehl"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
-            </motion.div>
+            </div>
             
-            <motion.span
-              className="section-label"
+            <span
+              className="section-label scrub-left"
               aria-hidden="true"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              style={{ display: "block" }}
+              style={{ display: "block", marginBottom: "0.5rem" }}
             >
               {t("intro.label")}
-            </motion.span>
+            </span>
 
-            <motion.h2
-              ref={swapRef as React.RefObject<HTMLHeadingElement>}
-              className="section-heading"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>{t("intro.heading1")}</span><br />
-              <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>{t("intro.heading2")}</span>
-            </motion.h2>
+            <RadialHover className="section-heading scrub-left">
+              <h2 ref={swapRef as React.RefObject<HTMLHeadingElement>} style={{ margin: 0 }}>
+                <span style={{ color: past ? "var(--t-text)" : "var(--t-accent)", transition: "color 0.6s ease" }}>{t("intro.heading1")}</span><br />
+                <span style={{ color: past ? "var(--t-accent)" : "var(--t-text)", transition: "color 0.6s ease" }}>{t("intro.heading2")}</span>
+              </h2>
+            </RadialHover>
 
-            <motion.div
-              className="border-accent"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+            <div
+              className="border-accent scrub-left"
             >
               <p
                 style={{
@@ -278,15 +297,12 @@ export default function Intro() {
               >
                 {t("intro.bio")}
               </p>
-            </motion.div>
+            </div>
           </div>
 
           {/* Right — stats + terminal */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+          <div
+            className="scrub-right"
           >
             {/* Stats */}
             <div
@@ -380,7 +396,7 @@ export default function Intro() {
 
               {renderTerminalContent()}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

@@ -27,40 +27,22 @@
       "ranking": "2nd place German Ski League"
     }
   },
-  "navGrid": {
-    "label": "// 02 — explore",
-    "headingMain": "Explore the",
-    "headingAccent": "Terrain.",
-    "software": {
-      "title": "Software & Projects",
-      "desc": "Web development, AI experiments and full-stack projects.",
-      "cta": "View projects",
-      "item1": "Prom Portal – PHP Event Management (bsz.app)",
-      "item2": "IT Puzzle – Applicant Testing Platform (SSC-Services)",
-      "item3": "Blackjack AI – Card Counting AI (Seminar Course)",
-      "item4": "Portfolio – React + Three.js + ASCII Renderer (moriskehl.tech)"
-    },
-    "alpine": {
-      "title": "Ski Racing",
-      "desc": "On skis since age 2.5. Active racer in the Ski Team Seibelseckle.",
-      "cta": "View achievements",
-      "item1": "2026 – 2nd Place German Ski League (Team)",
-      "item2": "2025 – 2nd Place German Ski League (Team)",
-      "item3": "Ski Team Seibelseckle – Active Racer",
-      "item4": "17+ Seasons on Snow"
-    },
-    "career": {
-      "title": "Career",
-      "desc": "From high school to dual studies, with experience in IT and retail.",
-      "cta": "View resume",
-      "item1": "From Oct. 2026 – Dual Studies DHBW, SV Informatik GmbH",
-      "item2": "2025 – Internship, SSC-Services GmbH (JavaScript, Node.js)",
-      "item3": "2023–2026 – Business High School, BSZ Leonberg",
-      "item4": "2017–2023 – Sports Profile, Maria Von Linden-Gymnasium"
-    }
+  "skiingSummary": {
+    "label": "// 02 — ski racing",
+    "heading1": "On the",
+    "heading2": "Slope.",
+    "desc": "On skis since the age of 2. Now an active racer in Ski Team Seibelseckle and, with them, a two-time silver medalist in the German Ski League.",
+    "cta": "View achievements →"
+  },
+  "codingSummary": {
+    "label": "// 03 — projects",
+    "heading1": "Behind the",
+    "heading2": "Screen.",
+    "desc": "From event management platforms in PHP to interactive applicant tests and AI-powered blackjack algorithms – I develop digital solutions out of passion.",
+    "cta": "View projects →"
   },
   "contact": {
-    "label": "// 03 — contact",
+    "label": "// 04 — contact",
     "heading1": "Let's build something",
     "heading2": "great.",
     "subtext": "Open for projects, collaboration and new challenges.",
@@ -99,19 +81,23 @@
     "ctaLive": "Live View →",
     "abiball": {
       "title": "Prom Portal",
-      "desc": "Event management system for prom planning. PHP backend with authentication, participant management, meal orders and payment tracking."
-    },
-    "itPuzzle": {
-      "title": "IT Puzzle",
-      "desc": "Web platform for testing applicants with IT-related puzzles and challenges. Built during my internship at SSC-Services."
+      "date": "Oct 2025 – Feb 2026",
+      "desc": "Comprehensive event management system specifically built for prom planning. Features a secure PHP backend with user authentication, ticket distribution, real-time participant management, customizable meal orders, and detailed payment tracking. Simplifies the logistical nightmare of organizing a large-scale school event."
     },
     "blackjack": {
       "title": "Blackjack AI",
-      "desc": "Card-counting AI for blackjack, developed as a seminar project. Combines card counting with image recognition for optimal strategy."
+      "date": "Grade 12",
+      "desc": "Advanced card-counting AI developed as an intensive seminar course project. This Python-based application combines traditional card counting mathematics with real-time computer vision and image recognition to determine the statistically optimal game strategy dynamically."
     },
     "portfolio": {
       "title": "Portfolio Website",
-      "desc": "This website, built with React, Three.js and a custom ASCII renderer that displays a 3D STL model as code characters."
+      "date": "March 2026",
+      "desc": "This modern web application, built from the ground up using React, TypeScript, and Vite. It features a custom ASCII renderer heavily leveraging Three.js to display a 3D STL skiing model entirely composed of dynamic code characters, blending my passions for coding and alpine sports."
+    },
+    "schluesselerlebnis": {
+      "title": "Schlüsselerlebnis",
+      "date": "June 2025",
+      "desc": "An immersive, browser-based escape room adventure and IT puzzle platform developed natively using Next.js and Tailwind CSS. Built during my internship at SSC-Services to evaluate applicants' technical problem-solving skills, it requires players to solve logic puzzles, decrypt hidden codes, and piece together clues to find their way out."
     }
   },
   "achievements": {

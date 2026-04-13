@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Route, Switch, useLocation } from "wouter";
 import { AnimatePresence, motion } from "framer-motion";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -26,6 +27,16 @@ const pageTransition = {
 
 function Router() {
   const [location] = useLocation();
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [location]);
   
   return (
     <AnimatePresence
