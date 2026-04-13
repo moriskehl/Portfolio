@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#000000"/>
-  <text x="32" y="44" text-anchor="middle" font-family="monospace" font-size="32" font-weight="400" fill="#ffffff">MK</text>
-  <circle cx="54" cy="18" r="4" fill="#3b82f6"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 100">
+  <!-- Modern Geometric MK design - Black on Transparent -->
+  <!-- M -->
+  <path fill="black" d="M10 80V20h10l20 25 20-25h10v60H60V42L40 68 20 42v38H10z"/>
+  <!-- K -->
+  <path fill="black" d="M75 80V20h10v25l15-25h12L95 45l17 35h-12l-12-25-8 8v17H75z"/>
 </svg>
