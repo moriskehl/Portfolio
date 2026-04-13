@@ -3,39 +3,22 @@
  * Clean, distraction-free background.
  * Focus on maximum readability: DM Sans body, Share Tech Mono headings.
  * Blue accent for key phrases only.
- *
- * Easter Egg: clicking ✕ on the terminal opens a sudo password prompt
- * that grants access to /secret when the correct password is entered.
  */
 
-import { useRef, useState, useEffect, useCallback, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 import { Trophy } from "lucide-react";
 import { useScrollSwap } from "../hooks/useScrollSwap";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "wouter";
-import { hashPassword } from "../lib/crypto";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import RadialHover from "./RadialHover";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* SHA-256 hash of the dashboard password */
-const PASSWORD_HASH = "eabe6030fabfa54fefca1e4241c8f107083f589c40efe73a2436dd50580a1d47";
-
 export default function Intro() {
   const { t } = useTranslation();
   const { ref: swapRef, past } = useScrollSwap(0.35);
-  const [, navigate] = useLocation();
   const containerRef = useRef<HTMLDivElement>(null);
-
-  /* Easter-egg state */
-  const [secretMode, setSecretMode] = useState(false);
-  const [secretInput, setSecretInput] = useState("");
-  const [secretError, setSecretError] = useState(false);
-  const [secretGranted, setSecretGranted] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const STATS = [
     { value: "17+", label: t("intro.stats.yearsSkiing") },
@@ -43,13 +26,6 @@ export default function Intro() {
     { value: "5+", label: t("intro.stats.projects") },
     { value: "∞", label: t("intro.stats.motivation") },
   ];
-
-  /* Focus input when secret mode activates */
-  useEffect(() => {
-    if (secretMode && inputRef.current) {
-      setTimeout(() => inputRef.current?.focus(), 100);
-    }
-  }, [secretMode]);
 
   /* GSAP Deterministic Scroll */
   useLayoutEffect(() => {
@@ -80,134 +56,8 @@ export default function Intro() {
     return () => ctx.revert();
   }, []);
 
-  /* Progress bar animation after access granted */
-  useEffect(() => {
-    if (!secretGranted) return;
-    let frame = 0;
-    const total = 30;
-    const interval = setInterval(() => {
-      frame++;
-      setProgress(Math.min(100, Math.round((frame / total) * 100)));
-      if (frame >= total) {
-        clearInterval(interval);
-        navigate("/secret");
-      }
-    }, 40);
-    return () => clearInterval(interval);
-  }, [secretGranted, navigate]);
-
-  const handleSecretSubmit = useCallback(async () => {
-    if (!secretInput.trim()) return;
-
-    const hash = await hashPassword(secretInput);
-    if (hash === PASSWORD_HASH) {
-      sessionStorage.setItem("__sk", "1");
-      setSecretGranted(true);
-    } else {
-      setSecretError(true);
-      setSecretInput("");
-      setTimeout(() => setSecretError(false), 600);
-    }
-  }, [secretInput]);
-
-  const handleCloseClick = () => {
-    if (secretMode) {
-      /* Cancel secret mode */
-      setSecretMode(false);
-      setSecretInput("");
-      setSecretError(false);
-    } else {
-      setSecretMode(true);
-    }
-  };
-
   /* Render the terminal content */
   const renderTerminalContent = () => {
-    if (secretGranted) {
-      return (
-        <div
-          style={{
-            fontFamily: "'Share Tech Mono', monospace",
-            fontSize: "0.78rem",
-            lineHeight: 2.1,
-          }}
-        >
-          <div>
-            <span style={{ color: "var(--t-text-faint)" }}>$ </span>
-            <span style={{ color: "var(--t-text-muted)" }}>sudo access --restricted</span>
-          </div>
-          <div style={{ color: "#22c55e", paddingLeft: "1rem" }}>
-            {t("secret.granted")}
-          </div>
-          <div style={{ paddingLeft: "1rem", marginTop: "0.5rem" }}>
-            <span style={{ color: "var(--t-text-faint)" }}>[</span>
-            <span style={{ color: "#22c55e" }}>
-              {"█".repeat(Math.floor(progress / 5))}
-            </span>
-            <span style={{ color: "var(--t-text-faint)" }}>
-              {"░".repeat(20 - Math.floor(progress / 5))}
-            </span>
-            <span style={{ color: "var(--t-text-faint)" }}>] </span>
-            <span style={{ color: "var(--t-text-muted)" }}>{progress}%</span>
-          </div>
-        </div>
-      );
-    }
-
-    if (secretMode) {
-      return (
-        <div
-          className={secretError ? "secret-shake" : ""}
-          style={{
-            fontFamily: "'Share Tech Mono', monospace",
-            fontSize: "0.78rem",
-            lineHeight: 2.1,
-          }}
-        >
-          <div>
-            <span style={{ color: "var(--t-text-faint)" }}>$ </span>
-            <span style={{ color: "var(--t-text-muted)" }}>sudo access --restricted</span>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", paddingLeft: "1rem" }}>
-            <span style={{ color: "var(--t-text-muted)", whiteSpace: "nowrap" }}>
-              {t("secret.prompt")}{" "}
-            </span>
-            <div style={{ position: "relative", flex: 1 }}>
-              <input
-                ref={inputRef}
-                type="password"
-                value={secretInput}
-                onChange={(e) => setSecretInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSecretSubmit();
-                  if (e.key === "Escape") handleCloseClick();
-                }}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  outline: "none",
-                  color: "var(--t-text)",
-                  fontFamily: "'Share Tech Mono', monospace",
-                  fontSize: "0.78rem",
-                  width: "100%",
-                  padding: 0,
-                  caretColor: "var(--t-accent)",
-                }}
-                autoComplete="off"
-                spellCheck={false}
-              />
-            </div>
-          </div>
-          {secretError && (
-            <div style={{ color: "#ef4444", paddingLeft: "1rem", fontSize: "0.75rem" }}>
-              {t("secret.denied")}
-            </div>
-          )}
-        </div>
-      );
-    }
-
-    /* Default terminal content */
     return (
       <div
         style={{
@@ -379,18 +229,7 @@ export default function Intro() {
                 <div style={{ display: "flex", gap: "14px", color: "var(--t-text-faint)", fontSize: "0.7rem", fontFamily: "sans-serif" }}>
                   <span style={{ cursor: "default" }}>—</span>
                   <span style={{ cursor: "default" }}>□</span>
-                  <span
-                    onClick={handleCloseClick}
-                    style={{
-                      cursor: "pointer",
-                      transition: "color 0.2s",
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = secretMode ? "var(--t-accent)" : "#ef4444")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--t-text-faint)")}
-                    title={secretMode ? "Cancel" : ""}
-                  >
-                    ✕
-                  </span>
+                  <span style={{ cursor: "default" }}>✕</span>
                 </div>
               </div>
 

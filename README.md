@@ -6,7 +6,7 @@ Dieses Repository enthält den Quellcode für meine persönliche Portfolio-Websi
 Die Website dient als digitale Visitenkarte und Showcase für meine Projekte, meinen sportlichen Werdegang und meine technischen Fähigkeiten. Sie wurde mit einem Fokus auf moderne Webtechnologien, Performance und ein einzigartiges "Matrix-Ski"-Design entwickelt.
 
 ## ✨ Hauptfunktionen
-- **Kombiniertes Design**: Ein moderner "Digital Descent"-Look, der Ski-Elemente mit einer Coding-Ästhetik (ASCII, Terminals, Glitch-Effekte) verbindet.
+- **Kombiniertes Design**: Ein moderner Portfolio-Look, der Ski-Elemente mit einer Coding-Ästhetik (ASCII, Terminals, Glitch-Effekte) verbindet.
 - **3D ASCII-Rendering**: Ein interaktives 3D-Skimodell (STL), das mit Three.js gerendert und durch einen Custom-Shader in dynamische ASCII-Zeichen umgewandelt wird.
 - **Interaktive Animationen**: Flüssige, scroll-gesteuerte Übergänge und Hover-Effekte mittels GSAP und Framer Motion.
 - **Mehrsprachigkeit (i18n)**: Unterstützung für Deutsch, Englisch und Französisch.
