@@ -100,17 +100,18 @@ export default function Navbar() {
           <Link
             href="/"
             style={{
-              fontFamily: "'Share Tech Mono', monospace",
-              fontSize: "0.95rem",
-              letterSpacing: "0.12em",
-              color: "var(--t-text)",
-              textDecoration: "none",
               zIndex: 60,
               position: "relative",
+              display: "flex",
+              alignItems: "center",
             }}
             onClick={() => setMenuOpen(false)}
           >
-            MK<span style={{ color: "var(--t-accent)" }}>.</span>
+            <img 
+              src="/logo.png" 
+              alt="MK" 
+              style={{ height: "48px", width: "auto" }} 
+            />
           </Link>
 
           {/* Desktop Links */}
@@ -152,7 +153,7 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={(e) => scrollTo(e, "contact")}
-                className="btn-primary btn-slanted"
+                className="btn-nav-contact btn-slanted"
                 style={{ padding: "0.45rem 1.1rem", fontSize: "0.7rem" }}
               >
                 <span>{t("nav.contact")}</span>

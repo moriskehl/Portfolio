@@ -442,6 +442,39 @@
     transform: skewX(0deg);
   }
 
+  .btn-nav-contact {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    
+    /* Dark mode (default) */
+    background: #000000;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+  }
+
+  :root.light .btn-nav-contact {
+    /* Light mode */
+    background: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+  }
+
+  .btn-nav-contact:hover {
+    background: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    transform: skewX(0deg) translateY(-2px);
+  }
+
   .btn-outline {
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.78rem;
@@ -634,11 +667,11 @@
   border: none;
 }
 
-/* ── Slanted frame (corner overlays above iframe) ── */
+/* ── Iframe frame ── */
 .slanted-frame {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--t-border-medium);
+  border: 2px solid var(--t-accent-border);
 }
 
 /* Iframe corner overlays removed for clean border */
@@ -719,24 +752,82 @@
 }
 
 /* ── Responsive helpers ── */
-@media (min-width: 768px) {
+
+/* Full desktop (≥1400px): disk + right-aligned cards */
+@media (min-width: 1400px) {
   .projects-layout {
     display: flex;
-    justify-content: flex-end; /* Pushes content to the right */
+    justify-content: flex-end;
   }
 
   .projects-cards {
-    width: 85%; /* Leaves 15% empty space on the left for the timeline */
+    width: 82%;
   }
 
   .mobile-only { display: none !important; }
 }
 
+/* Mid-large (1100px – 1399px): disk visible but narrower cards to clear it */
+@media (min-width: 1100px) and (max-width: 1399px) {
+  .projects-layout {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .projects-cards {
+    width: 72%; /* More clearance from disk at tighter widths */
+  }
+
+  .mobile-only { display: none !important; }
+}
+
+/* Medium screens (768px – 1099px): hide disk, full-width cards, hide iframes */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .disk-track {
+    display: none;
+  }
+
+  .projects-layout {
+    display: block;
+  }
+
+  .projects-cards {
+    width: 100%;
+  }
+
+  /* Increase vertical breathing room between cards */
+  .project-card-slanted {
+    margin-bottom: 4.5rem !important;
+  }
+
+  /* Hide heavy iframe embeds & aspect toggle on medium screens */
+  .desktop-only { display: none !important; }
+
+  .mobile-only { display: block !important; }
+}
+
+/* Small screens (<768px): disk hidden, desktop-only hidden */
 @media (max-width: 767px) {
   .disk-track {
     display: none;
   }
+
+  .projects-layout {
+    display: block;
+  }
+
+  .projects-cards {
+    width: 100%;
+  }
+
   .desktop-only { display: none !important; }
+}
+
+/* Clamp iframe wrapper max-width so it never overflows the card */
+@media (max-width: 1400px) {
+  .slanted-frame {
+    max-width: 100% !important;
+  }
 }
 
 /* ═══════════════════════════════════════
