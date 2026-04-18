@@ -9,7 +9,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useTheme } from "../contexts/ThemeContext";
-import { Sun, Moon, Home, Briefcase, Trophy, GraduationCap, FileText } from "lucide-react";
+import { Sun, Moon, Home, Briefcase, Trophy, GraduationCap } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 
@@ -24,7 +24,6 @@ const MOBILE_LINKS = [
   { labelKey: "nav.projects", href: "/projects", icon: Briefcase },
   { labelKey: "nav.achievements", href: "/achievements", icon: Trophy },
   { labelKey: "nav.cv", href: "/cv", icon: GraduationCap },
-  { labelKey: "nav.impressum", href: "/impressum", icon: FileText },
 ];
 
 export default function Navbar() {
@@ -117,14 +116,14 @@ export default function Navbar() {
           {/* Desktop Links */}
           <ul className="flex items-center gap-8 list-none m-0 p-0">
             {!isHome && (
-              <li className="hidden sm:block">
+              <li className="hidden lg:block">
                 <Link href="/" className="nav-link">
                   {t("nav.home")}
                 </Link>
               </li>
             )}
             {NAV_ROUTES.map((item) => (
-              <li key={item.labelKey} className="hidden sm:block">
+              <li key={item.labelKey} className="hidden lg:block">
                 <Link
                   href={item.href}
                   className="nav-link"
@@ -135,11 +134,11 @@ export default function Navbar() {
             ))}
 
             {/* Language Switcher */}
-            <li className="hidden sm:block">
+            <li className="hidden lg:block">
               <LanguageSwitcher />
             </li>
 
-            <li className="hidden sm:block">
+            <li className="hidden lg:block">
               <button
                 className="theme-toggle"
                 onClick={toggleTheme}
@@ -149,7 +148,7 @@ export default function Navbar() {
               </button>
             </li>
 
-            <li className="hidden sm:block">
+            <li className="hidden lg:block">
               <a
                 href="#contact"
                 onClick={(e) => scrollTo(e, "contact")}
@@ -161,7 +160,7 @@ export default function Navbar() {
             </li>
 
             {/* Mobile hamburger */}
-            <li className="sm:hidden">
+            <li className="lg:hidden">
               <button
                 className={`mobile-menu-btn ${menuOpen ? "open" : ""}`}
                 onClick={() => setMenuOpen(!menuOpen)}

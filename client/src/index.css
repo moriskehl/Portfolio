@@ -623,7 +623,7 @@
   color: var(--t-accent);
 }
 
-@media (max-width: 639px) {
+@media (max-width: 1023px) {
   .mobile-menu-btn { display: flex; }
 }
 
@@ -1317,5 +1317,73 @@
 .hover-distort:hover {
   letter-spacing: 0.05em;
   text-shadow: 2px 0 var(--t-accent), -2px 0 #ef4444;
+}
+
+/* ═══════════════════════════════════════
+   RESUME / CV PAGE
+   ═══════════════════════════════════════ */
+
+.resume-header {
+  padding-top: 10rem;
+}
+
+.resume-timeline-item {
+  display: grid;
+  grid-template-columns: 120px 1px 1fr;
+  gap: 2rem;
+}
+
+.education-card {
+  padding: 1.8rem;
+}
+
+.education-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+@media (max-width: 767px) {
+  .resume-header {
+    padding-top: 7rem;
+    padding-bottom: 2rem !important;
+  }
+
+  .resume-section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .resume-timeline-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  .resume-timeline-item .timeline-divider {
+    display: none !important;
+  }
+  
+  .resume-timeline-item .timeline-period {
+    text-align: left !important;
+    padding-top: 0 !important;
+    margin-bottom: 0.2rem;
+  }
+
+  .education-card {
+    padding: 1.25rem;
+  }
+
+  .education-header {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .education-header > span {
+    margin-bottom: 0.5rem;
+  }
 }
 

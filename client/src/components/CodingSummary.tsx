@@ -74,14 +74,19 @@ export default function CodingSummary() {
           <div 
             ref={mediaRef} 
             className="media-frame-digital order-2 lg:order-1"
-            style={{ width: "100%", height: "545px", overflow: "hidden" }}
+            style={{ 
+              width: "100%", 
+              aspectRatio: "576 / 545",
+              height: "auto",
+              overflow: "hidden" 
+            }}
           >
             <iframe 
               src="https://www.linkedin.com/embed/feed/update/urn:li:share:7339293684368109568?collapsed=1" 
               style={{
                 width: "102%",
-                height: "600px",
-                marginTop: "-4px",
+                height: "110%",
+                marginTop: "-4%",
                 marginLeft: "-1%",
                 border: "none",
                 pointerEvents: "auto"

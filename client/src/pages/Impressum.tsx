@@ -4,6 +4,7 @@
  */
 
 import { Link } from "wouter";
+import SubPageFooter from "../components/SubPageFooter";
 
 export default function Impressum() {
   return (
@@ -66,6 +67,7 @@ export default function Impressum() {
           </Link>
         </div>
       </div>
+      <SubPageFooter />
     </div>
   );
 }

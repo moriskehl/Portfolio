@@ -29,10 +29,8 @@ function TimelineItem({ item, index }: { item: { period: string; title: string; 
   return (
     <div
       ref={ref}
+      className="resume-timeline-item"
       style={{
-        display: "grid",
-        gridTemplateColumns: "120px 1px 1fr",
-        gap: "2rem",
         opacity: visible ? 1 : 0,
         transform: visible ? "none" : "translateY(28px)",
         transition: `opacity 0.7s ease ${index * 100}ms, transform 0.7s ease ${index * 100}ms`,
@@ -41,6 +39,7 @@ function TimelineItem({ item, index }: { item: { period: string; title: string; 
     >
       {/* Period */}
       <div
+        className="timeline-period"
         style={{
           fontFamily: "'Share Tech Mono', monospace",
           fontSize: "0.65rem",
@@ -55,7 +54,7 @@ function TimelineItem({ item, index }: { item: { period: string; title: string; 
       </div>
 
       {/* Timeline line + dot */}
-      <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div className="timeline-divider" style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div
           style={{
             width: "8px",
@@ -230,7 +229,7 @@ export default function Resume() {
     <div className="page-enter" style={{ background: "var(--t-bg)", minHeight: "100dvh" }}>
 
       {/* Header */}
-      <div ref={headerRef} className="container" style={{ paddingTop: "8rem", paddingBottom: "4rem" }}>
+      <div ref={headerRef} className="container resume-header" style={{ paddingBottom: "4rem" }}>
         <span
           className="section-label"
           aria-hidden="true"
@@ -259,7 +258,7 @@ export default function Resume() {
       <hr className="divider" />
 
       {/* Experience Timeline */}
-      <div className="container" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
+      <div className="container resume-section" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
         <span className="section-label" aria-hidden="true">{t("resume.labels.experience")}</span>
         <div style={{ marginTop: "2rem" }}>
           {EXPERIENCE.map((item, i) => (
@@ -271,22 +270,22 @@ export default function Resume() {
       <hr className="divider" />
 
       {/* Education */}
-      <div ref={eduRef} className="container" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
+      <div ref={eduRef} className="container resume-section" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
         <span className="section-label" aria-hidden="true">{t("resume.labels.education")}</span>
         <div style={{ marginTop: "2rem", display: "flex", flexDirection: "column", gap: "1px" }}>
           {EDUCATION.map((item, i) => (
             <div
               key={item.title}
+              className="education-card"
               style={{
                 opacity: eduVisible ? 1 : 0,
                 transform: eduVisible ? "none" : "translateY(24px)",
                 transition: `opacity 0.7s ease ${i * 120}ms, transform 0.7s ease ${i * 120}ms`,
                 background: "var(--t-bg-secondary)",
                 border: "1px solid var(--t-border)",
-                padding: "1.8rem",
               }}
             >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "0.5rem" }}>
+              <div className="education-header">
                 <div>
                   <h3 style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: "1rem", color: "var(--t-text)", marginBottom: "0.3rem" }}>
                     {item.title}
@@ -310,7 +309,7 @@ export default function Resume() {
       <hr className="divider" />
 
       {/* Skills */}
-      <div ref={skillRef} className="container" style={{ paddingTop: "3rem", paddingBottom: "6rem" }}>
+      <div ref={skillRef} className="container resume-section" style={{ paddingTop: "3rem", paddingBottom: "6rem" }}>
         <span className="section-label" aria-hidden="true">{t("resume.labels.skills")}</span>
         <div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px"
