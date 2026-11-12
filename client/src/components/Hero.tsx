@@ -88,8 +88,8 @@ export default function Hero() {
   return (
     <section
       id="start"
-      className="relative w-full overflow-hidden"
-      style={{ height: "100svh", minHeight: "450px", background: "var(--t-bg)" }}
+      className="relative w-full overflow-hidden h-[72svh] sm:h-[100svh]"
+      style={{ minHeight: "450px", background: "var(--t-bg)" }}
     >
       <div 
         className="absolute inset-0"

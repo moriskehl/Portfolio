@@ -13,8 +13,8 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
 
-const MODEL_URL =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663475502250/g9AaU56zXeUfHmDy3BTvTM/snowy_mountain_decimated_58ef2822.stl";
+// Served from client/public so the model ships with the site
+const MODEL_URL = "/models/mount_hood.stl";
 
 // ── ASCII density ramp: 16 bands, darkest → brightest ───────────────────────
 // Massive character set per band for fine-grained, photorealistic rendering
@@ -61,6 +61,7 @@ interface Controls {
   rotZ: number;      // Roll
   spinSpeed: number;
   scale: number;
+  heightScale: number; // Vertical exaggeration of the terrain
   lightRot: number;
   lightH: number;
   camDist: number;
@@ -81,21 +82,37 @@ const DEFAULTS: Controls = {
   rotY: 45,
   rotZ: 0,
   spinSpeed: 0.9,
-  scale: 4.47,
+  scale: 7.62,
+  heightScale: 1,
   lightRot: 87,
   lightH: -0.7,
-  camDist: 1.31,
+  camDist: 2,
   animateY: true,
-  posX: 0,
+  posX: -0.45,
   posY: -0.6,
   fontSize: 9,
   cellW: 7,
   rowH: 12,
   tokenLife: 4000,
   tokenStagger: 6000,
-  brightness: 1.6,
+  brightness: 1.25,
   offscreenRes: 1.0,
 };
+
+// Phones: the narrow viewport crops the view, so the mountain is drawn smaller,
+// centred and a little higher than the tuned desktop values.
+const SHOW_CONTROLS = false;
+
+const MOBILE_BREAKPOINT = 768;
+const MOBILE = { scaleMult: 0.62, posX: 0, posY: -0.2 };
+
+function placeMesh(mesh: THREE.Mesh, c: Controls, bbox: THREE.Box3, isMobile: boolean) {
+  const s = c.scale * (isMobile ? MOBILE.scaleMult : 1);
+  mesh.scale.set(s, s * c.heightScale, s);
+  const depth = bbox.max.z - bbox.min.z;
+  mesh.position.x = (isMobile ? MOBILE.posX : c.posX) * depth;
+  mesh.position.y = (isMobile ? MOBILE.posY : c.posY) * depth;
+}
 
 interface Props {
   onPauseChange?: (paused: boolean) => void;
@@ -124,7 +141,7 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
   const bboxRef = useRef<THREE.Box3 | null>(null);
 
   const [ctrl, setCtrl] = useState<Controls>({ ...DEFAULTS });
-  const [showPanel, setShowPanel] = useState(true);
+  const [showPanel, setShowPanel] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   const handlePause = useCallback(
@@ -147,13 +164,7 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
     mesh.rotation.x = (ctrl.rotX * Math.PI) / 180;
     mesh.rotation.y = (ctrl.rotY * Math.PI) / 180;
     mesh.rotation.z = (ctrl.rotZ * Math.PI) / 180;
-    mesh.scale.setScalar(ctrl.scale);
-
-    // Position offset
-    const bboxHeight = bbox.max.z - bbox.min.z;
-    const isMobile = window.innerWidth < 768;
-    mesh.position.x = ctrl.posX * bboxHeight;
-    mesh.position.y = (isMobile ? -0.3 : ctrl.posY) * bboxHeight;
+    placeMesh(mesh, ctrl, bbox, window.innerWidth < MOBILE_BREAKPOINT);
 
     const d = ctrl.camDist;
     camera.position.set(bbox.max.x * 4 * d, bbox.max.y * d, bbox.max.z * 3 * d);
@@ -327,7 +338,7 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
       const wActual = container.clientWidth || window.innerWidth;
       const hActual = container.clientHeight || window.innerHeight;
       
-      const isMobile = wActual < 768;
+      const isMobile = wActual < MOBILE_BREAKPOINT;
       // On mobile, render virtually larger so the ASCII characters shrink relative to the mountain
       const virtualMult = isMobile ? 1.8 : 1.0; 
       
@@ -354,12 +365,8 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
 
-      if (meshRef.current) {
-        meshRef.current.scale.setScalar(cc.scale);
-        
-        const bboxHeight = bboxRef.current ? bboxRef.current.max.z - bboxRef.current.min.z : 0;
-        meshRef.current.position.x = cc.posX * bboxHeight;
-        meshRef.current.position.y = (isMobile ? -0.3 : cc.posY) * bboxHeight;
+      if (meshRef.current && bboxRef.current) {
+        placeMesh(meshRef.current, cc, bboxRef.current, isMobile);
       }
     };
 
@@ -385,11 +392,7 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
 
         const c = ctrlRef.current;
         
-        mesh.scale.setScalar(c.scale);
-        const bboxHeight = bbox.max.z - bbox.min.z;
-        const isMobileInit = window.innerWidth < 768;
-        mesh.position.x = c.posX * bboxHeight;
-        mesh.position.y = (isMobileInit ? -0.3 : c.posY) * bboxHeight;
+        placeMesh(mesh, c, bbox, window.innerWidth < MOBILE_BREAKPOINT);
         mesh.rotation.x = (c.rotX * Math.PI) / 180;
         mesh.rotation.y = (c.rotY * Math.PI) / 180;
         mesh.rotation.z = (c.rotZ * Math.PI) / 180;
@@ -449,6 +452,7 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
     { key: "rotZ",        label: "Roll (Z)",          min: -180,  max: 180,   step: 1     },
     { key: "spinSpeed",   label: "Spin Speed",        min: 0,     max: 20,    step: 0.1   },
     { key: "scale",       label: "Scale",             min: 0.05,  max: 10,    step: 0.01  },
+    { key: "heightScale", label: "Height ×",          min: 0.2,   max: 8,     step: 0.05  },
     { key: "posX",        label: "Position X",        min: -2,    max: 2,     step: 0.01  },
     { key: "posY",        label: "Position Y",        min: -2,    max: 2,     step: 0.01  },
     { key: "lightRot",    label: "Light Rotation",    min: 0,     max: 360,   step: 1     },
@@ -530,7 +534,8 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
         </div>
       )}
 
-      {/* ── Control Panel (commented out — uncomment to re-enable tuning) ──
+      {/* ── Control Panel: hidden. Set SHOW_CONTROLS to true to tune the mountain again ── */}
+      {SHOW_CONTROLS && (<>
       <button
         onClick={() => setShowPanel((p) => !p)}
         style={{
@@ -606,7 +611,7 @@ export default function AsciiMountain({ onPauseChange, onLoad, light = false }: 
           </div>
         </div>
       )}
-      ── End Control Panel */}
+      </>)}
     </div>
   );
 }

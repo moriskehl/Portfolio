@@ -142,6 +142,7 @@
     "heading1": "Experience &",
     "heading2": "Education.",
     "upcoming": "UPCOMING",
+    "current": "CURRENT",
     "labels": {
       "experience": "// experience",
       "education": "// education",
@@ -149,8 +150,8 @@
     },
     "experience": {
       "dhbw": {
-        "title": "Dual Studies in Business Informatics",
-        "desc": "Dual study program with hands-on software development experience."
+        "title": "Dual Student in Business Informatics",
+        "desc": "Dual study programme focused on application management – practical phases at SV Informatik alternating with studies at DHBW Stuttgart."
       },
       "sportStall": {
         "title": "Minijob Cashier & Sales",
@@ -166,6 +167,10 @@
       }
     },
     "education": {
+      "dhbw": {
+        "title": "B.Sc. Business Informatics (dual study programme)",
+        "desc": "Studies in the Stuttgart region with a focus on topics such as Java and business administration."
+      },
       "abitur": {
         "title": "General Higher Education Entrance Qualification (Abitur)",
         "desc": "Seminar course in AI (Blackjack algorithm)."

@@ -161,13 +161,14 @@ export default function Resume() {
 
   const EXPERIENCE = [
     {
-      period: "Ab Okt. 2026",
+      period: "Sep. 2026 – Heute",
       title: t("resume.experience.dhbw.title"),
-      org: "DHBW · SV Informatik GmbH",
+      org: "SV Informatik GmbH · Region Stuttgart · Hybrid",
       desc: t("resume.experience.dhbw.desc"),
-      tags: ["Wirtschaftsinformatik", "Dual", "DHBW"],
+      tags: ["Wirtschaftsinformatik", "Application Management", "Dual"],
+      // Reuses the highlighted "upcoming" styling, labelled as current
       upcoming: true,
-      upcomingLabel: t("resume.upcoming"),
+      upcomingLabel: t("resume.current"),
     },
     {
       period: "Nov. 2025 – Heute",
@@ -196,6 +197,12 @@ export default function Resume() {
   ];
 
   const EDUCATION = [
+    {
+      period: "Okt. 2026 – Heute",
+      title: t("resume.education.dhbw.title"),
+      org: "DHBW Stuttgart",
+      desc: t("resume.education.dhbw.desc"),
+    },
     {
       period: "2023 – 2026",
       title: t("resume.education.abitur.title"),

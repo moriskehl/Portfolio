@@ -142,6 +142,7 @@
     "heading1": "Erfahrung &",
     "heading2": "Ausbildung.",
     "upcoming": "BEVORSTEHEND",
+    "current": "AKTUELL",
     "labels": {
       "experience": "// erfahrung",
       "education": "// ausbildung",
@@ -149,8 +150,8 @@
     },
     "experience": {
       "dhbw": {
-        "title": "Duales Studium Wirtschaftsinformatik",
-        "desc": "Dualer Studiengang mit Praxiserfahrung in der Softwareentwicklung."
+        "title": "Dualer Student Wirtschaftsinformatik",
+        "desc": "Duales Studium mit Schwerpunkt Application Management – Praxisphasen bei der SV Informatik im Wechsel mit dem Studium an der DHBW Stuttgart."
       },
       "sportStall": {
         "title": "Minijob Kassierer & Verkauf",
@@ -166,6 +167,10 @@
       }
     },
     "education": {
+      "dhbw": {
+        "title": "B.Sc. Wirtschaftsinformatik (Duales Studium)",
+        "desc": "Studium in der Region Stuttgart mit Schwerpunkten wie Java und Betriebswirtschaft."
+      },
       "abitur": {
         "title": "Allgemeine Hochschulreife (Abitur)",
         "desc": "Seminarkurs im Bereich KI (Blackjack-Algorithmus)."

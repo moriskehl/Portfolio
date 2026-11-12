@@ -142,6 +142,7 @@
     "heading1": "Expérience &",
     "heading2": "Formation.",
     "upcoming": "À VENIR",
+    "current": "ACTUEL",
     "labels": {
       "experience": "// expérience",
       "education": "// formation",
@@ -149,8 +150,8 @@
     },
     "experience": {
       "dhbw": {
-        "title": "Études en alternance en informatique de gestion",
-        "desc": "Cursus en alternance avec expérience pratique en développement logiciel."
+        "title": "Étudiant en alternance en informatique de gestion",
+        "desc": "Cursus en alternance axé sur l'Application Management – phases pratiques chez SV Informatik en alternance avec les études à la DHBW Stuttgart."
       },
       "sportStall": {
         "title": "Minijob Caissier & Vente",
@@ -166,6 +167,10 @@
       }
     },
     "education": {
+      "dhbw": {
+        "title": "B.Sc. Informatique de gestion (cursus en alternance)",
+        "desc": "Études dans la région de Stuttgart, avec notamment Java et la gestion d'entreprise."
+      },
       "abitur": {
         "title": "Baccalauréat général (Abitur)",
         "desc": "Séminaire en IA (algorithme Blackjack)."
